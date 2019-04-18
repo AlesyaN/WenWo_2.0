@@ -9,11 +9,15 @@ import ru.itis.models.Like;
 import ru.itis.models.Message;
 import ru.itis.models.Question;
 import ru.itis.models.User;
+import ru.itis.repositories.UserRepository;
 import ru.itis.services.LikeService;
 import ru.itis.services.MessageService;
+import ru.itis.services.QuestionService;
+import ru.itis.services.UserService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TestController {
@@ -24,13 +28,16 @@ public class TestController {
     @Autowired
     MessageService messageService;
 
+    @Autowired
+    QuestionService questionService;
+
+    @Autowired
+    UserService userService;
+
+
     @RequestMapping(method = RequestMethod.GET, path = "/")
     public String control() {
-        User user1 = User.builder().id(1).build();
-        User user2 = User.builder().id(2).build();
-        Question question = Question.builder().id(2).build();
-        Message message = messageService.getMessageById(1);
-        System.out.println(messageService.deleteMessage(message, user1));
+        Optional<User> userOptional = userService.authenticate("login", "5f4dcc3b5aa765d61d8327deb882cf99");
         return "page";
     }
 
