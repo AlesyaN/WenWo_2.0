@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -27,8 +28,12 @@ public class Question {
     @JoinColumn(name = "reciever_id")
     private User receiver;
 
+    @OneToMany(mappedBy = "question", fetch= FetchType.EAGER)
+    private List<Like> likes;
+
     @Column(name = "message")
     private String text;
     private Date date;
     private String answer;
+
 }

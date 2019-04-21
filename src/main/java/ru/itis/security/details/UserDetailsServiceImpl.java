@@ -1,4 +1,4 @@
-package ru.itis.details;
+package ru.itis.security.details;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +16,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return new UserDetailsImpl(userRepository.findByLogin(login)
-            .orElseThrow(IllegalAccessError::new));
+            .orElseThrow(IllegalArgumentException::new));
     }
 }
