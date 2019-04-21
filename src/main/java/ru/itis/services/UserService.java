@@ -1,7 +1,7 @@
 package ru.itis.services;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
@@ -14,6 +14,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public User getCurrentUser() {
 //        return Session.getSession().getCurrentUser();
         //TODO return current user
@@ -22,7 +25,11 @@ public class UserService {
 
     public Optional<User> register(String login, String email, String password) {
         if (loginIsValid(login) && emailIsValid(email)) {
-            User user = User.builder().login(login).email(email).password(DigestUtils.md5Hex(password)).build();
+            User user = User.builder()
+                    .login(login)
+                    .email(email)
+                    .password(passwordEncoder.encode(password))
+                    .build();
             user = userRepository.save(user);
             authorize(user);
             return Optional.of(user);
@@ -39,7 +46,7 @@ public class UserService {
 
     public Optional<User> authenticate(String login, String password) {
         Optional<User> userOptional = userRepository.findByLogin(login);
-        if (userOptional.isPresent() && DigestUtils.md5Hex(password).equals(userOptional.get().getPassword())) {
+        if (userOptional.isPresent() && passwordEncoder.matches(password, userOptional.get().getPassword())) {
             authorize(userOptional.get());
             return userOptional;
         } else return Optional.empty();
