@@ -1,8 +1,8 @@
 <#ftl encoding='UTF-8'>
 <html>
 <head>
-    <link rel="stylesheet" href="css/styles.css" type="text/css">
-    <#--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>-->
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <#--<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>-->
     <meta charset="utf-8">
 </head>
 <body>
@@ -12,7 +12,6 @@
     <div class="form-style-2-heading">
         ${user.fullName}
     </div>
-
     <p>
         <b>Followers: </b> ${user.followers?size}
         <br>
@@ -72,6 +71,10 @@
 
 </div>
 
+<#else>
+<div class="form-style-2-heading">
+    No such user
+</div>
 </#if>
 </body>
 </html>

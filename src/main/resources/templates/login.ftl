@@ -1,8 +1,8 @@
 <#ftl encoding='UTF-8'>
 <html>
 <head>
-    <link rel="stylesheet" href="css/styles.css"  type="text/css">
-    <#--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>-->
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <#--<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>-->
 </head>
 <body>
 <#if error??>
