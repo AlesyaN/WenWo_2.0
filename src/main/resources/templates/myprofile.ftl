@@ -7,17 +7,16 @@
 <body>
 <#if user??>
 <div class="form-style-2">
-
     <div class="form-style-2-heading">
         ${user.fullName}
     </div>
+    <br>
+    <a href="/editProfile">Edit</a>
     <p>
         <b>Followers: </b><div id="followers">${user.followers?size}</div>
     <br>
     <b>Followings: </b> ${user.followings?size}
     </p>
-
-
     <#if user.gender??>
         <label for="gender">Gender:
             <div id="gender">${user.gender}</div>

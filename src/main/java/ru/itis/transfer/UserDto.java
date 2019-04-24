@@ -18,6 +18,8 @@ import java.util.List;
 public class UserDto {
     private String login;
     private String email;
+    private String name;
+    private String surname;
     private String fullName;
     private String gender;
     private String city;
@@ -32,6 +34,8 @@ public class UserDto {
         return UserDto.builder()
                 .login(user.getLogin())
                 .email(user.getEmail())
+                .name(user.getName())
+                .surname(user.getSurname())
                 .fullName(user.getFullName())
                 .gender(user.getGender())
                 .city(user.getCity())
