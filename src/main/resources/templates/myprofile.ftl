@@ -11,16 +11,8 @@
     <div class="form-style-2-heading">
         ${user.fullName}
     </div>
-    <button onclick="follow()" id="follow-btn">
-            <#if user.isFollowedByCurrentUser()>
-                Not follow
-            <#else>
-                Follow
-            </#if>
-    </button>
     <p>
-        <b>Followers: </b>
-    <div id="followers">${user.followers?size}</div>
+        <b>Followers: </b><div id="followers">${user.followers?size}</div>
     <br>
     <b>Followings: </b> ${user.followings?size}
     </p>
@@ -56,6 +48,8 @@
         </label>
         <br>
     </#if>
+
+    <a href="/logout">Log out</a>
 
     <div class="form-style-2-heading">Questions</div>
     <list>

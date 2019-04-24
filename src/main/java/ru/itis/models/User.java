@@ -9,9 +9,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @AllArgsConstructor
@@ -31,21 +29,27 @@ public class User {
     private String email;
     private String city;
     private String gender;
+    @Column(name = "dateofbirth")
+    private Date dateOfBirth;
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Question> questions;
 
-    @OneToMany(mappedBy = "subscriptor", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name="subscriptions",
+            joinColumns = @JoinColumn(name="subscriptor_id"),
+            inverseJoinColumns = @JoinColumn(name="subscriber_id")
+    )
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Subscription> followers;
+    private List<User> followers;
 
-    @OneToMany(mappedBy = "subscriber", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "followers")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Subscription> followings;
+    private List<User> followings;
 
-    @Column(name = "dateofbirth")
-    private Date dateOfBirth;
+
 
     public String getFullName() {
         return name + " " + surname;

@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.itis.models.Question;
-import ru.itis.models.Subscription;
 import ru.itis.models.User;
 
 import java.util.Date;
@@ -25,8 +24,9 @@ public class UserDto {
     private Date dateOfBirth;
     private List<Question> answeredQuestions;
     private List<Question> unansweredQuestions;
-    private List<Subscription> followers;
-    private List<Subscription> followings;
+    private List<User> followers;
+    private List<User> followings;
+    private boolean followedByCurrentUser;
 
     public static UserDto from(User user) {
         return UserDto.builder()
@@ -41,5 +41,16 @@ public class UserDto {
                 .followers(user.getFollowers())
                 .followings(user.getFollowings())
                 .build();
+    }
+
+    public static UserDto from(User user, User currentUser) {
+        UserDto userDto = UserDto.from(user);
+        userDto.followedByCurrentUser = false;
+        List<User> followers = user.getFollowers();
+        for (int i = 0; i < followers.size() && !userDto.followedByCurrentUser; i++) {
+            if (followers.get(i).getId().equals(currentUser.getId()))
+                userDto.followedByCurrentUser = true;
+        }
+        return userDto;
     }
 }

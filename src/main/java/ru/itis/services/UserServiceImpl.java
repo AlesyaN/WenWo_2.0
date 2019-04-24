@@ -7,6 +7,7 @@ import ru.itis.forms.UserRegisterForm;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,6 +49,41 @@ public class UserServiceImpl implements UserService {
                 .surname(form.getSurname())
                 .build();
         userRepository.save(user);
+        return true;
+    }
+
+
+
+    @Override
+    public boolean toggleSubscription(User subscriptor, User subscriber) {
+        if (subscriptionIsUnique(subscriptor, subscriber)) {
+            subscriptor.getFollowers().add(subscriber);
+            subscriber.getFollowings().add(subscriptor);
+            userRepository.save(subscriptor);
+            return true;
+        } else {
+            subscriptor.getFollowers().remove(findById(subscriptor.getFollowers(), subscriber.getId()));
+            subscriber.getFollowings().remove(findById(subscriber.getFollowings(), subscriptor.getId()));
+            userRepository.save(subscriptor);
+            return false;
+        }
+    }
+
+    private User findById(List<User> users,Integer id) {
+        for (User user: users) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    private boolean subscriptionIsUnique(User subscriptor, User subscriber) {
+        for (User follower: subscriptor.getFollowers()) {
+            if (follower.getId().equals(subscriber.getId())) {
+                return false;
+            }
+        }
         return true;
     }
 }
