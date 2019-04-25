@@ -26,6 +26,8 @@
             <input type="checkbox" id="remember-me" name="remember-me">Remember me</label>
         <input type="submit" value="Login">
     </form>
+    <label for="signUp">First time on our website?
+    <a id="signUp" class="button" href="/signUp">Register</a></label>
 </div>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <#if user??>
 <div class="form-style-2">
     <a class="button" href="/feed">Feed</a>
+    <a class="button" href="/questions">You have ${user.unansweredQuestions?size} unanswered questions</a>
     <br>
     <br>
     <div class="form-style-2-heading">

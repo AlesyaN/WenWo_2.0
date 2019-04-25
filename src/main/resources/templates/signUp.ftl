@@ -35,6 +35,8 @@
         <br>
         <input type="submit" value="Register">
     </form>
+    <label for="login">Already registered?
+    <a id="login" class="button" href="/login">Login</a></label>
 </div>
 </body>
 </html>
