@@ -9,8 +9,10 @@ import ru.itis.models.Question;
 import ru.itis.models.User;
 import ru.itis.security.details.UserDetailsImpl;
 import ru.itis.services.QuestionService;
+import ru.itis.services.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class FeedController {
@@ -18,11 +20,18 @@ public class FeedController {
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping("/feed")
     public String getFeed(ModelMap modelMap, Authentication authentication) {
-        User currentUser = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
-        List<Question> questions = questionService.getUsersFeed(currentUser);
-        modelMap.addAttribute("feed", questions);
+        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+        Optional<User> userOptional = userService.getUserById(currentUserId);
+        if (userOptional.isPresent()) {
+            User currentUser = userOptional.get();
+            List<Question> questions = questionService.getUsersFeed(currentUser);
+            modelMap.addAttribute("feed", questions);
+        }
         return "feed";
     }
 }

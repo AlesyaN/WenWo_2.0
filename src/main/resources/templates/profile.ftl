@@ -88,7 +88,7 @@
                     </#if>
         <i>${question.date}</i>
         <i>Likes: ${question.likes?size}</i>
-
+        <br>
     </#list>
     </list>
 <#else>
