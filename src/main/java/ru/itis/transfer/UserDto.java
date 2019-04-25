@@ -22,11 +22,13 @@ public class UserDto {
     private String gender;
     private String city;
     private Date dateOfBirth;
+    private List<Question> unansweredQuestionsByCurrentUser;
     private List<Question> answeredQuestions;
     private List<Question> unansweredQuestions;
     private List<User> followers;
     private List<User> followings;
     private boolean followedByCurrentUser;
+
 
     public static UserDto from(User user) {
         return UserDto.builder()
@@ -36,10 +38,10 @@ public class UserDto {
                 .gender(user.getGender())
                 .city(user.getCity())
                 .dateOfBirth(user.getDateOfBirth())
-                .answeredQuestions(user.getAnsweredQuestions())
-                .unansweredQuestions(user.getUnansweredQuestions())
                 .followers(user.getFollowers())
                 .followings(user.getFollowings())
+                .unansweredQuestions(user.getUnansweredQuestions())
+                .answeredQuestions(user.getAnsweredQuestions())
                 .build();
     }
 

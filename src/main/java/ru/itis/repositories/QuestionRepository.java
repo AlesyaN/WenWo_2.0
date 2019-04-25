@@ -20,4 +20,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     @Query("select q from User u join u.followings f join f.questions q where u.id = :id and q.answer is not null order by q.date desc")
     List<Question> findFeedByUser_Id(@Param("id") Integer id);
 
+    List<Question> findAllByReceiver_IdAndSender_IdAndAnswerIsNull(Integer receiverId, Integer senderId);
+
 }

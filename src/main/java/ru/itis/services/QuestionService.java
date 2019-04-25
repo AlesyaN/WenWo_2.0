@@ -14,6 +14,6 @@ public interface QuestionService {
     List<Question> getAllUserQuestionsBySender(User receiver, User sender);
     void addOrUpdateQuestion(Question question);
     void deleteQuestion(Question question);
-
     List<Question> getUsersFeed(User currentUser);
+    List<Question> getUserUnansweredQuestionsBySender(User user, User currentUser);
 }

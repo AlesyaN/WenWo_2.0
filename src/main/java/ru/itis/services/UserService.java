@@ -16,4 +16,5 @@ public interface UserService {
     boolean toggleSubscription(User user, User currentUser);
 
     boolean editProfile(UserEditForm form, User user);
+
 }

@@ -5,13 +5,12 @@
     <meta charset="utf-8">
 </head>
 <body>
-
-<#if user??>
 <div class="form-style-2">
     <a class="button" href="/feed">Feed</a>
     <a class="button" href="/profile">My profile</a>
     <br>
     <br>
+<#if user??>
     <div class="form-style-2-heading">
         ${user.fullName}
     </div>
@@ -24,12 +23,28 @@
     </button>
     <p>
         <b>Followers: </b>
-    <div id="followers">${user.followers?size}</div>
-    <br>
-    <b>Followings: </b> ${user.followings?size}
+        <span id="followers">${user.followers?size}</span>
+        <br>
+        <b>Followings: </b> ${user.followings?size}
     </p>
 
+    <form id="ask-form" onsubmit="ask(event)" class="form-style-2">
+        <div class="form-style-2-heading">Ask ${user.login} anything...</div>
+        <textarea id="textarea" class="textarea-field" name="question"></textarea>
+        <br>
+        <input type="submit" value="Ask">
+        <br>
+        <div id="unanswered-questions-bar"
+             <#if unansweredQuestions?? && unansweredQuestions?size <= 0>
+             style="display: none"
+             </#if>
+             class="button">
+            You have <span id="num-of-unanswered-questions"><#if unansweredQuestions??>${unansweredQuestions?size}</#if></span> unanswered questions for ${user.login}
+        </div>
 
+    </form>
+
+    <br>
     <#if user.gender??>
         <label for="gender">Gender:
             <div id="gender">${user.gender}</div>
@@ -64,23 +79,19 @@
     <div class="form-style-2-heading">Questions</div>
     <list>
     <#list user.answeredQuestions as question>
-            <a href="/profile/${question.sender.id}">${question.sender.login}</a>
-            <br>
-            <b>${question.text}</b>
-            <br>
+        <a href="/profile/${question.sender.id}">${question.sender.login}</a>
+        <br>
+        <b>${question.text}</b>
+        <br>
                     <#if question.answer??>
                         <p>${question.answer}</p>
                     </#if>
-            <i>${question.date}</i>
-            <i>Likes: ${question.likes?size}</i>
+        <i>${question.date}</i>
+        <i>Likes: ${question.likes?size}</i>
 
     </#list>
     </list>
-
-</div>
-
 <#else>
-<div class="form-style-2-heading">
     No such user
 </div>
 </#if>

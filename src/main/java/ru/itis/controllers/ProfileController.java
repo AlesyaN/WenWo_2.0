@@ -5,11 +5,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import ru.itis.models.Question;
 import ru.itis.models.User;
 import ru.itis.security.details.UserDetailsImpl;
+import ru.itis.services.QuestionService;
 import ru.itis.services.UserService;
 import ru.itis.transfer.UserDto;
 
+import java.util.List;
 import java.util.Optional;
 
 import static ru.itis.transfer.UserDto.from;
@@ -19,6 +22,9 @@ public class ProfileController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    QuestionService questionService;
 
     @GetMapping("/profile")
     public String getProfilePage(ModelMap modelMap, Authentication authentication) {
@@ -34,10 +40,14 @@ public class ProfileController {
         if (userCandidate.isPresent()) {
             User user = userCandidate.get();
             User currentUser = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
+
             if (user.getId().equals(currentUser.getId())) {
                 modelMap.addAttribute("user", from(currentUser));
                 return "myprofile";
             }
+
+            List<Question> questions = questionService.getUserUnansweredQuestionsBySender(user, currentUser);
+            modelMap.addAttribute("unansweredQuestions", questions);
             modelMap.addAttribute("user", from(user, currentUser));
         }
         return "profile";

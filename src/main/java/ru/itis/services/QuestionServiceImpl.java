@@ -44,6 +44,10 @@ public class QuestionServiceImpl implements QuestionService{
     @Override
     public List<Question> getUsersFeed(User currentUser) {
         return questionRepository.findFeedByUser_Id(currentUser.getId());
-//        return null;
+    }
+
+    @Override
+    public List<Question> getUserUnansweredQuestionsBySender(User user, User currentUser) {
+        return questionRepository.findAllByReceiver_IdAndSender_IdAndAnswerIsNull(user.getId(), currentUser.getId());
     }
 }
