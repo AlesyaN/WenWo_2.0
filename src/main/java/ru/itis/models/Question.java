@@ -24,7 +24,7 @@ public class Question {
     @JoinColumn(name = "sender_id")
     private User sender;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reciever_id")
     private User receiver;
 

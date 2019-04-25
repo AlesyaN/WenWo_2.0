@@ -28,9 +28,13 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String getProfilePage(ModelMap modelMap, Authentication authentication) {
-        User user = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
-        UserDto userDto = from(user, user);
-        modelMap.addAttribute("user", userDto);
+        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+        Optional<User> userCandidate = userService.getUserById(currentUserId);
+        if (userCandidate.isPresent()) {
+            User user = userCandidate.get();
+            UserDto userDto = from(user, user);
+            modelMap.addAttribute("user", userDto);
+        }
         return "myprofile";
     }
 
@@ -39,16 +43,18 @@ public class ProfileController {
         Optional<User> userCandidate = userService.getUserById(id);
         if (userCandidate.isPresent()) {
             User user = userCandidate.get();
-            User currentUser = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
-
-            if (user.getId().equals(currentUser.getId())) {
-                modelMap.addAttribute("user", from(currentUser));
-                return "myprofile";
+            Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+            Optional<User> currentUserCandidate = userService.getUserById(currentUserId);
+            if (currentUserCandidate.isPresent()) {
+                User currentUser = currentUserCandidate.get();
+                if (user.getId().equals(currentUser.getId())) {
+                    modelMap.addAttribute("user", from(currentUser));
+                    return "myprofile";
+                }
+                List<Question> questions = questionService.getUserUnansweredQuestionsBySender(user, currentUser);
+                modelMap.addAttribute("unansweredQuestions", questions);
+                modelMap.addAttribute("user", from(user, currentUser));
             }
-
-            List<Question> questions = questionService.getUserUnansweredQuestionsBySender(user, currentUser);
-            modelMap.addAttribute("unansweredQuestions", questions);
-            modelMap.addAttribute("user", from(user, currentUser));
         }
         return "profile";
     }

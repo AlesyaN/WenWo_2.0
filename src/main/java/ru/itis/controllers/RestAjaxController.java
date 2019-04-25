@@ -56,4 +56,17 @@ public class RestAjaxController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PostMapping("/api/answer")
+    public ResponseEntity<Object> answer(HttpServletRequest request, Authentication authentication) {
+        Optional<Question> questionCandidate = questionService.getQuestionById(Integer.parseInt(request.getParameter("id")));
+        if (questionCandidate.isPresent()) {
+            Question question = questionCandidate.get();
+            question.setAnswer(request.getParameter("answer"));
+            questionService.addOrUpdateQuestion(question);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
