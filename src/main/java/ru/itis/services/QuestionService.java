@@ -15,4 +15,5 @@ public interface QuestionService {
     void addOrUpdateQuestion(Question question);
     void deleteQuestion(Question question);
 
+    List<Question> getUsersFeed(User currentUser);
 }

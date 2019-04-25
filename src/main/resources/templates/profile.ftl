@@ -5,13 +5,17 @@
     <meta charset="utf-8">
 </head>
 <body>
+
 <#if user??>
 <div class="form-style-2">
-
+    <a class="button" href="/feed">Feed</a>
+    <a class="button" href="/profile">My profile</a>
+    <br>
+    <br>
     <div class="form-style-2-heading">
         ${user.fullName}
     </div>
-    <button onclick="follow()" id="follow-btn">
+    <button class="button" onclick="follow()" id="follow-btn">
             <#if user.isFollowedByCurrentUser()>
                 Not follow
             <#else>
@@ -60,8 +64,7 @@
     <div class="form-style-2-heading">Questions</div>
     <list>
     <#list user.answeredQuestions as question>
-        <ul>
-            <b>${question.sender.login}</b>
+            <a href="/profile/${question.sender.id}">${question.sender.login}</a>
             <br>
             <b>${question.text}</b>
             <br>
@@ -70,7 +73,7 @@
                     </#if>
             <i>${question.date}</i>
             <i>Likes: ${question.likes?size}</i>
-        </ul>
+
     </#list>
     </list>
 

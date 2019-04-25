@@ -7,11 +7,15 @@
 <body>
 <#if user??>
 <div class="form-style-2">
+    <a class="button" href="/feed">Feed</a>
+    <br>
+    <br>
     <div class="form-style-2-heading">
         ${user.fullName}
     </div>
     <br>
     <a href="/editProfile">Edit</a>
+    <br>
     <p>
         <b>Followers: </b><div id="followers">${user.followers?size}</div>
     <br>
@@ -49,12 +53,13 @@
     </#if>
 
     <a href="/logout">Log out</a>
-
+    <br>
+    <br>
     <div class="form-style-2-heading">Questions</div>
     <list>
     <#list user.answeredQuestions as question>
         <ul>
-            <b>${question.sender.login}</b>
+            <a href="/profile/${question.sender.id}">${question.sender.login}</a>
             <br>
             <b>${question.text}</b>
             <br>

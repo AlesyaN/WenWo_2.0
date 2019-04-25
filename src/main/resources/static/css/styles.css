@@ -70,7 +70,8 @@
 }
 
 .form-style-2 input[type=submit],
-.form-style-2 input[type=button] {
+.form-style-2 input[type=button],
+.button{
     border: none;
     padding: 8px 15px 8px 15px;
     background: #FF8500;

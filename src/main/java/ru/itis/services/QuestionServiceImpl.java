@@ -40,4 +40,10 @@ public class QuestionServiceImpl implements QuestionService{
     public void deleteQuestion(Question question){
         questionRepository.delete(question);
     }
+
+    @Override
+    public List<Question> getUsersFeed(User currentUser) {
+        return questionRepository.findFeedByUser_Id(currentUser.getId());
+//        return null;
+    }
 }
