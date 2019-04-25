@@ -42,13 +42,18 @@
 
     <label for="gender">Gender:
         <select class="select-field" id="gender" name="gender">
+            <option value=""
+                <#if !user.gender??>
+                    selected
+                </#if>>not selected
+            </option>
             <option value="male"
-                <#if user.gender == "male">
+                <#if user.gender?? && user.gender == "male">
                     selected
                 </#if>>male
             </option>
             <option value="female"
-                <#if user.gender == "female">
+                <#if user.gender?? && user.gender == "female">
                     selected
                 </#if>>female
             </option>
@@ -57,12 +62,12 @@
     <br>
 
     <label for="city">City:
-        <input class="input-field" type="text" name="city" id="city" value="${user.city}">
+        <input class="input-field" type="text" name="city" id="city" value="<#if user.city??>${user.city}</#if>">
     </label>
     <br>
 
     <label for="dateOfBirth">Date of birth:
-        <input class="input-field" type="text" name="dateOfBirth" id="dateOfBirth" value="${user.dateOfBirth}">
+        <input class="input-field" type="text" name="dateOfBirth" id="dateOfBirth" value="<#if user.dateOfBirth??>${user.dateOfBirth}</#if>">
     </label>
     <br>
 

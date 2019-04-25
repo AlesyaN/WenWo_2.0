@@ -1,5 +1,6 @@
 package ru.itis.services;
 
+import ru.itis.forms.UserEditForm;
 import ru.itis.forms.UserRegisterForm;
 import ru.itis.models.User;
 
@@ -13,4 +14,6 @@ public interface UserService {
     boolean signUp(UserRegisterForm form);
 
     boolean toggleSubscription(User user, User currentUser);
+
+    boolean editProfile(UserEditForm form, User user);
 }

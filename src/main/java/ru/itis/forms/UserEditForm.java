@@ -23,21 +23,25 @@ public class UserEditForm {
     private String dateOfBirth;
 
     public static User from(UserEditForm form) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        try {
-            return User.builder()
-                    .name(form.getName())
-                    .surname(form.getSurname())
-                    .login(form.getLogin())
-                    .password(form.getNewPassword())
-                    .email(form.getEmail())
-                    .gender(form.getGender())
-                    .city(form.getCity())
-                    .dateOfBirth(format.parse(form.getDateOfBirth()))
-                    .build();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy h:mm:ss");
+        User user = User.builder()
+                .name(form.getName())
+                .surname(form.getSurname())
+                .login(form.getLogin())
+                .password(form.getNewPassword())
+                .email(form.getEmail())
+                .gender(form.getGender())
+                .city(form.getCity())
+                .build();
+        if (!form.getDateOfBirth().equals("")) {
+            try {
+                user.setDateOfBirth(format.parse(form.getDateOfBirth()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
-        return null;
+        return user;
     }
+
+
 }

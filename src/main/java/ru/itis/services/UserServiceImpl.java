@@ -3,12 +3,17 @@ package ru.itis.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.itis.forms.UserEditForm;
 import ru.itis.forms.UserRegisterForm;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
+
+import static ru.itis.forms.UserEditForm.from;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -53,7 +58,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public boolean toggleSubscription(User subscriptor, User subscriber) {
         if (subscriptionIsUnique(subscriptor, subscriber)) {
@@ -69,8 +73,62 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private User findById(List<User> users,Integer id) {
-        for (User user: users) {
+    @Override
+    public boolean editProfile(UserEditForm form, User currentUser) {
+        if (form.getOldPassword().equals("") && form.getNewPassword().equals("")
+                || passwordEncoder.matches(form.getOldPassword(), currentUser.getPassword())) {
+            if (!form.getName().equals(""))
+                currentUser.setName(form.getName());
+            else
+                currentUser.setName(null);
+
+            if (!form.getSurname().equals(""))
+                currentUser.setSurname(form.getSurname());
+            else
+                currentUser.setSurname(null);
+
+            if (!form.getLogin().equals(""))
+                currentUser.setLogin(form.getLogin());
+            else
+                currentUser.setLogin(null);
+
+            if (!form.getEmail().equals(""))
+                currentUser.setEmail(form.getEmail());
+            else
+                currentUser.setEmail(null);
+
+            if (!form.getOldPassword().equals("") && !form.getNewPassword().equals(""))
+                currentUser.setPassword(passwordEncoder.encode(form.getNewPassword()));
+
+            if (!form.getCity().equals(""))
+                currentUser.setCity(form.getCity());
+            else
+                currentUser.setCity(null);
+
+            if (!form.getGender().equals(""))
+                currentUser.setGender(form.getGender());
+            else
+                currentUser.setGender(null);
+
+            if (!form.getDateOfBirth().equals("")) {
+                try {
+                    SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy h:mm:ss");
+                    currentUser.setDateOfBirth(format.parse(form.getDateOfBirth()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                currentUser.setDateOfBirth(null);
+            }
+            System.out.println("City: " + currentUser.getCity());
+            userRepository.save(currentUser);
+            return true;
+        }
+        return false;
+    }
+
+    private User findById(List<User> users, Integer id) {
+        for (User user : users) {
             if (user.getId().equals(id)) {
                 return user;
             }
@@ -79,7 +137,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private boolean subscriptionIsUnique(User subscriptor, User subscriber) {
-        for (User follower: subscriptor.getFollowers()) {
+        for (User follower : subscriptor.getFollowers()) {
             if (follower.getId().equals(subscriber.getId())) {
                 return false;
             }
