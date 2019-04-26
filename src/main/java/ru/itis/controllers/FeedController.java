@@ -26,12 +26,9 @@ public class FeedController {
     @GetMapping("/feed")
     public String getFeed(ModelMap modelMap, Authentication authentication) {
         Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-        Optional<User> userOptional = userService.getUserById(currentUserId);
-        if (userOptional.isPresent()) {
-            User currentUser = userOptional.get();
-            List<Question> questions = questionService.getUsersFeed(currentUser);
-            modelMap.addAttribute("feed", questions);
-        }
+        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        List<Question> questions = questionService.getUsersFeed(currentUser);
+        modelMap.addAttribute("feed", questions);
         return "feed";
     }
 }

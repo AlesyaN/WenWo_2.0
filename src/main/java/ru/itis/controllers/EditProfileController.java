@@ -11,6 +11,8 @@ import ru.itis.models.User;
 import ru.itis.security.details.UserDetailsImpl;
 import ru.itis.services.UserService;
 
+import java.util.Optional;
+
 import static ru.itis.transfer.UserEditDto.from;
 
 @Controller
@@ -21,16 +23,19 @@ public class EditProfileController {
 
     @GetMapping("/editProfile")
     public String getEditPage(Authentication authentication, ModelMap modelMap) {
-        User currentUser = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
+        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
         modelMap.addAttribute("user", from(currentUser));
         return "editProfile";
     }
 
     @PostMapping("/editProfile")
     public String edit(UserEditForm form, Authentication authentication, ModelMap modelMap) {
-        User currentUser = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
+        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
         userService.editProfile(form, currentUser);
         modelMap.addAttribute("user", currentUser);
         return "redirect:/profile";
+
     }
 }

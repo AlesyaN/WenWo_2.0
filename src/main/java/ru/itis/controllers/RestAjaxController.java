@@ -27,46 +27,35 @@ public class RestAjaxController {
 
     @PostMapping("/api/follow")
     public ResponseEntity<Object> follow(HttpServletRequest request, Authentication authentication) {
-        Optional<User> subscriptorCandidate = userService.getUserByLogin(request.getParameter("login"));
-        User currentUser = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
-        if (subscriptorCandidate.isPresent()) {
-            boolean followed = userService.toggleSubscription(subscriptorCandidate.get(),currentUser);
-            return ResponseEntity.ok(followed);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        User subscriptor = userService.getUserByLogin(request.getParameter("login")).orElseThrow(IllegalArgumentException::new);
+        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        boolean followed = userService.toggleSubscription(subscriptor, currentUser);
+        return ResponseEntity.ok(followed);
     }
 
     @PostMapping("/api/ask")
     public ResponseEntity<Object> ask(HttpServletRequest request, Authentication authentication) {
-        Optional<User> userCandidate = userService.getUserByLogin(request.getParameter("login"));
-        User currentUser = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
+        User subscriptor = userService.getUserByLogin(request.getParameter("login")).orElseThrow(IllegalArgumentException::new);
+        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
         String questionText = request.getParameter("question");
-        if (userCandidate.isPresent()) {
-            Question question = Question.builder()
-                                        .sender(currentUser)
-                                        .receiver(userCandidate.get())
-                                        .text(questionText)
-                                        .date(new Date())
-                                        .build();
-            questionService.addOrUpdateQuestion(question);
-            int numOfUnansweredQuestions = questionService.getUserUnansweredQuestionsBySender(userCandidate.get(), currentUser).size();
-            return ResponseEntity.ok(numOfUnansweredQuestions);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        Question question = Question.builder()
+                .sender(currentUser)
+                .receiver(subscriptor)
+                .text(questionText)
+                .date(new Date())
+                .build();
+        questionService.addOrUpdateQuestion(question);
+        int numOfUnansweredQuestions = questionService.getUserUnansweredQuestionsBySender(subscriptor, currentUser).size();
+        return ResponseEntity.ok(numOfUnansweredQuestions);
     }
 
     @PostMapping("/api/answer")
     public ResponseEntity<Object> answer(HttpServletRequest request, Authentication authentication) {
-        Optional<Question> questionCandidate = questionService.getQuestionById(Integer.parseInt(request.getParameter("id")));
-        if (questionCandidate.isPresent()) {
-            Question question = questionCandidate.get();
-            question.setAnswer(request.getParameter("answer"));
-            questionService.addOrUpdateQuestion(question);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        Question question = questionService.getQuestionById(Integer.parseInt(request.getParameter("id"))).orElseThrow(IllegalArgumentException::new);
+        question.setAnswer(request.getParameter("answer"));
+        questionService.addOrUpdateQuestion(question);
+        return ResponseEntity.ok().build();
     }
 }
