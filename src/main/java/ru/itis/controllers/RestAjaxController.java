@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itis.models.Question;
 import ru.itis.models.User;
@@ -26,8 +27,8 @@ public class RestAjaxController {
     QuestionService questionService;
 
     @PostMapping("/api/follow")
-    public ResponseEntity<Object> follow(HttpServletRequest request, Authentication authentication) {
-        User subscriptor = userService.getUserByLogin(request.getParameter("login")).orElseThrow(IllegalArgumentException::new);
+    public ResponseEntity<Object> follow(@RequestParam("login") String login, Authentication authentication) {
+        User subscriptor = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);
         Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
         User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
         boolean followed = userService.toggleSubscription(subscriptor, currentUser);
@@ -35,11 +36,10 @@ public class RestAjaxController {
     }
 
     @PostMapping("/api/ask")
-    public ResponseEntity<Object> ask(HttpServletRequest request, Authentication authentication) {
-        User subscriptor = userService.getUserByLogin(request.getParameter("login")).orElseThrow(IllegalArgumentException::new);
+    public ResponseEntity<Object> ask(@RequestParam("login") String login, @RequestParam("question") String questionText, Authentication authentication) {
+        User subscriptor = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);
         Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
         User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
-        String questionText = request.getParameter("question");
         Question question = Question.builder()
                 .sender(currentUser)
                 .receiver(subscriptor)
@@ -52,9 +52,9 @@ public class RestAjaxController {
     }
 
     @PostMapping("/api/answer")
-    public ResponseEntity<Object> answer(HttpServletRequest request) {
-        Question question = questionService.getQuestionById(Integer.parseInt(request.getParameter("id"))).orElseThrow(IllegalArgumentException::new);
-        question.setAnswer(request.getParameter("answer"));
+    public ResponseEntity<Object> answer(@RequestParam("id") Integer id, @RequestParam("answer") String answer) {
+        Question question = questionService.getQuestionById(id).orElseThrow(IllegalArgumentException::new);
+        question.setAnswer(answer);
         questionService.addOrUpdateQuestion(question);
         return ResponseEntity.ok().build();
     }
