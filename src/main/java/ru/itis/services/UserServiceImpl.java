@@ -62,12 +62,10 @@ public class UserServiceImpl implements UserService {
     public boolean toggleSubscription(User subscriptor, User subscriber) {
         if (subscriptionIsUnique(subscriptor, subscriber)) {
             subscriptor.getFollowers().add(subscriber);
-            subscriber.getFollowings().add(subscriptor);
             userRepository.save(subscriptor);
             return true;
         } else {
             subscriptor.getFollowers().remove(findById(subscriptor.getFollowers(), subscriber.getId()));
-            subscriber.getFollowings().remove(findById(subscriber.getFollowings(), subscriptor.getId()));
             userRepository.save(subscriptor);
             return false;
         }

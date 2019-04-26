@@ -42,7 +42,7 @@ public class ProfileController {
             User user = userCandidate.get();
             Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
             User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
-            if (user.getId().equals(currentUser.getId())) return "redirect:/myprofile";
+            if (user.getId().equals(currentUser.getId())) return "redirect:/profile";
             List<Question> questions = questionService.getUserUnansweredQuestionsBySender(user, currentUser);
             modelMap.addAttribute("unansweredQuestions", questions);
             modelMap.addAttribute("user", from(user, currentUser));

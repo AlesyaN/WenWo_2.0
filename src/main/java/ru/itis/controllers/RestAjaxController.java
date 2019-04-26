@@ -52,7 +52,7 @@ public class RestAjaxController {
     }
 
     @PostMapping("/api/answer")
-    public ResponseEntity<Object> answer(HttpServletRequest request, Authentication authentication) {
+    public ResponseEntity<Object> answer(HttpServletRequest request) {
         Question question = questionService.getQuestionById(Integer.parseInt(request.getParameter("id"))).orElseThrow(IllegalArgumentException::new);
         question.setAnswer(request.getParameter("answer"));
         questionService.addOrUpdateQuestion(question);
