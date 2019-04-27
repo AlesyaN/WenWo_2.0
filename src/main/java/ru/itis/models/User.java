@@ -35,17 +35,15 @@ public class User {
     @OneToMany(mappedBy = "receiver")
     private List<Question> questions;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="subscriptions",
             joinColumns = @JoinColumn(name="subscriptor_id"),
             inverseJoinColumns = @JoinColumn(name="subscriber_id")
     )
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> followers;
 
     @ManyToMany(mappedBy = "followers")
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> followings;
 
 
