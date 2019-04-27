@@ -32,8 +32,7 @@ public class User {
     @Column(name = "dateofbirth")
     private Date dateOfBirth;
 
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, fetch = FetchType.EAGER,  orphanRemoval=true)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "receiver")
     private List<Question> questions;
 
     @ManyToMany

@@ -20,15 +20,15 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sender_id")
     private User sender;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "reciever_id")
     private User receiver;
 
-    @OneToMany(mappedBy = "question", fetch= FetchType.EAGER)
+    @OneToMany(mappedBy = "question")
     private List<Like> likes;
 
     @Column(name = "message")
