@@ -33,6 +33,7 @@ public class User {
     private Date dateOfBirth;
 
     @OneToMany(mappedBy = "receiver")
+    @OrderBy("date DESC")
     private List<Question> questions;
 
     @ManyToMany(cascade = CascadeType.ALL)

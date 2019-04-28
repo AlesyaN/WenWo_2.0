@@ -21,18 +21,18 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     public List<Question> getAllUserQuestions(User user){
-        return questionRepository.findAllByReceiver_IdOrderByDate(user.getId());
+        return questionRepository.findAllByReceiver_Id(user.getId());
     }
 
     public List<Question> getUserAnsweredQuestions(User user) {
-        return questionRepository.findAllByReceiver_IdAndAnswerIsNotNullOrderByDate(user.getId());
+        return questionRepository.findAllByReceiver_IdAndAnswerIsNotNull(user.getId());
     }
 
     public List<Question> getUserUnansweredQuestions(User user) {
-        return questionRepository.findAllByReceiver_IdAndAnswerIsNullOrderByDate(user.getId());
+        return questionRepository.findAllByReceiver_IdAndAnswerIsNull(user.getId());
     }
     public List<Question> getAllUserQuestionsBySender(User receiver, User sender){
-        return questionRepository.findAllByReceiver_IdAndSender_IdOrderByDate(receiver.getId(), sender.getId());
+        return questionRepository.findAllByReceiver_IdAndSender_Id(receiver.getId(), sender.getId());
     }
     public void addOrUpdateQuestion(Question question) {
         questionRepository.save(question);
@@ -48,6 +48,6 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<Question> getUserUnansweredQuestionsBySender(User user, User currentUser) {
-        return questionRepository.findAllByReceiver_IdAndSender_IdAndAnswerIsNullOrderByDate(user.getId(), currentUser.getId());
+        return questionRepository.findAllByReceiver_IdAndSender_IdAndAnswerIsNull(user.getId(), currentUser.getId());
     }
 }
