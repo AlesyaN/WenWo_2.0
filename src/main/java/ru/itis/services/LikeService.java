@@ -13,4 +13,6 @@ public interface LikeService {
     Optional<Like> getLikeById(Integer id);
     List<Like> getLikesByQuestion(Question question);
     List<Like> getLikesByUser(User user);
+
+    boolean toggle(Question question, User currentUser);
 }

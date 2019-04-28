@@ -29,6 +29,7 @@ public class FeedController {
         User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
         List<Question> questions = questionService.getUsersFeed(currentUser);
         modelMap.addAttribute("feed", questions);
+        modelMap.addAttribute("current_user", currentUser);
         return "feed";
     }
 }

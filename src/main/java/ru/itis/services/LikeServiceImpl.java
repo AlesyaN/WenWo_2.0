@@ -35,4 +35,21 @@ public class LikeServiceImpl implements LikeService{
     public List<Like> getLikesByUser(User user) {
         return likeRepository.findAllByUser_Id(user.getId());
     }
+
+    @Override
+    public boolean toggle(Question question, User currentUser) {
+        Optional<Like> like = likeRepository.findOneByQuestion_IdAndUser_Id(question.getId(), currentUser.getId());
+        if (like.isPresent()) {
+            likeRepository.delete(like.get());
+            return false;
+        } else {
+            Like newLike = Like.builder()
+                                .question(question)
+                                .user(currentUser)
+                                .build();
+            likeRepository.save(newLike);
+            return true;
+        }
+    }
+
 }

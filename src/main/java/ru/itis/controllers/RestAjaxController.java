@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.itis.models.Like;
 import ru.itis.models.Question;
 import ru.itis.models.User;
 import ru.itis.security.details.UserDetailsImpl;
+import ru.itis.services.LikeService;
 import ru.itis.services.QuestionService;
 import ru.itis.services.UserService;
 
@@ -25,6 +27,9 @@ public class RestAjaxController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    LikeService likeService;
 
     @PostMapping("/api/follow")
     public ResponseEntity<Object> follow(@RequestParam("login") String login, Authentication authentication) {
@@ -57,5 +62,14 @@ public class RestAjaxController {
         question.setAnswer(answer);
         questionService.addOrUpdateQuestion(question);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/api/like")
+    public ResponseEntity<Object> like(@RequestParam("id") Integer id, Authentication authentication) {
+        Question question = questionService.getQuestionById(id).orElseThrow(IllegalArgumentException::new);
+        Integer currentUserId = ((UserDetailsImpl)authentication.getPrincipal()).getUser().getId();
+        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        boolean isLike = likeService.toggle(question, currentUser);
+        return ResponseEntity.ok(isLike);
     }
 }
