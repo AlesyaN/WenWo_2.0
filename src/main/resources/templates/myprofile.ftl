@@ -64,11 +64,25 @@
             <br>
             <b>${question.text}</b>
             <br>
+            <i>${question.sender.login}  ${question.date}</i>
+            <br>
                     <#if question.answer??>
                         <p>${question.answer}</p>
                     </#if>
-            <i>${question.date}</i>
-            <i>Likes: ${question.likes?size}</i>
+            <#assign liked = false>
+            <#list question.likes as like>
+                <#if like.user.login.equals(user.login)>
+                    <#assign liked = true>
+                </#if>
+            </#list>
+            <button
+                    <#if liked == true>
+                        class="pressed-button"
+                    <#elseif liked == false>
+                        class="button"
+                    </#if>
+                        id="${question.id}" onclick="like(event)">&hearts;</button>
+            <i id="likes${question.id}">${question.likes?size}</i>
         </ul>
     </#list>
     </list>
@@ -82,5 +96,6 @@
 </#if>
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/profile.js"></script>
+<script type="application/javascript" src="/js/like.js"></script>
 </body>
 </html>

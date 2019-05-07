@@ -21,16 +21,16 @@
                     <#if question.answer??>
                         <p>${question.answer}</p>
                     </#if>
-            <#assign followed = false>
+            <#assign liked = false>
             <#list question.likes as like>
-                <#if like.user.id == current_user.id>
-                    <#assign followed = true>
+                <#if like.user.id == currentUserId>
+                    <#assign liked = true>
                 </#if>
             </#list>
             <button
-                    <#if followed == true>
+                    <#if liked == true>
                         class="pressed-button"
-                    <#elseif followed == false>
+                    <#elseif liked == false>
                         class="button"
                     </#if>
                     id="${question.id}" onclick="like(event)">&hearts;</button>
@@ -41,6 +41,6 @@
 
 </div>
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
-<script type="application/javascript" src="/js/feed.js"></script>
+<script type="application/javascript" src="/js/like.js"></script>
 </body>
 </html>

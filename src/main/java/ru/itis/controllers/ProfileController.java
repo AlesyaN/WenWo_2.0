@@ -30,7 +30,7 @@ public class ProfileController {
     public String getProfilePage(ModelMap modelMap, Authentication authentication) {
         Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
         User user = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
-        UserDto userDto = from(user, user);
+        UserDto userDto = from(user);
         modelMap.addAttribute("user", userDto);
         return "myprofile";
     }
@@ -45,7 +45,8 @@ public class ProfileController {
             if (user.getId().equals(currentUser.getId())) return "redirect:/profile";
             List<Question> questions = questionService.getUserUnansweredQuestionsBySender(user, currentUser);
             modelMap.addAttribute("unansweredQuestions", questions);
-            modelMap.addAttribute("user", from(user, currentUser));
+            modelMap.addAttribute("user", from(user));
+            modelMap.addAttribute("currentUserId", currentUser.getId());
         }
         return "profile";
     }

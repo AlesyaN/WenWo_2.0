@@ -22,12 +22,10 @@ public class UserDto {
     private String gender;
     private String city;
     private Date dateOfBirth;
-    private List<Question> unansweredQuestionsByCurrentUser;
     private List<Question> answeredQuestions;
     private List<Question> unansweredQuestions;
     private List<User> followers;
     private List<User> followings;
-    private boolean followedByCurrentUser;
 
 
     public static UserDto from(User user) {
@@ -45,14 +43,4 @@ public class UserDto {
                 .build();
     }
 
-    public static UserDto from(User user, User currentUser) {
-        UserDto userDto = UserDto.from(user);
-        userDto.followedByCurrentUser = false;
-        List<User> followers = user.getFollowers();
-        for (int i = 0; i < followers.size() && !userDto.followedByCurrentUser; i++) {
-            if (followers.get(i).getId().equals(currentUser.getId()))
-                userDto.followedByCurrentUser = true;
-        }
-        return userDto;
-    }
 }
