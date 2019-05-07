@@ -72,4 +72,11 @@ public class RestAjaxController {
         boolean isLike = likeService.toggle(question, currentUser);
         return ResponseEntity.ok(isLike);
     }
+
+    @PostMapping("/api/deleteQuestion")
+    public ResponseEntity<Object> deleteQuestion(@RequestParam("id") Integer id) {
+        Question question = questionService.getQuestionById(id).orElseThrow(IllegalArgumentException::new);
+        questionService.deleteQuestion(question);
+        return ResponseEntity.ok().build();
+    }
 }

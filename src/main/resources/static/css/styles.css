@@ -97,6 +97,10 @@
     -moz-border-radius: 3px;
 }
 
+.delete {
+    background: #e9322d;
+}
+
 .form-style-2 input[type=submit]:hover,
 .form-style-2 input[type=button]:hover {
     background: #7ea1dd;

@@ -22,7 +22,8 @@
             <br>
             <br>
             <textarea class="textarea-field" id="textarea${question.id}"></textarea><br>
-            <button class="button" onclick="answer(event)" id="${question.id}">Answer</button>
+            <button class="button" onclick="answer(event)" data-questionId="${question.id}">Answer</button>
+            <button class="button delete" onclick="deleteQuestion(event)" data-questionId="${question.id}">Delete</button>
         </div>
         <br>
         <br>
