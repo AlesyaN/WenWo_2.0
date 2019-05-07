@@ -71,7 +71,7 @@
                     </#if>
             <#assign liked = false>
             <#list question.likes as like>
-                <#if like.user.login.equals(user.login)>
+                <#if like.user.login == user.login>
                     <#assign liked = true>
                 </#if>
             </#list>
