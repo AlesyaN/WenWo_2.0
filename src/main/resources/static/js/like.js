@@ -1,12 +1,12 @@
 function like(event) {
-    var id = event.target.id;
+    var id = event.target.dataset.questionid;
     var button = event.target;
     var numOfLkes = document.getElementById("likes" + id);
     $.ajax({
         url : "/api/like",
         method: "post",
         data: {
-            "id" : event.target.id
+            "id" : id
         },
         success: function (msg) {
             if (msg === true) {

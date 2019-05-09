@@ -106,7 +106,7 @@
                     <#elseif liked == false>
                         class="button"
                     </#if>
-                        id="${question.id}" onclick="like(event)">&hearts;</button>
+                        data-questionid="${question.id}" onclick="like(event)">&hearts;</button>
         <i id="likes${question.id}">${question.likes?size}</i>
         <br>
     </#list>
