@@ -48,3 +48,21 @@ function ask(event) {
         }
     });
 }
+
+function deleteQuestion(event) {
+    var id = event.target.dataset.questionid;
+    var question = document.getElementById("question" + id);
+    $.ajax({
+        url: "/api/deleteQuestion",
+        type: "post",
+        data: {
+            "id": id
+        },
+        success(msg) {
+            question.remove();
+        },
+        error(msg) {
+            alert(error);
+        }
+    });
+}

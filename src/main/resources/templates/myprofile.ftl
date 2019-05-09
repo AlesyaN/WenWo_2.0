@@ -59,7 +59,7 @@
     <div class="form-style-2-heading">Questions</div>
     <list>
     <#list user.answeredQuestions as question>
-        <ul>
+        <div id ="question${question.id}">
             <a href="/profile/${question.sender.id}">${question.sender.login}</a>
             <br>
             <b>${question.text}</b>
@@ -83,7 +83,8 @@
                     </#if>
                         id="${question.id}" onclick="like(event)">&hearts;</button>
             <i id="likes${question.id}">${question.likes?size}</i>
-        </ul>
+            <button class="button delete" onclick="deleteQuestion(event)" data-questionId="${question.id}">Delete</button>
+        </div>
     </#list>
     </list>
 
