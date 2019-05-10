@@ -40,12 +40,29 @@
         <br>
         <input type="submit" value="Ask">
         <br>
-        <div id="unanswered-questions-bar"
+        <div class="pressed-button">
+            <div id="unanswered-questions-bar" onclick="openUnansweredQuestions(event)"
              <#if unansweredQuestions?? && unansweredQuestions?size <= 0>
              style="display: none"
              </#if>
-             class="button">
-            You have <span id="num-of-unanswered-questions"><#if unansweredQuestions??>${unansweredQuestions?size}</#if></span> unanswered questions for ${user.login}
+                 class="button">
+                You have <span
+                    id="num-of-unanswered-questions"><#if unansweredQuestions??>${unansweredQuestions?size}</#if></span>
+                unanswered questions for ${user.login}
+            </div>
+            <br>
+            <div id="unansweredQuestions" style="display: none">
+                <#list unansweredQuestions as question>
+                    <div id="question${question.id}">
+                        ${question.text}
+                        <button class="button delete" onclick="deleteUnansweredQuestion(event)"
+                                data-questionId="${question.id}">Delete
+                        </button>
+                    </div>
+                    <br>
+                </#list>
+            </div>
+
         </div>
 
     </form>

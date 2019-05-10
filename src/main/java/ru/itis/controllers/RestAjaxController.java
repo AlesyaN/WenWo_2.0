@@ -52,8 +52,7 @@ public class RestAjaxController {
                 .date(new Date())
                 .build();
         questionService.addOrUpdateQuestion(question);
-        int numOfUnansweredQuestions = questionService.getUserUnansweredQuestionsBySender(subscriptor, currentUser).size();
-        return ResponseEntity.ok(numOfUnansweredQuestions);
+        return ResponseEntity.ok(question.getId());
     }
 
     @PostMapping("/api/answer")
