@@ -67,7 +67,7 @@
             <i>${question.sender.login}  ${question.date}</i>
             <br>
                     <#if question.answer??>
-                        <p>${question.answer}</p>
+                        <p id="answer${question.id}">${question.answer}</p>
                     </#if>
             <#assign liked = false>
             <#list question.likes as like>
@@ -84,7 +84,7 @@
                         data-questionid="${question.id}" onclick="like(event)">&hearts;</button>
             <i id="likes${question.id}">${question.likes?size}</i>
             <button class="button delete" onclick="deleteQuestion(event)" data-questionId="${question.id}">Delete</button>
-            <button class="button edit" onclick="openEditQuestionField(event)" data-questionId="${question.id}">Edit</button>
+            <button class="button edit" onclick="openEditAnswerField(event)" data-questionId="${question.id}">Edit</button>
         </div>
     </#list>
     </list>

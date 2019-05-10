@@ -67,7 +67,7 @@ function deleteQuestion(event) {
     });
 }
 
-function openEditQuestionField(event) {
+function openEditAnswerField(event) {
     var id = event.target.dataset.questionid;
     event.target.remove();
     var question = document.getElementById(id);
@@ -76,15 +76,19 @@ function openEditQuestionField(event) {
 
     var textarea = document.createElement("textarea");
     textarea.className = "textarea-field";
+    textarea.id = "answerField" + id;
+    textarea.value = document.getElementById("answer" + id).innerHTML;
 
     var editButton = document.createElement("button");
     editButton.className = "button edit";
+    editButton.dataset.questionid = id;
+    editButton.onclick = editAnswer;
     editButton.innerHTML = "Edit";
 
     var closeButton = document.createElement("button");
     closeButton.className = "button delete";
     closeButton.innerHTML = "Close";
-    closeButton.onclick = closeEditQuestionField;
+    closeButton.onclick = closeEditAnswerField;
 
     div.appendChild(document.createElement("br"));
     div.appendChild(textarea);
@@ -95,7 +99,7 @@ function openEditQuestionField(event) {
     question.appendChild(div);
 }
 
-function closeEditQuestionField(event) {
+function closeEditAnswerField(event) {
     var question = event.target.parentElement.parentElement;
     event.target.parentElement.remove();
 
@@ -103,7 +107,24 @@ function closeEditQuestionField(event) {
     button.className = "button edit";
     button.innerHTML = "Edit";
     button.dataset.questionid = question.id;
-    button.onclick = openEditQuestionField;
+    button.onclick = openEditAnswerField;
 
     question.appendChild(button);
+}
+
+function editAnswer(event) {
+    var questionId = event.target.dataset.questionid;
+    var answer = document.getElementById("answerField" + questionId).value;
+    $.ajax({
+        url: "/api/editAnswer",
+        type: "post",
+        data: {
+            "questionId": questionId,
+            "answer": answer
+        },
+        success: function(msg) {
+            closeEditAnswerField(event);
+            document.getElementById("answer" + questionId).innerHTML = answer;
+        }
+    });
 }

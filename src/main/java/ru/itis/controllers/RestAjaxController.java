@@ -79,4 +79,12 @@ public class RestAjaxController {
         questionService.deleteQuestion(question);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/api/editAnswer")
+    public ResponseEntity<Object> editAnswer(@RequestParam("questionId") Integer questionId, @RequestParam("answer") String answer) {
+        Question question = questionService.getQuestionById(questionId).orElseThrow(IllegalArgumentException::new);
+        question.setAnswer(answer);
+        questionService.addOrUpdateQuestion(question);
+        return ResponseEntity.ok().build();
+    }
 }
