@@ -7,6 +7,7 @@ import ru.itis.forms.UserEditForm;
 import ru.itis.forms.UserRegisterForm;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
+import ru.itis.utils.FileDownloader;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,8 @@ import static ru.itis.forms.UserEditForm.from;
 
 @Service
 public class UserServiceImpl implements UserService {
+    @Autowired
+    private FileDownloader fileDownloader;
 
     @Autowired
     private UserRepository userRepository;
@@ -46,12 +49,14 @@ public class UserServiceImpl implements UserService {
     public boolean signUp(UserRegisterForm form) {
         if (!emailIsValid(form.getEmail()) && !loginIsValid(form.getLogin())) return false;
         String hashPassword = passwordEncoder.encode(form.getPassword());
+        String photoPath = fileDownloader.upload(form.getFile(), form.getLogin()).orElseThrow(IllegalArgumentException::new);
         User user = User.builder()
                 .login(form.getLogin())
                 .password(hashPassword)
                 .email(form.getEmail())
                 .name(form.getName())
                 .surname(form.getSurname())
+                .photo_path(photoPath)
                 .build();
         userRepository.save(user);
         return true;
@@ -118,7 +123,6 @@ public class UserServiceImpl implements UserService {
             } else {
                 currentUser.setDateOfBirth(null);
             }
-            System.out.println("City: " + currentUser.getCity());
             userRepository.save(currentUser);
             return true;
         }
