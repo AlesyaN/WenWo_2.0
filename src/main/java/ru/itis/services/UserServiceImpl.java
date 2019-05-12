@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
-import static ru.itis.forms.UserEditForm.from;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -123,6 +123,12 @@ public class UserServiceImpl implements UserService {
             } else {
                 currentUser.setDateOfBirth(null);
             }
+
+            if (!form.getFile().isEmpty()) {
+                String path = fileDownloader.upload(form.getFile(), currentUser.getLogin()).orElseThrow(IllegalArgumentException::new);
+                currentUser.setPhoto_path(path);
+            }
+
             userRepository.save(currentUser);
             return true;
         }

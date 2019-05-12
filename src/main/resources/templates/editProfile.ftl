@@ -6,7 +6,7 @@
 </head>
 <body>
 <#if user??>
-<form method="post" class="form-style-2">
+<form method="post" class="form-style-2" enctype="multipart/form-data">
     <div class="form-style-2-heading">
         Edit your profile
     </div>
@@ -68,6 +68,11 @@
 
     <label for="dateOfBirth">Date of birth:
         <input class="input-field" type="text" name="dateOfBirth" id="dateOfBirth" value="<#if user.dateOfBirth??>${user.dateOfBirth}</#if>">
+    </label>
+    <br>
+
+    <label for="file">Avatar:
+    <input type="file" name="file" id="file">
     </label>
     <br>
 

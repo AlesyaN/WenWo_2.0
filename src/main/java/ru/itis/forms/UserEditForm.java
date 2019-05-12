@@ -3,6 +3,7 @@ package ru.itis.forms;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 import ru.itis.models.User;
 
 import java.text.ParseException;
@@ -21,27 +22,7 @@ public class UserEditForm {
     private String gender;
     private String city;
     private String dateOfBirth;
-
-    public static User from(UserEditForm form) {
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy h:mm:ss");
-        User user = User.builder()
-                .name(form.getName())
-                .surname(form.getSurname())
-                .login(form.getLogin())
-                .password(form.getNewPassword())
-                .email(form.getEmail())
-                .gender(form.getGender())
-                .city(form.getCity())
-                .build();
-        if (!form.getDateOfBirth().equals("")) {
-            try {
-                user.setDateOfBirth(format.parse(form.getDateOfBirth()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-        return user;
-    }
+    private MultipartFile file;
 
 
 }
