@@ -33,6 +33,10 @@
         <br>
         <b>Followings: </b> ${user.followings?size}
     </p>
+    <#if user.photoPath??>
+    <img style="width: 30%; height: 30%" src="${user.photoPath}">
+    </#if>
+    <br>
 
     <form id="ask-form" onsubmit="ask(event)" class="form-style-2">
         <div class="form-style-2-heading">Ask ${user.login} anything...</div>
@@ -123,7 +127,8 @@
                     <#elseif liked == false>
                         class="button"
                     </#if>
-                        data-questionid="${question.id}" onclick="like(event)">&hearts;</button>
+                        data-questionid="${question.id}" onclick="like(event)">&hearts;
+        </button>
         <i id="likes${question.id}">${question.likes?size}</i>
         <br>
     </#list>

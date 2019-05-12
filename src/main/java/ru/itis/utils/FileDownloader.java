@@ -14,12 +14,11 @@ import java.util.Optional;
 @Service
 public class FileDownloader {
 
-    @Value("${my.files-url}")
-    private String UPLOADED_FOLDER;
+    private static String UPLOADED_FOLDER;
 
     public Optional<String> upload(MultipartFile image, String login) {
         if (!image.isEmpty()) {
-            String userFolderName = "/" + login + "/";
+            String userFolderName = "/users/" + login + "/";
             File directory = new File(UPLOADED_FOLDER + userFolderName);
             if (!directory.exists()) directory.mkdirs();
             String fileName = userFolderName + image.getOriginalFilename();
@@ -35,6 +34,11 @@ public class FileDownloader {
         } else {
             return Optional.empty();
         }
+    }
+
+    @Value("${my.files-url}")
+    public void setUploadedFolder(String uploadedFolder) {
+        UPLOADED_FOLDER = uploadedFolder;
     }
 
 }

@@ -18,10 +18,15 @@
     <a href="/editProfile">Edit</a>
     <br>
     <p>
-        <b>Followers: </b><div id="followers">${user.followers?size}</div>
+        <b>Followers: </b>
+    <div id="followers">${user.followers?size}</div>
     <br>
     <b>Followings: </b> ${user.followings?size}
     </p>
+    <#if user.photoPath??>
+        <img style="width: 30%; height: 30%" src="${user.photoPath}">
+    </#if>
+    <br>
     <#if user.gender??>
         <label for="gender">Gender:
             <div id="gender">${user.gender}</div>
@@ -59,7 +64,7 @@
     <div class="form-style-2-heading">Questions</div>
     <list>
     <#list user.answeredQuestions as question>
-        <div id ="${question.id}">
+        <div id="${question.id}">
             <a href="/profile/${question.sender.id}">${question.sender.login}</a>
             <br>
             <b>${question.text}</b>
@@ -81,10 +86,13 @@
                     <#elseif liked == false>
                         class="button"
                     </#if>
-                        data-questionid="${question.id}" onclick="like(event)">&hearts;</button>
+                        data-questionid="${question.id}" onclick="like(event)">&hearts;
+            </button>
             <i id="likes${question.id}">${question.likes?size}</i>
-            <button class="button delete" onclick="deleteQuestion(event)" data-questionId="${question.id}">Delete</button>
-            <button class="button edit" onclick="openEditAnswerField(event)" data-questionId="${question.id}">Edit</button>
+            <button class="button delete" onclick="deleteQuestion(event)" data-questionId="${question.id}">Delete
+            </button>
+            <button class="button edit" onclick="openEditAnswerField(event)" data-questionId="${question.id}">Edit
+            </button>
         </div>
     </#list>
     </list>
