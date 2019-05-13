@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.validators.Login;
+import ru.itis.validators.Password;
 
 import javax.validation.constraints.Size;
 
@@ -16,8 +17,7 @@ public class UserRegisterForm {
     @Login
     private String login;
 
-    @NotBlank
-    @Size(min=4, max=30)
+    @Password
     private String password;
 
     @NotBlank
