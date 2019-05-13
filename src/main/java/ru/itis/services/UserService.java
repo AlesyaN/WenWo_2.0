@@ -17,4 +17,8 @@ public interface UserService {
 
     boolean editProfile(UserEditForm form, User user);
 
+    boolean loginIsUnique(String login);
+
+    boolean emailIsUnique(String email);
+
 }

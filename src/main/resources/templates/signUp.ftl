@@ -1,17 +1,20 @@
 <#ftl encoding='UTF-8'>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/styles.css"  type="text/css">
-    <#--<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>-->
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+<#--<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>-->
 </head>
 <body>
-<#if error??>
-    <div class="alert alert-danger">Wrong login or email!</div>
-</#if>
 <div class="form-style-2">
     <div class="form-style-2-heading">
         Please Sign Up!
     </div>
+    <#if errors??>
+        <#list errors as error>
+            <span>${error}</span>
+            <br>
+        </#list>
+    </#if>
     <form method="post" action="/signUp" enctype="multipart/form-data">
         <label for="login">Login
             <input class="input-field" type="text" id="login" name="login">
@@ -38,7 +41,7 @@
         <input type="submit" value="Register">
     </form>
     <label for="login">Already registered?
-    <a id="login" class="button" href="/login">Login</a></label>
+        <a id="login" class="button" href="/login">Login</a></label>
 </div>
 </body>
 </html>

@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private boolean emailIsValid(String email) {
-        return email != null && !userRepository.findByEmail(email).isPresent();
+    public boolean emailIsUnique(String email) {
+        return !userRepository.findByEmail(email).isPresent();
     }
 
-    private boolean loginIsValid(String login) {
-        return login != null && !userRepository.findByLogin(login).isPresent();
+    public boolean loginIsUnique(String login) {
+        return !userRepository.findByLogin(login).isPresent();
     }
 
 
@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean signUp(UserRegisterForm form) {
-        if (!emailIsValid(form.getEmail()) && !loginIsValid(form.getLogin())) return false;
         String hashPassword = passwordEncoder.encode(form.getPassword());
         String photoPath = fileDownloader.upload(form.getFile(), form.getLogin()).orElseThrow(IllegalArgumentException::new);
         User user = User.builder()

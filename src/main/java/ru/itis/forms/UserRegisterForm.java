@@ -1,19 +1,38 @@
 package ru.itis.forms;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
+import ru.itis.validators.Login;
+
+import javax.validation.constraints.Size;
+
 
 @Data
 @NoArgsConstructor
 public class UserRegisterForm {
+    @Login
     private String login;
+
+    @NotBlank
+    @Size(min=4, max=30)
     private String password;
+
+    @NotBlank
+    @Size(min=4, max=30)
     private String name;
+
+    @NotBlank
+    @Size(min=4, max=30)
     private String surname;
+
+    @NotBlank
+    @Email
     private String email;
+
+
     private MultipartFile file;
 
 }
