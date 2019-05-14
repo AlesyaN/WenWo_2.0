@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
+import ru.itis.validators.File;
 import ru.itis.validators.Login;
 import ru.itis.validators.Password;
 
@@ -32,7 +33,7 @@ public class UserRegisterForm {
     @Email
     private String email;
 
-
+    @File
     private MultipartFile file;
 
 }
