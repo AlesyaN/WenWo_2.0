@@ -93,6 +93,25 @@
             </button>
             <button class="button edit" onclick="openEditAnswerField(event)" data-questionId="${question.id}">Edit
             </button>
+            <br>
+            <div class="form-style-2" id="comments">
+                <h3 class="form-style-2-heading">Comments:</h3>
+                <#list question.comments as comment>
+                    <div>
+                        <a href="/profile/${comment.author.id}">${comment.author.login}</a><br>
+                        <b>${comment.text}</b><br>
+                        <i>${comment.date}</i><br>
+                    </div>
+                    <br>
+                </#list>
+            </div>
+            <div class="form-style-2">
+                <input class="input-field" id="comment${question.id}"
+                          placeholder="Your comment">
+                <br><br>
+                <button class="button" data-questionId="${question.id}" onclick="addComment(event)">Send</button>
+            </div>
+            <br>
         </div>
     </#list>
     </list>
@@ -107,5 +126,6 @@
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/profile.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
 </body>
 </html>

@@ -3,19 +3,22 @@ package ru.itis.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import ru.itis.forms.CommentForm;
+import ru.itis.models.Comment;
 import ru.itis.models.Like;
 import ru.itis.models.Question;
 import ru.itis.models.User;
 import ru.itis.security.details.UserDetailsImpl;
+import ru.itis.services.CommentService;
 import ru.itis.services.LikeService;
 import ru.itis.services.QuestionService;
 import ru.itis.services.UserService;
+import ru.itis.transfer.CommentDto;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.Optional;
 
@@ -30,6 +33,9 @@ public class RestAjaxController {
 
     @Autowired
     LikeService likeService;
+
+    @Autowired
+    CommentService commentService;
 
     @PostMapping("/api/follow")
     public ResponseEntity<Object> follow(@RequestParam("login") String login, Authentication authentication) {
@@ -85,5 +91,21 @@ public class RestAjaxController {
         question.setAnswer(answer);
         questionService.addOrUpdateQuestion(question);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/api/addComment")
+    public ResponseEntity<Object> addComment(@RequestBody @Valid CommentForm commentForm, BindingResult result, Authentication authentication) {
+        if (result.hasErrors()) return ResponseEntity.badRequest().build();
+        Question question = questionService.getQuestionById(commentForm.getQuestionId()).orElseThrow(IllegalArgumentException::new);
+        Integer currentUserId = ((UserDetailsImpl)authentication.getPrincipal()).getUser().getId();
+        User author = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        Comment comment = Comment.builder()
+                .author(author)
+                .question(question)
+                .date(new Date())
+                .text(commentForm.getText())
+                .build();
+        commentService.addComment(comment);
+        return ResponseEntity.ok(CommentDto.from(comment));
     }
 }
