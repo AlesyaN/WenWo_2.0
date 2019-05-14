@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.itis.validators.File;
 import ru.itis.validators.Login;
 import ru.itis.validators.Password;
+import ru.itis.validators.UniqueEmail;
 
 import javax.validation.constraints.Size;
 
@@ -30,6 +31,7 @@ public class UserRegisterForm {
     private String surname;
 
     @NotBlank
+    @UniqueEmail
     @Email
     private String email;
 

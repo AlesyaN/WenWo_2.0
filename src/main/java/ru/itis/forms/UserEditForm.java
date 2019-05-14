@@ -10,6 +10,7 @@ import ru.itis.models.User;
 import ru.itis.validators.File;
 import ru.itis.validators.Login;
 import ru.itis.validators.Password;
+import ru.itis.validators.UniqueEmail;
 
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -36,6 +37,7 @@ public class UserEditForm {
     private String oldPassword;
 
     @NotBlank
+    @UniqueEmail
     @Email
     private String email;
 
