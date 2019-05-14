@@ -18,7 +18,7 @@ public class FileDownloader {
 
     public Optional<String> upload(MultipartFile image, String login) {
         if (!image.isEmpty()) {
-            String userFolderName = "/users/" + login + "/";
+            String userFolderName = "/" + login + "/";
             File directory = new File(UPLOADED_FOLDER + userFolderName);
             if (!directory.exists()) directory.mkdirs();
             String fileName = userFolderName + image.getOriginalFilename();
@@ -29,7 +29,7 @@ public class FileDownloader {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return Optional.of(fileName);
+            return Optional.of("/users" + fileName);
 
         } else {
             return Optional.empty();
