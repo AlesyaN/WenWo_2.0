@@ -1,6 +1,7 @@
 function addComment(event) {
     var questionId = event.target.dataset.questionid;
     var commentInput = document.getElementById("comment" + questionId);
+    if (commentInput.value.trim() === "") return;
     $.ajax({
         url: "/api/addComment",
         method: "post",

@@ -30,7 +30,7 @@ function ask(event) {
     var unansweredQuestions = document.getElementById("unansweredQuestions");
     var textarea = document.getElementById("textarea");
     event.preventDefault();
-    if (textarea.value === "") return;
+    if (textarea.value.trim() === "") return;
     $.ajax({
         url: "/api/ask",
         type: "post",
