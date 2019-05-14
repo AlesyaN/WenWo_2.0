@@ -31,6 +31,9 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private List<Like> likes;
 
+    @OneToMany(mappedBy = "question")
+    private List<Comment> comments;
+
     @Column(name = "message")
     private String text;
     private Date date;
