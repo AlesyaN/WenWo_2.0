@@ -17,7 +17,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/users/**",
                 "/css/**",
                 "/js/**")
-                .addResourceLocations("file:///" + UPLOADED_FOLDER,
+                .addResourceLocations("file:///" + UPLOADED_FOLDER + "/users/",
                         "classpath:/static/css/",
                         "classpath:/static/js/");
     }
