@@ -65,11 +65,18 @@
     <list>
     <#list user.answeredQuestions as question>
         <div id="${question.id}">
-            <a href="/profile/${question.sender.id}">${question.sender.login}</a>
+            <a href="/profile/${question.receiver.id}">${question.receiver.login}</a>
             <br>
             <b>${question.text}</b>
             <br>
-            <i>${question.sender.login}  ${question.date}</i>
+            <i>
+                <#if question.anonymous>
+                    anonymous
+                <#else>
+                    <a href="/profile/${question.sender.id}">${question.sender.login}</a>
+                </#if>
+                ${question.date}
+            </i>
             <br>
                     <#if question.answer??>
                         <p id="answer${question.id}">${question.answer}</p>
@@ -100,7 +107,9 @@
                     <div id="comment${comment.id}">
                         <a href="/profile/${comment.author.id}">${comment.author.login}</a>
                         <#if comment.author.login == user.login>
-                            <button class="button delete" data-comment-id="${comment.id}" onclick="deleteComment(event)">Delete</button>
+                            <button class="button delete" data-comment-id="${comment.id}"
+                                    onclick="deleteComment(event)">Delete
+                            </button>
                         </#if><br>
                         <b>${comment.text}</b><br>
                         <i>${comment.date}</i><br>
@@ -110,7 +119,7 @@
             </div>
             <div class="form-style-2">
                 <input class="input-field" id="comment${question.id}"
-                          placeholder="Your comment">
+                       placeholder="Your comment">
                 <br><br>
                 <button class="button" data-questionId="${question.id}" onclick="addComment(event)">Send</button>
             </div>

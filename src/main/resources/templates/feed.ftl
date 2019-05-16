@@ -16,7 +16,13 @@
             <br>
             <b>${question.text}</b>
             <br>
-            <i>${question.sender.login}  ${question.date}</i>
+            <i>
+            <#if question.anonymous>
+                anonymous
+            <#else>
+                <a href="/profile/${question.sender.id}">${question.sender.login}</a>
+            </#if>
+                ${question.date}</i>
             <br>
                     <#if question.answer??>
                         <p>${question.answer}</p>
@@ -33,7 +39,8 @@
                     <#elseif liked == false>
                         class="button"
                     </#if>
-                    data-questionid="${question.id}" onclick="like(event)">&hearts;</button>
+                        data-questionid="${question.id}" onclick="like(event)">&hearts;
+            </button>
             <i id="likes${question.id}">${question.likes?size}</i>
             <br>
             <div class="form-style-2" id="comments">
@@ -42,7 +49,9 @@
                     <div id="comment${comment.id}">
                         <a href="/profile/${comment.author.id}">${comment.author.login}</a>
                         <#if comment.author.id == currentUserId>
-                            <button class="button delete" data-comment-id="${comment.id}" onclick="deleteComment(event)">Delete</button>
+                            <button class="button delete" data-comment-id="${comment.id}"
+                                    onclick="deleteComment(event)">Delete
+                            </button>
                         </#if><br>
                         <b>${comment.text}</b><br>
                         <i>${comment.date}</i><br>

@@ -110,11 +110,18 @@
     <div class="form-style-2-heading">Questions</div>
     <list>
     <#list user.answeredQuestions as question>
-        <a href="/profile/${question.sender.id}">${question.sender.login}</a>
+        <a href="/profile/${question.receiver.id}">${question.receiver.login}</a>
         <br>
         <b>${question.text}</b>
         <br>
-        <i>${question.sender.login}  ${question.date}</i>
+        <i>
+            <#if question.anonymous>
+                    anonymous
+            <#else>
+                    <a href="/profile/${question.sender.id}">${question.sender.login}</a>
+            </#if>
+            ${question.date}
+        </i>
         <br>
                     <#if question.answer??>
                         <p>${question.answer}</p>
