@@ -23,8 +23,7 @@ public class EditProfileController {
 
     @GetMapping("/editProfile")
     public String getEditPage(Authentication authentication, ModelMap modelMap) {
-        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        User currentUser = userService.getCurrentUser(authentication);
         modelMap.addAttribute("user", from(currentUser));
         return "editProfile";
     }

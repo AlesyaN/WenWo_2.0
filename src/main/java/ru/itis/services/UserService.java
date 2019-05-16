@@ -1,5 +1,6 @@
 package ru.itis.services;
 
+import org.springframework.security.core.Authentication;
 import ru.itis.forms.UserEditForm;
 import ru.itis.forms.UserRegisterForm;
 import ru.itis.models.User;
@@ -21,4 +22,5 @@ public interface UserService {
 
     boolean emailIsUnique(String email);
 
+    User getCurrentUser(Authentication authentication);
 }

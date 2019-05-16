@@ -40,8 +40,7 @@ public class RestAjaxController {
     @PostMapping("/api/follow")
     public ResponseEntity<Object> follow(@RequestParam("login") String login, Authentication authentication) {
         User subscriptor = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);
-        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        User currentUser = userService.getCurrentUser(authentication);
         boolean followed = userService.toggleSubscription(subscriptor, currentUser);
         return ResponseEntity.ok(followed);
     }
@@ -49,8 +48,7 @@ public class RestAjaxController {
     @PostMapping("/api/ask")
     public ResponseEntity<Object> ask(@RequestParam("login") String login, @RequestParam("question") String questionText, Authentication authentication) {
         User subscriptor = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);
-        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        User currentUser = userService.getCurrentUser(authentication);
         Question question = Question.builder()
                 .sender(currentUser)
                 .receiver(subscriptor)
@@ -72,8 +70,7 @@ public class RestAjaxController {
     @PostMapping("/api/like")
     public ResponseEntity<Object> like(@RequestParam("id") Integer id, Authentication authentication) {
         Question question = questionService.getQuestionById(id).orElseThrow(IllegalArgumentException::new);
-        Integer currentUserId = ((UserDetailsImpl)authentication.getPrincipal()).getUser().getId();
-        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        User currentUser = userService.getCurrentUser(authentication);
         boolean isLike = likeService.toggle(question, currentUser);
         return ResponseEntity.ok(isLike);
     }
@@ -97,8 +94,7 @@ public class RestAjaxController {
     public ResponseEntity<Object> addComment(@RequestBody @Valid CommentForm commentForm, BindingResult result, Authentication authentication) {
         if (result.hasErrors()) return ResponseEntity.badRequest().build();
         Question question = questionService.getQuestionById(commentForm.getQuestionId()).orElseThrow(IllegalArgumentException::new);
-        Integer currentUserId = ((UserDetailsImpl)authentication.getPrincipal()).getUser().getId();
-        User author = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        User author = userService.getCurrentUser(authentication);
         Comment comment = Comment.builder()
                 .author(author)
                 .question(question)

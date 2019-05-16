@@ -19,8 +19,7 @@ public class QuestionController {
 
     @GetMapping("/questions")
     public String getQuestionsPage(Authentication authentication, ModelMap modelMap) {
-        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        User currentUser = userService.getCurrentUser(authentication);
         modelMap.addAttribute("questions", currentUser.getUnansweredQuestions());
         return "questions";
     }

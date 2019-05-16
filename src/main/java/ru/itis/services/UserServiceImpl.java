@@ -1,12 +1,14 @@
 package ru.itis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itis.forms.UserEditForm;
 import ru.itis.forms.UserRegisterForm;
 import ru.itis.models.User;
 import ru.itis.repositories.UserRepository;
+import ru.itis.security.details.UserDetailsImpl;
 import ru.itis.utils.FileDownloader;
 
 import java.text.ParseException;
@@ -29,6 +31,12 @@ public class UserServiceImpl implements UserService {
 
     public boolean emailIsUnique(String email) {
         return !userRepository.findByEmail(email).isPresent();
+    }
+
+    @Override
+    public User getCurrentUser(Authentication authentication) {
+        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+        return getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean loginIsUnique(String login) {

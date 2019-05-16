@@ -28,8 +28,7 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String getProfilePage(ModelMap modelMap, Authentication authentication) {
-        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-        User user = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+        User user = userService.getCurrentUser(authentication);
         UserDto userDto = from(user);
         modelMap.addAttribute("user", userDto);
         return "myprofile";
@@ -40,8 +39,7 @@ public class ProfileController {
         Optional<User> userCandidate = userService.getUserById(id);
         if (userCandidate.isPresent()) {
             User user = userCandidate.get();
-            Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-            User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+            User currentUser = userService.getCurrentUser(authentication);
             if (user.getId().equals(currentUser.getId())) return "redirect:/profile";
             List<Question> questions = questionService.getUserUnansweredQuestionsBySender(user, currentUser);
             modelMap.addAttribute("unansweredQuestions", questions);
