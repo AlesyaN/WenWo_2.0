@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDto {
+    private Integer id;
     private String text;
     private Integer questionId;
     private Integer authorId;
@@ -22,6 +23,7 @@ public class CommentDto {
 
     public static CommentDto from(Comment comment) {
         return CommentDto.builder()
+                .id(comment.getId())
                 .authorId(comment.getAuthor().getId())
                 .authorLogin(comment.getAuthor().getLogin())
                 .questionId(comment.getQuestion().getId())

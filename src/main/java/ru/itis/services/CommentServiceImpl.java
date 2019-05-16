@@ -7,6 +7,7 @@ import ru.itis.models.Question;
 import ru.itis.repositories.CommentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -27,5 +28,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> findAllByQuestion(Question question) {
         return commentRepository.findAllByQuestion_Id(question.getId());
+    }
+
+    @Override
+    public Optional<Comment> getCommentById(Integer commentId) {
+        return Optional.ofNullable(commentRepository.findOne(commentId));
     }
 }

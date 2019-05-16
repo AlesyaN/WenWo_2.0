@@ -18,6 +18,12 @@ function addComment(event) {
             author.href = "/profile/" + comment.authorId;
             author.innerHTML = comment.authorLogin;
 
+            var deleteButton = document.createElement("button");
+            deleteButton.className = "button delete";
+            deleteButton.dataset.commentId = comment.id;
+            deleteButton.innerHTML = "Delete";
+            deleteButton.onclick = deleteComment;
+
             var text = document.createElement("b");
             text.innerHTML = comment.text;
 
@@ -32,7 +38,9 @@ function addComment(event) {
 
             var br = document.createElement("br");
 
+            commentElement.id = "comment" + comment.id;
             commentElement.appendChild(author);
+            commentElement.appendChild(deleteButton);
             commentElement.appendChild(br);
             commentElement.appendChild(text);
             commentElement.appendChild(br.cloneNode());
@@ -46,6 +54,24 @@ function addComment(event) {
         },
         error: function () {
             alert("error");
+        }
+    })
+}
+
+function deleteComment(event) {
+    var commentId = event.target.dataset.commentId;
+    var comment = document.getElementById("comment" + commentId);
+    $.ajax({
+        url: "/api/deleteComment",
+        method: "post",
+        data: {
+            commentId: commentId
+        },
+        success: function (msg) {
+            comment.remove();
+        },
+        error: function(msg) {
+            alert(msg);
         }
     })
 }
