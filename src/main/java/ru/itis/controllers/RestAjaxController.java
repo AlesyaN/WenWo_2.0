@@ -46,10 +46,11 @@ public class RestAjaxController {
     }
 
     @PostMapping("/api/ask")
-    public ResponseEntity<Object> ask(@RequestParam("login") String login, @RequestParam("question") String questionText, Authentication authentication) {
+    public ResponseEntity<Object> ask(@RequestParam("login") String login, @RequestParam("question") String questionText, @RequestParam("anonymous") boolean anonymous, Authentication authentication) {
         User subscriptor = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);
         User currentUser = userService.getCurrentUser(authentication);
         Question question = Question.builder()
+                .anonymous(anonymous)
                 .sender(currentUser)
                 .receiver(subscriptor)
                 .text(questionText)

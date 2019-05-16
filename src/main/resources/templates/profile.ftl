@@ -41,6 +41,10 @@
     <form id="ask-form" onsubmit="ask(event)" class="form-style-2">
         <div class="form-style-2-heading">Ask ${user.login} anything...</div>
         <textarea id="textarea" class="textarea-field" name="question"></textarea>
+        <label for="anonymous">
+            Ask anonymously
+            <input type="checkbox" id="anonymous">
+        </label>
         <br>
         <input type="submit" value="Ask">
         <br>
@@ -137,7 +141,9 @@
                     <div id="comment${comment.id}">
                         <a href="/profile/${comment.author.id}">${comment.author.login}</a>
                         <#if comment.author.id == currentUserId>
-                            <button class="button delete" data-comment-id="${comment.id}" onclick="deleteComment(event)">Delete</button>
+                            <button class="button delete" data-comment-id="${comment.id}"
+                                    onclick="deleteComment(event)">Delete
+                            </button>
                         </#if><br>
                         <b>${comment.text}</b><br>
                         <i>${comment.date}</i><br>

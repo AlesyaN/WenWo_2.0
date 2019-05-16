@@ -29,6 +29,7 @@ function ask(event) {
     var unansweredQuestionsBar = document.getElementById("unanswered-questions-bar");
     var unansweredQuestions = document.getElementById("unansweredQuestions");
     var textarea = document.getElementById("textarea");
+    var checkbox = document.getElementById("anonymous");
     event.preventDefault();
     if (textarea.value.trim() === "") return;
     $.ajax({
@@ -36,7 +37,8 @@ function ask(event) {
         type: "post",
         data: {
             "login": document.getElementById("login").innerHTML,
-            "question": textarea.value
+            "question": textarea.value,
+            "anonymous": checkbox.checked
         },
         success: function (id) {
             unansweredQuestionsBar.style.display = "block";
@@ -54,6 +56,7 @@ function ask(event) {
             unansweredQuestions.appendChild(document.createElement("br"));
             unansweredQuestions.appendChild(newQuestion);
 
+            checkbox.checked = false;
             textarea.value = "";
         },
         error: function (msg) {

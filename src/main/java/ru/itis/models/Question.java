@@ -38,5 +38,6 @@ public class Question {
     private String text;
     private Date date;
     private String answer;
+    private boolean anonymous;
 
 }
