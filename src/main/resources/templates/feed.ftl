@@ -39,8 +39,11 @@
             <div class="form-style-2" id="comments">
                 <h3 class="form-style-2-heading">Comments:</h3>
                 <#list question.comments as comment>
-                    <div>
-                        <a href="/profile/${comment.author.id}">${comment.author.login}</a><br>
+                    <div id="comment${comment.id}">
+                        <a href="/profile/${comment.author.id}">${comment.author.login}</a>
+                        <#if comment.author.id == currentUserId>
+                            <button class="button delete" data-comment-id="${comment.id}" onclick="deleteComment(event)">Delete</button>
+                        </#if><br>
                         <b>${comment.text}</b><br>
                         <i>${comment.date}</i><br>
                     </div>

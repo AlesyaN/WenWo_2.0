@@ -108,4 +108,11 @@ public class RestAjaxController {
         commentService.addComment(comment);
         return ResponseEntity.ok(CommentDto.from(comment));
     }
+
+    @PostMapping("/api/deleteComment")
+    public ResponseEntity<Object> deleteComment(@RequestParam("commentId") Integer commentId) {
+        Comment comment = commentService.getCommentById(commentId).orElseThrow(IllegalArgumentException::new);
+        commentService.deleteComment(comment);
+        return ResponseEntity.ok().build();
+    }
 }
