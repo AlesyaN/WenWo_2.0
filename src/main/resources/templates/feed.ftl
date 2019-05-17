@@ -6,6 +6,10 @@
 </head>
 <body>
 <div class="form-style-2">
+    <form class="form-style-2" method="get" action="/search">
+        <input class="input-field" type="text" id="search" name="search-text">
+        <input type="submit" class="button" value="Search">
+    </form>
     <div class="form-style-2-heading">
         Feed
     </div>
@@ -74,6 +78,5 @@
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
 <script type="application/javascript" src="/js/comment.js"></script>
-
 </body>
 </html>

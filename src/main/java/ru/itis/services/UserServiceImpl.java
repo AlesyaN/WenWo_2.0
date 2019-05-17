@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
         return getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
     }
 
+    @Override
+    public List<User> search(String text) {
+        return userRepository.search(text);
+    }
+
     public boolean loginIsUnique(String login) {
         return !userRepository.findByLogin(login).isPresent();
     }

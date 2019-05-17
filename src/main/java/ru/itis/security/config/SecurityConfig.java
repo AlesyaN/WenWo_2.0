@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/editProfile").authenticated()
                 .antMatchers("/feed").authenticated()
                 .antMatchers("/questions").authenticated()
+                .antMatchers("/search").authenticated()
                 .and()
             .rememberMe()
                 .rememberMeParameter("remember-me")

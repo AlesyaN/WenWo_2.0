@@ -6,6 +6,10 @@
 </head>
 <body>
 <div class="form-style-2">
+    <form class="form-style-2" method="get" action="/search">
+        <input class="input-field" type="text" id="search" name="search-text">
+        <input type="submit" class="button" value="Search">
+    </form>
     <a class="button" href="/feed">Feed</a>
     <a class="button" href="/profile">My profile</a>
     <br>

@@ -23,4 +23,6 @@ public interface UserService {
     boolean emailIsUnique(String email);
 
     User getCurrentUser(Authentication authentication);
+
+    List<User> search(String text);
 }
