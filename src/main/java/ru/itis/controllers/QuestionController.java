@@ -19,7 +19,7 @@ public class QuestionController {
 
     @GetMapping("/questions")
     public String getQuestionsPage(Authentication authentication, ModelMap modelMap) {
-        User currentUser = userService.getCurrentUser(authentication);
+        User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
         modelMap.addAttribute("questions", currentUser.getUnansweredQuestions());
         return "questions";
     }

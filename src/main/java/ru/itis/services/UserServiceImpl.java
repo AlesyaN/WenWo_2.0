@@ -34,9 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getCurrentUser(Authentication authentication) {
-        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-        return getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
+    public Optional<User> getCurrentUser(Authentication authentication) {
+        if (authentication != null) {
+            Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
+            return getUserById(currentUserId);
+        }
+        return Optional.empty();
     }
 
     @Override

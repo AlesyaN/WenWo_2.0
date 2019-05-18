@@ -40,7 +40,7 @@ public class RestAjaxController {
     @PostMapping("/api/follow")
     public ResponseEntity<Object> follow(@RequestParam("login") String login, Authentication authentication) {
         User subscriptor = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);
-        User currentUser = userService.getCurrentUser(authentication);
+        User currentUser = userService.getCurrentUser(authentication).orElse(null);
         boolean followed = userService.toggleSubscription(subscriptor, currentUser);
         return ResponseEntity.ok(followed);
     }
@@ -48,7 +48,7 @@ public class RestAjaxController {
     @PostMapping("/api/ask")
     public ResponseEntity<Object> ask(@RequestParam("login") String login, @RequestParam("question") String questionText, @RequestParam("anonymous") boolean anonymous, Authentication authentication) {
         User subscriptor = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);
-        User currentUser = userService.getCurrentUser(authentication);
+        User currentUser = userService.getCurrentUser(authentication).orElse(null);
         Question question = Question.builder()
                 .anonymous(anonymous)
                 .sender(currentUser)
@@ -71,7 +71,7 @@ public class RestAjaxController {
     @PostMapping("/api/like")
     public ResponseEntity<Object> like(@RequestParam("id") Integer id, Authentication authentication) {
         Question question = questionService.getQuestionById(id).orElseThrow(IllegalArgumentException::new);
-        User currentUser = userService.getCurrentUser(authentication);
+        User currentUser = userService.getCurrentUser(authentication).orElse(null);
         boolean isLike = likeService.toggle(question, currentUser);
         return ResponseEntity.ok(isLike);
     }
@@ -95,7 +95,7 @@ public class RestAjaxController {
     public ResponseEntity<Object> addComment(@RequestBody @Valid CommentForm commentForm, BindingResult result, Authentication authentication) {
         if (result.hasErrors()) return ResponseEntity.badRequest().build();
         Question question = questionService.getQuestionById(commentForm.getQuestionId()).orElseThrow(IllegalArgumentException::new);
-        User author = userService.getCurrentUser(authentication);
+        User author = userService.getCurrentUser(authentication).orElse(null);
         Comment comment = Comment.builder()
                 .author(author)
                 .question(question)

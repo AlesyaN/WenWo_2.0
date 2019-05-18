@@ -10,14 +10,15 @@
         <input class="input-field" type="text" id="search" name="search-text">
         <input type="submit" class="button" value="Search">
     </form>
-    <a class="button" href="/feed">Feed</a>
-    <a class="button" href="/profile">My profile</a>
-    <br>
-    <br>
+        <a class="button" href="/feed">Feed</a>
+        <a class="button" href="/profile">My profile</a>
+        <br>
+        <br>
 <#if user??>
     <div class="form-style-2-heading">
         ${user.fullName}
     </div>
+    <#if currentUserId??>
     <button class="button" onclick="follow()" id="follow-btn">
             <#assign followedByCurrentUser = false>
             <#list user.followers as follower>
@@ -31,6 +32,9 @@
                 Follow
             </#if>
     </button>
+    <#else>
+    <a class="button" href="/login">Follow</a>
+    </#if>
     <p>
         <b>Followers: </b>
         <span id="followers">${user.followers?size}</span>
@@ -42,6 +46,7 @@
     </#if>
     <br>
 
+    <#if currentUserId??>
     <form id="ask-form" onsubmit="ask(event)" class="form-style-2">
         <div class="form-style-2-heading">Ask ${user.login} anything...</div>
         <textarea id="textarea" class="textarea-field" name="question"></textarea>
@@ -78,6 +83,7 @@
         </div>
 
     </form>
+    </#if>
 
     <br>
     <#if user.gender??>
@@ -127,6 +133,7 @@
             ${question.date}
         </i>
         <br>
+        <#if currentUserId??>
                     <#if question.answer??>
                         <p>${question.answer}</p>
                     </#if>
@@ -144,6 +151,10 @@
                     </#if>
                         data-questionid="${question.id}" onclick="like(event)">&hearts;
         </button>
+        <#else>
+            <br>
+            <a class="button" href="/login">&hearts;</a>
+        </#if>
         <i id="likes${question.id}">${question.likes?size}</i>
         <br>
         <div class="form-style-2" id="comments">
@@ -151,7 +162,7 @@
                 <#list question.comments as comment>
                     <div id="comment${comment.id}">
                         <a href="/profile/${comment.author.id}">${comment.author.login}</a>
-                        <#if comment.author.id == currentUserId>
+                        <#if currentUserId?? && comment.author.id == currentUserId>
                             <button class="button delete" data-comment-id="${comment.id}"
                                     onclick="deleteComment(event)">Delete
                             </button>
@@ -162,12 +173,14 @@
                     <br>
                 </#list>
         </div>
+        <#if currentUserId??>
         <div class="form-style-2">
             <input class="input-field" id="comment${question.id}"
                    placeholder="Your comment">
             <br><br>
             <button class="button" data-questionId="${question.id}" onclick="addComment(event)">Send</button>
         </div>
+        </#if>
         <br>
     </#list>
     </list>

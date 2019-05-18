@@ -25,7 +25,7 @@ public class FeedController {
 
     @GetMapping("/feed")
     public String getFeed(ModelMap modelMap, Authentication authentication) {
-        User currentUser = userService.getCurrentUser(authentication);
+        User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
         List<Question> questions = questionService.getUsersFeed(currentUser);
         modelMap.addAttribute("feed", questions);
         modelMap.addAttribute("currentUserId", currentUser.getId());
