@@ -29,9 +29,7 @@ public class ProfileController {
     @GetMapping("/profile")
     public String getProfilePage(ModelMap modelMap, Authentication authentication) {
         User user = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
-        UserDto userDto = from(user);
-        modelMap.addAttribute("user", userDto);
-        return "myprofile";
+        return "redirect:/profile/" + user.getId();
     }
 
     @GetMapping("/profile/{id}")
@@ -43,7 +41,7 @@ public class ProfileController {
             modelMap.addAttribute("user", from(user));
             if (currentUserOptional.isPresent()) {
                 User currentUser = currentUserOptional.get();
-                if (user.getId().equals(currentUserOptional.get().getId())) return "redirect:/profile";
+                if (user.getId().equals(currentUserOptional.get().getId())) return "myprofile";
                 List<Question> questions = questionService.getUserUnansweredQuestionsBySender(user, currentUser);
                 modelMap.addAttribute("unansweredQuestions", questions);
                 modelMap.addAttribute("currentUserId", currentUser.getId());
