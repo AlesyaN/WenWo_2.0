@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> search(String text) {
+    public List<User> searchUsers(String text) {
         return userRepository.search(text);
     }
 

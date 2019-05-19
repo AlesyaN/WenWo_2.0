@@ -50,4 +50,9 @@ public class QuestionServiceImpl implements QuestionService{
     public List<Question> getUserUnansweredQuestionsBySender(User user, User currentUser) {
         return questionRepository.findAllByReceiver_IdAndSender_IdAndAnswerIsNull(user.getId(), currentUser.getId());
     }
+
+    @Override
+    public List<Question> searchQuestions(String text) {
+        return questionRepository.search(text);
+    }
 }

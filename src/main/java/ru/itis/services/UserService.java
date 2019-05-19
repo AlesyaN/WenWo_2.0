@@ -24,5 +24,5 @@ public interface UserService {
 
     Optional<User> getCurrentUser(Authentication authentication);
 
-    List<User> search(String text);
+    List<User> searchUsers(String text);
 }

@@ -16,4 +16,6 @@ public interface QuestionService {
     void deleteQuestion(Question question);
     List<Question> getUsersFeed(User currentUser);
     List<Question> getUserUnansweredQuestionsBySender(User user, User currentUser);
+
+    List<Question> searchQuestions(String text);
 }
