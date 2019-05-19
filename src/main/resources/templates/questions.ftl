@@ -14,7 +14,11 @@
     <br>
     <#list questions as question>
         <div id="question${question.id}">
-            <b><a href="/profile/${question.sender.id}">${question.sender.login}</a></b>
+            <#if question.anonymous>
+                <b>anonymous</b>
+            <#else>
+                <b><a href="/profile/${question.sender.id}">${question.sender.login}</a></b>
+            </#if>
             <br>
             <b>${question.text}</b>
             <br>
@@ -23,7 +27,8 @@
             <br>
             <textarea class="textarea-field" id="textarea${question.id}"></textarea><br>
             <button class="button" onclick="answer(event)" data-questionId="${question.id}">Answer</button>
-            <button class="button delete" onclick="deleteQuestion(event)" data-questionId="${question.id}">Delete</button>
+            <button class="button delete" onclick="deleteQuestion(event)" data-questionId="${question.id}">Delete
+            </button>
         </div>
         <br>
         <br>
