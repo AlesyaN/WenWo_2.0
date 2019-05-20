@@ -18,7 +18,7 @@
         <ul>
             <a href="/profile/${question.receiver.id}">${question.receiver.login}</a>
             <br>
-            <b>${question.text}</b>
+            <b data-contain-hashtags>${question.text}</b>
             <br>
             <i>
             <#if question.anonymous>
@@ -29,7 +29,7 @@
                 ${question.date}</i>
             <br>
                     <#if question.answer??>
-                        <p>${question.answer}</p>
+                        <p data-contain-hashtags>${question.answer}</p>
                     </#if>
             <#assign liked = false>
             <#list question.likes as like>
@@ -57,7 +57,7 @@
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
-                        <b>${comment.text}</b><br>
+                        <b data-contain-hashtags>${comment.text}</b><br>
                         <i>${comment.date}</i><br>
                     </div>
                     <br>
@@ -78,5 +78,7 @@
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
 <script type="application/javascript" src="/js/comment.js"></script>
+<script type="application/javascript" src="/js/hashtags.js"></script>
+
 </body>
 </html>

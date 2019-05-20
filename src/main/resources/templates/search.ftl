@@ -13,8 +13,7 @@
     <a class="button" href="/profile">My profile</a>
     <br><br>
     <div class="form-style-2-heading">Searching results:</div>
-<#if 0 < users?size || 0 < questions?size>
-    <#if 0 < users?size>
+    <#if users?? && 0 < users?size>
     <br>
         <div class="form-style-2-heading">Users</div>
         <#list users as user>
@@ -27,13 +26,13 @@
             <br>
         </#list>
     </#if>
-    <#if 0 < questions?size>
+    <#if questions?? && 0 < questions?size>
         <br>
         <div class="form-style-2-heading">Questions</div>
         <#list questions as question>
               <a href="/profile/${question.receiver.id}">${question.receiver.login}</a>
             <br>
-            <b>${question.text}</b>
+            <b data-contain-hashtags>${question.text}</b>
             <br>
             <i>
                 <#if question.anonymous>
@@ -44,10 +43,10 @@
                 ${question.date}
             </i>
             <br>
-            <#if currentUserId??>
                 <#if question.answer??>
-                            <p>${question.answer}</p>
+                            <p data-contain-hashtags>${question.answer}</p>
                 </#if>
+            <#if currentUserId??>
                 <#assign liked = false>
                 <#list question.likes as like>
                     <#if like.user.id == currentUserId>
@@ -78,7 +77,7 @@
                                         onclick="deleteComment(event)">Delete
                                 </button>
                             </#if><br>
-                            <b>${comment.text}</b><br>
+                            <b data-contain-hashtags>${comment.text}</b><br>
                             <i>${comment.date}</i><br>
                         </div>
                         <br>
@@ -95,9 +94,10 @@
             <br>
         </#list>
     </#if>
-<#else>
-    <div>No results</div>
-</#if>
 </div>
+<script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
+<script type="application/javascript" src="/js/like.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
+<script type="application/javascript" src="/js/hashtags.js"></script>
 </body>
 </html>

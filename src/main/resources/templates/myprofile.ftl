@@ -71,7 +71,7 @@
         <div id="${question.id}">
             <a href="/profile/${question.receiver.id}">${question.receiver.login}</a>
             <br>
-            <b>${question.text}</b>
+            <b><div data-contain-hashtags>${question.text}</div></b>
             <br>
             <i>
                 <#if question.anonymous>
@@ -83,7 +83,7 @@
             </i>
             <br>
                     <#if question.answer??>
-                        <p id="answer${question.id}">${question.answer}</p>
+                        <p data-contain-hashtags id="answer${question.id}">${question.answer}</p>
                     </#if>
             <#assign liked = false>
             <#list question.likes as like>
@@ -104,6 +104,7 @@
             </button>
             <button class="button edit" onclick="openEditAnswerField(event)" data-questionId="${question.id}">Edit
             </button>
+            </div>
             <br>
             <div class="form-style-2" id="comments">
                 <h3 class="form-style-2-heading">Comments:</h3>
@@ -115,7 +116,7 @@
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
-                        <b>${comment.text}</b><br>
+                        <b><div data-contain-hashtags>${comment.text}</div></b><br>
                         <i>${comment.date}</i><br>
                     </div>
                     <br>
@@ -128,7 +129,6 @@
                 <button class="button" data-questionId="${question.id}" onclick="addComment(event)">Send</button>
             </div>
             <br>
-        </div>
     </#list>
     </list>
 
@@ -143,5 +143,6 @@
 <script type="application/javascript" src="/js/profile.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
 <script type="application/javascript" src="/js/comment.js"></script>
+<script type="application/javascript" src="/js/hashtags.js"></script>
 </body>
 </html>

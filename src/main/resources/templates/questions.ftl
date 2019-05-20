@@ -20,7 +20,7 @@
                 <b><a href="/profile/${question.sender.id}">${question.sender.login}</a></b>
             </#if>
             <br>
-            <b>${question.text}</b>
+            <b data-contain-hashtags>${question.text}</b>
             <br>
             <i>${question.date}</i>
             <br>
@@ -36,5 +36,7 @@
 </div>
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/questions.js"></script>
+<script type="application/javascript" src="/js/hashtags.js"></script>
+
 </body>
 </html>

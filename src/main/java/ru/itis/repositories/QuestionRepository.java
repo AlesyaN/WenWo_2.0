@@ -22,6 +22,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     List<Question> findAllByReceiver_IdAndSender_IdAndAnswerIsNull(Integer receiverId, Integer senderId);
 
-    @Query("from Question q where q.text like CONCAT('%',:text,'%') or q.answer like CONCAT('%',:text,'%')")
+    @Query("from Question q where q.answer is not null and (q.text like CONCAT('%',:text,'%') or q.answer like CONCAT('%',:text,'%'))")
     List<Question> search(@Param("text") String text);
 }

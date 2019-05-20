@@ -10,10 +10,10 @@
         <input class="input-field" type="text" id="search" name="search-text">
         <input type="submit" class="button" value="Search">
     </form>
-        <a class="button" href="/feed">Feed</a>
-        <a class="button" href="/profile">My profile</a>
-        <br>
-        <br>
+    <a class="button" href="/feed">Feed</a>
+    <a class="button" href="/profile">My profile</a>
+    <br>
+    <br>
 <#if user??>
     <div class="form-style-2-heading">
         ${user.fullName}
@@ -71,7 +71,9 @@
             <div id="unansweredQuestions" style="display: none">
                 <#list unansweredQuestions as question>
                     <div id="question${question.id}">
-                        ${question.text}
+                        <div data-contain-hashtags>
+                            ${question.text}
+                        </div>
                         <button class="button delete" onclick="deleteUnansweredQuestion(event)"
                                 data-questionId="${question.id}">Delete
                         </button>
@@ -122,7 +124,11 @@
     <#list user.answeredQuestions as question>
         <a href="/profile/${question.receiver.id}">${question.receiver.login}</a>
         <br>
-        <b>${question.text}</b>
+        <b>
+            <div data-contain-hashtags>
+            ${question.text}
+            </div>
+        </b>
         <br>
         <i>
             <#if question.anonymous>
@@ -133,10 +139,12 @@
             ${question.date}
         </i>
         <br>
+            <#if question.answer??>
+                        <div data-contain-hashtags>
+                ${question.answer}</div>
+                <br>
+            </#if>
         <#if currentUserId??>
-                    <#if question.answer??>
-                        <p>${question.answer}</p>
-                    </#if>
             <#assign liked = false>
             <#list question.likes as like>
                 <#if like.user.id == currentUserId>
@@ -167,7 +175,7 @@
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
-                        <b>${comment.text}</b><br>
+                        <b><div data-contain-hashtags>${comment.text}</div></b><br>
                         <i>${comment.date}</i><br>
                     </div>
                     <br>
@@ -192,5 +200,7 @@
 <script type="application/javascript" src="/js/profile.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
 <script type="application/javascript" src="/js/comment.js"></script>
+<script type="application/javascript" src="/js/hashtags.js"></script>
+
 </body>
 </html>

@@ -21,9 +21,17 @@ public class SearchController {
     @Autowired
     QuestionService questionService;
 
-    @GetMapping("/search")
+    @GetMapping(value = "/search", params = "search-text")
     public String search(@RequestParam("search-text") String text, ModelMap modelMap, Authentication authentication) {
         modelMap.addAttribute("users", userService.searchUsers(text));
+        modelMap.addAttribute("questions", questionService.searchQuestions(text));
+        Optional<User> userOptional = userService.getCurrentUser(authentication);
+        userOptional.ifPresent(user -> modelMap.addAttribute("currentUserId", user.getId()));
+        return "search";
+    }
+
+    @GetMapping(value = "/search", params = "hashtag")
+    public String searchHashtag(@RequestParam("hashtag") String text, ModelMap modelMap, Authentication authentication) {
         modelMap.addAttribute("questions", questionService.searchQuestions(text));
         Optional<User> userOptional = userService.getCurrentUser(authentication);
         userOptional.ifPresent(user -> modelMap.addAttribute("currentUserId", user.getId()));

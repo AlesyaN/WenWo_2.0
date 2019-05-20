@@ -25,7 +25,7 @@ function addComment(event) {
             deleteButton.onclick = deleteComment;
 
             var text = document.createElement("b");
-            text.innerHTML = comment.text;
+            text.innerHTML = hashtags(comment.text);
 
             var dateElement = document.createElement("i");
             var date = new Date(comment.date);
