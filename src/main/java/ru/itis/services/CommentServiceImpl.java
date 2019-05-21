@@ -34,4 +34,9 @@ public class CommentServiceImpl implements CommentService {
     public Optional<Comment> getCommentById(Integer commentId) {
         return Optional.ofNullable(commentRepository.findOne(commentId));
     }
+
+    @Override
+    public List<Comment> searchComments(String text) {
+        return commentRepository.search(text);
+    }
 }

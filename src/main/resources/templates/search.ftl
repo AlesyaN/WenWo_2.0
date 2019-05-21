@@ -43,9 +43,9 @@
                 ${question.date}
             </i>
             <br>
-                <#if question.answer??>
+            <#if question.answer??>
                             <p data-contain-hashtags>${question.answer}</p>
-                </#if>
+            </#if>
             <#if currentUserId??>
                 <#assign liked = false>
                 <#list question.likes as like>
@@ -91,6 +91,25 @@
                 <button class="button" data-questionId="${question.id}" onclick="addComment(event)">Send</button>
             </div>
             </#if>
+            <br>
+        </#list>
+    </#if>
+    <#if comments?? && 0 < comments?size>
+        <br>
+        <div class="form-style-2-heading">Comments</div>
+        <#list comments as comment>
+            <div id="comment${comment.id}">
+                <i>To question: ${comment.question.text}</i>
+                <br>
+                <a href="/profile/${comment.author.id}">${comment.author.login}</a>
+                            <#if currentUserId?? && comment.author.id == currentUserId>
+                                <button class="button delete" data-comment-id="${comment.id}"
+                                        onclick="deleteComment(event)">Delete
+                                </button>
+                            </#if><br>
+                <b data-contain-hashtags>${comment.text}</b><br>
+                <i>${comment.date}</i><br>
+            </div>
             <br>
         </#list>
     </#if>

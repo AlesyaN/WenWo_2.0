@@ -13,5 +13,7 @@ public interface CommentService {
     List<Comment> findAllByQuestion(Question question);
 
     Optional<Comment> getCommentById(Integer commentId);
+
+    List<Comment> searchComments(String text);
 }
 

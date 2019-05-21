@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.itis.models.User;
+import ru.itis.services.CommentService;
 import ru.itis.services.QuestionService;
 import ru.itis.services.UserService;
 
@@ -21,10 +22,14 @@ public class SearchController {
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    CommentService commentService;
+
     @GetMapping(value = "/search", params = "search-text")
     public String search(@RequestParam("search-text") String text, ModelMap modelMap, Authentication authentication) {
         modelMap.addAttribute("users", userService.searchUsers(text));
         modelMap.addAttribute("questions", questionService.searchQuestions(text));
+        modelMap.addAttribute("comments", commentService.searchComments(text));
         Optional<User> userOptional = userService.getCurrentUser(authentication);
         userOptional.ifPresent(user -> modelMap.addAttribute("currentUserId", user.getId()));
         return "search";
@@ -33,6 +38,7 @@ public class SearchController {
     @GetMapping(value = "/search", params = "hashtag")
     public String searchHashtag(@RequestParam("hashtag") String text, ModelMap modelMap, Authentication authentication) {
         modelMap.addAttribute("questions", questionService.searchQuestions(text));
+        modelMap.addAttribute("comments", commentService.searchComments(text));
         Optional<User> userOptional = userService.getCurrentUser(authentication);
         userOptional.ifPresent(user -> modelMap.addAttribute("currentUserId", user.getId()));
         return "search";
