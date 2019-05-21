@@ -1,9 +1,9 @@
-document.body.onload = function (event) {
+document.addEventListener("DOMContentLoaded", function (event) {
     var elems = document.body.querySelectorAll('[data-contain-hashtags]');
     for (var i = 0; i < elems.length; i++) {
         elems[i].innerHTML = hashtags(elems[i].innerHTML);
     }
-};
+});
 
 function hashtags(text) {
     var regex = /#[A-Za-z-]+/g;
@@ -15,7 +15,7 @@ function hashtags(text) {
     return text;
 }
 
-function removeHashtags(text) {
+function removetags(text) {
     var elems = $.parseHTML(text);
     for (var i = 0; i < elems.length; i++) {
         text = text.replace(elems[i].outerHTML, elems[i].innerHTML);

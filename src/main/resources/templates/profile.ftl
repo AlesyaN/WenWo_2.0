@@ -71,7 +71,7 @@
             <div id="unansweredQuestions" style="display: none">
                 <#list unansweredQuestions as question>
                     <div id="question${question.id}">
-                        <div data-contain-hashtags>
+                        <div data-contain-hashtags data-contain-user-tags>
                             ${question.text}
                         </div>
                         <button class="button delete" onclick="deleteUnansweredQuestion(event)"
@@ -122,10 +122,10 @@
     <div class="form-style-2-heading">Questions</div>
     <list>
     <#list user.answeredQuestions as question>
-        <a href="/profile/${question.receiver.id}">${question.receiver.login}</a>
+        <a href="/profile/${question.receiver.login}">${question.receiver.login}</a>
         <br>
         <b>
-            <div data-contain-hashtags>
+            <div data-contain-hashtags data-contain-user-tags>
             ${question.text}
             </div>
         </b>
@@ -134,13 +134,13 @@
             <#if question.anonymous>
                     anonymous
             <#else>
-                    <a href="/profile/${question.sender.id}">${question.sender.login}</a>
+                    <a href="/profile/${question.sender.login}">${question.sender.login}</a>
             </#if>
             ${question.date}
         </i>
         <br>
             <#if question.answer??>
-                        <div data-contain-hashtags>
+                        <div data-contain-hashtags data-contain-user-tags>
                 ${question.answer}</div>
                 <br>
             </#if>
@@ -169,13 +169,13 @@
             <h3 class="form-style-2-heading">Comments:</h3>
                 <#list question.comments as comment>
                     <div id="comment${comment.id}">
-                        <a href="/profile/${comment.author.id}">${comment.author.login}</a>
+                        <a href="/profile/${comment.author.login}">${comment.author.login}</a>
                         <#if currentUserId?? && comment.author.id == currentUserId>
                             <button class="button delete" data-comment-id="${comment.id}"
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
-                        <b><div data-contain-hashtags>${comment.text}</div></b><br>
+                        <b><div data-contain-hashtags data-contain-user-tags>${comment.text}</div></b><br>
                         <i>${comment.date}</i><br>
                     </div>
                     <br>
@@ -201,6 +201,7 @@
 <script type="application/javascript" src="/js/like.js"></script>
 <script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
+<script type="application/javascript" src="/js/user-tags.js"></script>
 
 </body>
 </html>

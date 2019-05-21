@@ -17,10 +17,10 @@
             <#if question.anonymous>
                 <b>anonymous</b>
             <#else>
-                <b><a href="/profile/${question.sender.id}">${question.sender.login}</a></b>
+                <b><a href="/profile/${question.sender.login}">${question.sender.login}</a></b>
             </#if>
             <br>
-            <b data-contain-hashtags>${question.text}</b>
+            <b data-contain-hashtags data-contain-user-tags>${question.text}</b>
             <br>
             <i>${question.date}</i>
             <br>
@@ -37,6 +37,7 @@
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/questions.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
+<script type="application/javascript" src="/js/user-tags.js"></script>
 
 </body>
 </html>

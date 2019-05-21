@@ -29,12 +29,12 @@ public class ProfileController {
     @GetMapping("/profile")
     public String getProfilePage(ModelMap modelMap, Authentication authentication) {
         User user = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
-        return "redirect:/profile/" + user.getId();
+        return "redirect:/profile/" + user.getLogin();
     }
 
-    @GetMapping("/profile/{id}")
-    public String getProfilePage(@PathVariable("id") Integer id, ModelMap modelMap, Authentication authentication) {
-        Optional<User> userCandidate = userService.getUserById(id);
+    @GetMapping("/profile/{login}")
+    public String getProfilePage(@PathVariable("login") String login, ModelMap modelMap, Authentication authentication) {
+        Optional<User> userCandidate = userService.getUserByLogin(login);
         if (userCandidate.isPresent()) {
             User user = userCandidate.get();
             Optional<User> currentUserOptional = userService.getCurrentUser(authentication);

@@ -44,7 +44,7 @@ function ask(event) {
             unansweredQuestionsBar.style.display = "block";
             numOfUnansweredQuestions.innerHTML = +numOfUnansweredQuestions.innerHTML + 1;
             var newQuestion = document.createElement("div");
-            newQuestion.innerHTML = hashtags(textarea.value);
+            newQuestion.innerHTML = usertags(hashtags(textarea.value));
 
             var deleteButton = document.createElement("button");
             deleteButton.className = "button delete";
@@ -113,7 +113,7 @@ function openEditAnswerField(event) {
     var textarea = document.createElement("textarea");
     textarea.className = "textarea-field";
     textarea.id = "answerField" + id;
-    textarea.value = removeHashtags(document.getElementById("answer" + id).innerHTML);
+    textarea.value = removetags(document.getElementById("answer" + id).innerHTML);
 
     var editButton = document.createElement("button");
     editButton.className = "button edit";
@@ -160,7 +160,7 @@ function editAnswer(event) {
         },
         success: function (msg) {
             closeEditAnswerField(event);
-            document.getElementById("answer" + questionId).innerHTML = hashtags(answer);
+            document.getElementById("answer" + questionId).innerHTML = usertags(hashtags(answer));
         }
     });
 

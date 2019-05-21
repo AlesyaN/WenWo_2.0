@@ -112,4 +112,13 @@ public class RestAjaxController {
         commentService.deleteComment(comment);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/api/userExists")
+    public ResponseEntity<Object> userExists(@RequestParam("login") String login) {
+        if (!userService.loginIsUnique(login)) {
+            return ResponseEntity.ok(login);
+        } else {
+            return ResponseEntity.ok("");
+        }
+    }
 }

@@ -69,21 +69,21 @@
     <list>
     <#list user.answeredQuestions as question>
         <div id="${question.id}">
-            <a href="/profile/${question.receiver.id}">${question.receiver.login}</a>
+            <a href="/profile/${question.receiver.login}">${question.receiver.login}</a>
             <br>
-            <b><div data-contain-hashtags>${question.text}</div></b>
+            <b><div data-contain-user-tags data-contain-hashtags>${question.text}</div></b>
             <br>
             <i>
                 <#if question.anonymous>
                     anonymous
                 <#else>
-                    <a href="/profile/${question.sender.id}">${question.sender.login}</a>
+                    <a href="/profile/${question.sender.login}">${question.sender.login}</a>
                 </#if>
                 ${question.date}
             </i>
             <br>
                     <#if question.answer??>
-                        <p data-contain-hashtags id="answer${question.id}">${question.answer}</p>
+                        <p data-contain-user-tags data-contain-hashtags id="answer${question.id}">${question.answer}</p>
                     </#if>
             <#assign liked = false>
             <#list question.likes as like>
@@ -110,13 +110,13 @@
                 <h3 class="form-style-2-heading">Comments:</h3>
                 <#list question.comments as comment>
                     <div id="comment${comment.id}">
-                        <a href="/profile/${comment.author.id}">${comment.author.login}</a>
+                        <a href="/profile/${comment.author.login}">${comment.author.login}</a>
                         <#if comment.author.login == user.login>
                             <button class="button delete" data-comment-id="${comment.id}"
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
-                        <b><div data-contain-hashtags>${comment.text}</div></b><br>
+                        <b><div data-contain-user-tags data-contain-hashtags>${comment.text}</div></b><br>
                         <i>${comment.date}</i><br>
                     </div>
                     <br>
@@ -144,5 +144,6 @@
 <script type="application/javascript" src="/js/like.js"></script>
 <script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
+<script type="application/javascript" src="/js/user-tags.js"></script>
 </body>
 </html>
