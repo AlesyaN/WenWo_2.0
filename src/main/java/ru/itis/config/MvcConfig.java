@@ -20,6 +20,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations("file:///" + UPLOADED_FOLDER + "/users/",
                         "classpath:/static/css/",
                         "classpath:/static/js/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("/webjars/")
+                .resourceChain(false);
     }
 
     @Value("${my.files-url}")

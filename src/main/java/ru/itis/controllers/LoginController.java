@@ -24,7 +24,7 @@ public class LoginController {
     @GetMapping("/login")
     public String getLoginPage(Authentication authentication, ModelMap modelMap, HttpServletRequest request) {
         if (authentication != null) {
-            return "redirect:/profile/" + ((UserDetailsImpl)authentication.getPrincipal()).getUser().getId();
+            return "redirect:/profile/" + ((UserDetailsImpl)authentication.getPrincipal()).getUser().getLogin();
         }
         if (request.getParameterMap().containsKey("error")) {
             modelMap.addAttribute("error", true);

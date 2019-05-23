@@ -19,6 +19,7 @@
         ${user.fullName}
     </div>
     <#if currentUserId??>
+    <a class="button" href="/chat?login=${user.login}">Chat</a><br>
     <button class="button" onclick="follow()" id="follow-btn">
             <#assign followedByCurrentUser = false>
             <#list user.followers as follower>
@@ -33,7 +34,8 @@
             </#if>
     </button>
     <#else>
-    <a class="button" href="/login">Follow</a>
+        <a class="button" href="/login">Chat</a><br>
+        <a class="button" href="/login">Follow</a>
     </#if>
     <p>
         <b>Followers: </b>
@@ -126,7 +128,7 @@
         <br>
         <b>
             <div data-contain-hashtags data-contain-user-tags>
-            ${question.text}
+                ${question.text}
             </div>
         </b>
         <br>
@@ -141,7 +143,7 @@
         <br>
             <#if question.answer??>
                         <div data-contain-hashtags data-contain-user-tags>
-                ${question.answer}</div>
+                            ${question.answer}</div>
                 <br>
             </#if>
         <#if currentUserId??>
@@ -175,7 +177,9 @@
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
-                        <b><div data-contain-hashtags data-contain-user-tags>${comment.text}</div></b><br>
+                        <b>
+                            <div data-contain-hashtags data-contain-user-tags>${comment.text}</div>
+                        </b><br>
                         <i>${comment.date}</i><br>
                     </div>
                     <br>
