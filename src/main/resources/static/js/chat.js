@@ -49,7 +49,7 @@ function sendMessage() {
         'receiverLogin': $("#partner").val(),
         'text': $("#message").val()
     }));
-    $("#message").value = "";
+    document.getElementById("message").value = "";
 }
 
 $(function () {
