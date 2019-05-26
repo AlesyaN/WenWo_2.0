@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class MessageDto {
+    private Integer id;
     private String senderLogin;
     private String receiverLogin;
     private String text;
@@ -20,6 +21,7 @@ public class MessageDto {
 
     public static MessageDto from(Message message) {
         return MessageDto.builder()
+                .id(message.getId())
                 .senderLogin(message.getSender().getLogin())
                 .receiverLogin(message.getReceiver().getLogin())
                 .text(message.getText())

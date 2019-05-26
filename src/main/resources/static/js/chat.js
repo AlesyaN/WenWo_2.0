@@ -11,12 +11,20 @@ function connect() {
             },
             function (message) {
                 console.log(message);
-            });
+            }
+        );
+        stompClient.subscribe('/user/queue/deleteMessage',
+            function (message) {
+                console.log("deleted " + message);
+                removeMessage(JSON.parse(message.body));
+            }
+        );
     });
 }
 
 function addMessage(message) {
     var tr = document.createElement("tr");
+    tr.id = message.id;
 
     var name = document.createElement("td");
     var link = document.createElement("a");
@@ -33,12 +41,20 @@ function addMessage(message) {
         + ('0' + (1 + +date.getMonth())).slice(-2) + "."
         + date.getUTCFullYear() + " "
         + date.getHours() + ":" +
-        + date.getMinutes() + ":" +
-        + date.getSeconds();
+        +date.getMinutes() + ":" +
+        +date.getSeconds();
 
     tr.appendChild(name);
     tr.appendChild(text);
     tr.appendChild(dateElement);
+    if (message.receiverLogin === $("#partner").val()) {
+        var deleteButton = document.createElement("button");
+        deleteButton.className = "button";
+        deleteButton.innerHTML = "Delete";
+        deleteButton.dataset.id = message.id;
+        deleteButton.onclick = deleteMessage;
+        tr.appendChild(deleteButton);
+    }
 
     document.getElementById("messages").appendChild(tr);
 
@@ -56,5 +72,19 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#send" ).click(function() { sendMessage(); });
+    $("#send").click(function () {
+        sendMessage();
+    });
 });
+
+function deleteMessage(event) {
+    var messageId = event.target.dataset.id;
+    stompClient.send("/app/deleteMessage", {}, JSON.stringify({
+        'messageId': messageId,
+        'partnerLogin': $("#partner").val()
+    }));
+}
+
+function removeMessage(id) {
+    document.getElementById(id).remove();
+}

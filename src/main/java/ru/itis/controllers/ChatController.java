@@ -2,6 +2,7 @@ package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.itis.forms.DeleteMessageForm;
 import ru.itis.forms.MessageForm;
 import ru.itis.models.Message;
 import ru.itis.models.User;
@@ -64,5 +66,14 @@ public class ChatController {
         MessageDto messageDto = MessageDto.from(message);
         template.convertAndSendToUser(message.getSender().getLogin(), "/queue/chat", messageDto);
         template.convertAndSendToUser(message.getReceiver().getLogin(), "/queue/chat", messageDto);
+    }
+
+    @MessageMapping("/deleteMessage")
+    public void deleteMessage(@Payload DeleteMessageForm deleteMessageForm, Authentication authentication) throws IllegalAccessException {
+        messageService.deleteMessage(messageService.getMessageById(deleteMessageForm.getMessageId()).orElseThrow(IllegalArgumentException::new),
+                userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new));
+        template.convertAndSendToUser(deleteMessageForm.getPartnerLogin(), "/queue/deleteMessage", deleteMessageForm.getMessageId());
+        template.convertAndSendToUser(userService.getCurrentUser(authentication).orElseThrow(IllegalAccessException::new).getLogin(), "/queue/deleteMessage", deleteMessageForm.getMessageId());
+
     }
 }
