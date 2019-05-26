@@ -12,6 +12,8 @@
         <input type="submit" class="button" value="Search">
     </form>
     <a class="button" href="/feed">Feed</a>
+    <a class="button" href="/profile">My profile</a>
+    <a class="button" href="/chat">Messages</a>
     <a class="button" href="/questions">You have ${user.unansweredQuestions?size} unanswered questions</a>
     <br>
     <br>

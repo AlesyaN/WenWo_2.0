@@ -33,7 +33,16 @@ public class ChatController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/chat")
+    @GetMapping(value = "/chat")
+    public String getChatsPage(ModelMap modelMap, Authentication authentication) {
+        User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
+        List<Message> chats = messageService.getChats(currentUser);
+        modelMap.addAttribute("chats", chats);
+        modelMap.addAttribute("currentUserId", currentUser.getId());
+        return "chats";
+    }
+
+    @GetMapping(value = "/chat", params = {"login"})
     public String getChatPage(@RequestParam("login") String login, ModelMap modelMap, Authentication authentication) {
         User user1 = userService.getCurrentUser(authentication).orElseThrow(IllegalArgumentException::new);
         User user2 = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);

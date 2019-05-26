@@ -11,4 +11,7 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
 
     @Query("from Message m where m.sender.id = :id1 and m.receiver.id = :id2 or m.sender.id = :id2 and m.receiver.id = :id1 order by m.date")
     List<Message> findAllByUsers(@Param("id1") Integer id1, @Param("id2") Integer id2);
+
+    @Query("from Message m where m.sender.id = :userId or m.receiver.id = :userId")
+    List<Message> findAllByUser(@Param("userId") Integer userId);
 }

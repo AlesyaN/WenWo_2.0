@@ -11,7 +11,7 @@
     </form>
     <a class="button" href="/feed">Feed</a>
     <a class="button" href="/profile">My profile</a>
-    <br><br>
+    <a class="button" href="/chat">Messages</a>
     <div class="form-style-2-heading">Searching results:</div>
     <#if users?? && 0 < users?size>
     <br>

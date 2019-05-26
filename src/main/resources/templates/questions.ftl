@@ -6,12 +6,16 @@
 </head>
 <body>
 <div class="form-style-2">
+    <form class="form-style-2" method="get" action="/search">
+        <input class="input-field" type="text" id="search" name="search-text">
+        <input type="submit" class="button" value="Search">
+    </form>
+    <a class="button" href="/feed">Feed</a>
+    <a class="button" href="/profile">My profile</a>
+    <a class="button" href="/chat">Messages</a>
     <div class="form-style-2-heading">
         You have <span id="num-of-unanswered-questions">${questions?size}</span> unanswered questions
     </div>
-    <a class="button" href="/profile">My profile</a>
-    <br>
-    <br>
     <#list questions as question>
         <div id="question${question.id}">
             <#if question.anonymous>

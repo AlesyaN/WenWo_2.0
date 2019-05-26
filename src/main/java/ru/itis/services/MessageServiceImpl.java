@@ -6,8 +6,7 @@ import ru.itis.models.Message;
 import ru.itis.models.User;
 import ru.itis.repositories.MessageRepository;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MessageServiceImpl implements MessageService{
@@ -31,6 +30,37 @@ public class MessageServiceImpl implements MessageService{
         if (message.getSender().getId().equals(sender.getId())) {
             messageRepository.delete(message);
         }
+    }
+
+    @Override
+    public List<Message> getChats(User user) {
+        List<Message> messages =  messageRepository.findAllByUser(user.getId());
+        Map<User, Message> chatMap = new HashMap<>();
+        for (Message m: messages) {
+            User partner;
+            if (m.getSender().getId().equals(user.getId())) {
+                partner = m.getReceiver();
+            } else {
+                partner = m.getSender();
+            }
+            if (!chatMap.containsKey(partner) || chatMap.get(partner).getDate().before(m.getDate())) {
+                chatMap.put(partner, m);
+            }
+        }
+        List<Message> chats = new ArrayList<>(chatMap.values());
+        chats.sort(new Comparator<Message>() {
+            @Override
+            public int compare(Message o1, Message o2) {
+                if (o1.getDate().before(o2.getDate())) {
+                    return 1;
+                } else if (o1.getDate().after(o2.getDate())){
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        return chats;
     }
 
 }

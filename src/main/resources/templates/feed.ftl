@@ -10,10 +10,13 @@
         <input class="input-field" type="text" id="search" name="search-text">
         <input type="submit" class="button" value="Search">
     </form>
+    <a class="button" href="/feed">Feed</a>
+    <a class="button" href="/profile">My profile</a>
+    <a class="button" href="/chat">Messages</a>
     <div class="form-style-2-heading">
         Feed
     </div>
-    <a class="button" href="/profile">My profile</a>
+
     <#list feed as question>
         <ul>
             <a href="/profile/${question.receiver.login}">${question.receiver.login}</a>
