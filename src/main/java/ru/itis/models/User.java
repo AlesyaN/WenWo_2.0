@@ -47,6 +47,8 @@ public class User {
     @ManyToMany(mappedBy = "followers")
     private List<User> followings;
 
+    @OneToMany(mappedBy = "owner")
+    List<Album> albums;
 
 
     public String getFullName() {

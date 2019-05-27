@@ -64,6 +64,16 @@
         <br>
     </#if>
 
+    <div class="form-style-2-heading">Albums</div>
+    <div style="display: inline">
+        <#list user.albums as album>
+            <div>
+            <img style="display: block; width: 30%; height: 30%" src="${album.cover.photoPath}">
+            <a href="/albums/${album.id}">${album.name}</a>
+            </div>
+        </#list>
+    </div>
+    <br>
     <a href="/logout">Log out</a>
     <br>
     <br>

@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import ru.itis.models.Album;
 import ru.itis.models.Question;
 import ru.itis.models.User;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -30,6 +32,7 @@ public class UserDto {
     private List<Question> unansweredQuestions;
     private List<User> followers;
     private List<User> followings;
+    private List<AlbumDto> albums;
 
     private static String UPLOADED_FOLDER;
 
@@ -46,6 +49,7 @@ public class UserDto {
                 .photoPath(user.getPhoto_path())
                 .unansweredQuestions(user.getUnansweredQuestions())
                 .answeredQuestions(user.getAnsweredQuestions())
+                .albums(user.getAlbums().stream().map(AlbumDto::from).collect(Collectors.toList()))
                 .build();
     }
 
