@@ -2,6 +2,7 @@ package ru.itis.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -36,13 +37,18 @@ public class FileDownloader {
         }
     }
 
+    public void createFolder(String folderPath) {
+        File directory = new File(UPLOADED_FOLDER + "/users/" + folderPath);
+        if (!directory.exists()) directory.mkdirs();
+    }
+
+    public void deleteFolder(String folderPath) {
+        File directory = new File(UPLOADED_FOLDER + "/users/" + folderPath);
+        FileSystemUtils.deleteRecursively(directory);
+    }
+
     @Value("${my.files-url}")
     public void setUploadedFolder(String uploadedFolder) {
         UPLOADED_FOLDER = uploadedFolder;
-    }
-
-    public void createFolder(String albumPath) {
-        File directory = new File(UPLOADED_FOLDER + "/users/" + albumPath);
-        if (!directory.exists()) directory.mkdirs();
     }
 }

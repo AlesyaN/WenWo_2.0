@@ -18,6 +18,9 @@
     <div class="form-style-2-heading">
         Album ${album.name}
     </div>
+    <form method="post" action="/albums/${album.id}/delete">
+        <input type="submit" class="button" value="Delete album">
+    </form>
     <form class="form-style-2" action="/albums/${album.id}" method="post" enctype="multipart/form-data">
         <div class="form-style-2-heading">Upload photos</div>
         <input type="file" name="photo">
@@ -25,7 +28,8 @@
         <#if error??>
             You should add file first
         </#if>
-        </div><br>
+        </div>
+        <br>
         <input type="text" name="description" class="input-field" placeholder="Description"><br>
         <input type="submit">
     </form>

@@ -29,4 +29,10 @@ public class AlbumServiceImpl implements AlbumService {
         fileDownloader.createFolder(album.getOwner().getLogin() + "/albums/" + album.getId());
     }
 
+    @Override
+    public void deleteAlbum(Album album) {
+        fileDownloader.deleteFolder(album.getOwner().getLogin() + "/albums/" + album.getId());
+        albumRepository.delete(album);
+    }
+
 }

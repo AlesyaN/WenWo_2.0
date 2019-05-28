@@ -10,4 +10,6 @@ public interface AlbumService {
     Optional<Album> getAlbum(Integer albumId);
 
     void addAlbum(Album album);
+
+    void deleteAlbum(Album album);
 }

@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.forms.PhotoForm;
 import ru.itis.models.User;
@@ -50,7 +51,11 @@ public class AlbumController {
         photoForm.setAlbum(albumService.getAlbum(albumId).orElseThrow(IllegalArgumentException::new));
         photoService.addPhoto(photoForm);
         return "redirect:/albums/" + albumId;
+    }
 
-
+    @PostMapping("albums/{album-id}/delete")
+    public String deleteAlbum(@PathVariable("album-id") Integer albumId) {
+        albumService.deleteAlbum(albumService.getAlbum(albumId).orElseThrow(IllegalArgumentException::new));
+        return "redirect:/profile";
     }
 }

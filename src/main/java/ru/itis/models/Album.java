@@ -23,7 +23,7 @@ public class Album {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     @OrderBy("date DESC")
     private List<Photo> photos;
 }
