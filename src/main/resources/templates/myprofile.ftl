@@ -65,7 +65,13 @@
     </#if>
 
     <div class="form-style-2-heading">Albums</div>
-    <div style="display: inline">
+    <button class="button" onclick="openNewAlbumForm(event)">+ new album</button>
+    <div style="display: none" id="newAlbumForm">
+        <label for="name">Album name:
+        <input class="input-field" type="text" id="albumName" name="name"></label>
+        <button class="button" onclick="addAlbum(event)">Save</button>
+    </div>
+    <div id="albums" style="display: inline">
         <#list user.albums as album>
             <div>
             <img style="display: block; width: 30%; height: 30%" src="${album.cover.photoPath}">
@@ -157,5 +163,6 @@
 <script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
+<script type="application/javascript" src="/js/albums.js"></script>
 </body>
 </html>

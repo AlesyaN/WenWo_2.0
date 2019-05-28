@@ -6,15 +6,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.forms.CommentForm;
-import ru.itis.models.Comment;
-import ru.itis.models.Like;
-import ru.itis.models.Question;
-import ru.itis.models.User;
+import ru.itis.models.*;
 import ru.itis.security.details.UserDetailsImpl;
-import ru.itis.services.CommentService;
-import ru.itis.services.LikeService;
-import ru.itis.services.QuestionService;
-import ru.itis.services.UserService;
+import ru.itis.services.*;
+import ru.itis.transfer.AlbumDto;
 import ru.itis.transfer.CommentDto;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +31,9 @@ public class RestAjaxController {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    AlbumService albumService;
 
     @PostMapping("/api/follow")
     public ResponseEntity<Object> follow(@RequestParam("login") String login, Authentication authentication) {
@@ -120,5 +118,16 @@ public class RestAjaxController {
         } else {
             return ResponseEntity.ok("");
         }
+    }
+
+    @PostMapping("/api/addAlbum")
+    public ResponseEntity<Object> addAlbum(@RequestParam("name")String name, Authentication authentication) {
+        User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
+        Album album = Album.builder()
+                .name(name)
+                .owner(currentUser)
+                .build();
+        albumService.addAlbum(album);
+        return ResponseEntity.ok(AlbumDto.from(album));
     }
 }

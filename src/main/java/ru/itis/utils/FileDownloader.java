@@ -41,4 +41,8 @@ public class FileDownloader {
         UPLOADED_FOLDER = uploadedFolder;
     }
 
+    public void createFolder(String albumPath) {
+        File directory = new File(UPLOADED_FOLDER + "/users/" + albumPath);
+        if (!directory.exists()) directory.mkdirs();
+    }
 }
