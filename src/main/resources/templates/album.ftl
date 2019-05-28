@@ -18,6 +18,17 @@
     <div class="form-style-2-heading">
         Album ${album.name}
     </div>
+    <form class="form-style-2" action="/albums/${album.id}" method="post" enctype="multipart/form-data">
+        <div class="form-style-2-heading">Upload photos</div>
+        <input type="file" name="photo">
+        <div>
+        <#if error??>
+            You should add file first
+        </#if>
+        </div><br>
+        <input type="text" name="description" class="input-field" placeholder="Description"><br>
+        <input type="submit">
+    </form>
     <#list album.photos as photo>
          <div>
              <img style="display: block; width: 30%; height: 30%" src="${photo.photoPath}"><br>

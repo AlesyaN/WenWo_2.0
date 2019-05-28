@@ -11,6 +11,7 @@ import ru.itis.models.User;
 import ru.itis.security.details.UserDetailsImpl;
 import ru.itis.services.UserService;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 import static ru.itis.transfer.UserEditDto.from;
@@ -29,7 +30,7 @@ public class EditProfileController {
     }
 
     @PostMapping("/editProfile")
-    public String edit(UserEditForm form, Authentication authentication, ModelMap modelMap) {
+    public String edit(@Valid UserEditForm form, Authentication authentication, ModelMap modelMap) {
         Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
         User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
         userService.editProfile(form, currentUser);

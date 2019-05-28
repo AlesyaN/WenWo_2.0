@@ -16,9 +16,9 @@ public class FileDownloader {
 
     private static String UPLOADED_FOLDER;
 
-    public Optional<String> upload(MultipartFile image, String login) {
+    public Optional<String> upload(MultipartFile image, String folderName) {
         if (!image.isEmpty()) {
-            String userFolderName = "/users/" + login + "/";
+            String userFolderName = "/users/" + folderName + "/";
             File directory = new File(UPLOADED_FOLDER + userFolderName);
             if (!directory.exists()) directory.mkdirs();
             String fileName = userFolderName + image.getOriginalFilename();

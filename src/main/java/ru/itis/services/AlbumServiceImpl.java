@@ -2,6 +2,7 @@ package ru.itis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.itis.forms.PhotoForm;
 import ru.itis.models.Album;
 import ru.itis.repositories.AlbumRepository;
 import ru.itis.utils.FileDownloader;
@@ -27,4 +28,5 @@ public class AlbumServiceImpl implements AlbumService {
         albumRepository.save(album);
         fileDownloader.createFolder(album.getOwner().getLogin() + "/albums/" + album.getId());
     }
+
 }

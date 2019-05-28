@@ -1,6 +1,7 @@
 package ru.itis.services;
 
 import org.springframework.stereotype.Service;
+import ru.itis.forms.PhotoForm;
 import ru.itis.models.Album;
 import java.util.Optional;
 
