@@ -122,14 +122,14 @@
 
     <div class="form-style-2-heading">Albums</div>
     <table id="albums">
-        <tr>
+        <tr id="images">
                     <#list user.albums as album>
                         <td>
-                            <img style="height: 10%" src="${album.cover.photoPath}">
+                            <img style="height: 200px" src="${album.cover.photoPath}">
                         </td>
                     </#list>
         </tr>
-        <tr>
+        <tr id="links">
                     <#list user.albums as album>
                         <td>
                             <a href="/albums/${album.id}">${album.name}</a>

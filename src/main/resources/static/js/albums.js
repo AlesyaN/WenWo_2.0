@@ -10,21 +10,21 @@ function addAlbum(event) {
             },
             success: function (album) {
                 closeNewAlbumForm();
-                var div = document.createElement("div");
+                var images = document.getElementById("images");
+                var tdImg = document.createElement("td");
                 var img = document.createElement("img");
-                img.style.display = "block";
-                img.style.width = "30%";
-                img.style.height = "30%";
+                img.style.height = "200px";
                 img.src = album.cover.photoPath;
+                tdImg.appendChild(img);
+                images.appendChild(tdImg);
 
+                var links = document.getElementById("links");
+                var tdLink = document.createElement("td");
                 var a = document.createElement("a");
                 a.href = "/albums/" + album.id;
                 a.innerHTML = album.name;
-
-                div.appendChild(img);
-                div.appendChild(a);
-
-                albums.appendChild(div);
+                tdLink.appendChild(a);
+                links.appendChild(tdLink);
             }
         });
     }
