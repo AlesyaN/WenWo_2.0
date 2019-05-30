@@ -130,4 +130,10 @@ public class RestAjaxController {
         albumService.addAlbum(album);
         return ResponseEntity.ok(AlbumDto.from(album));
     }
+
+    @PostMapping("/api/editAlbumName")
+    public ResponseEntity<Object> editAlbumName(@RequestParam("album-id")Integer albumId, @RequestParam("new-name") String newName) {
+        albumService.editAlbumName(albumId, newName);
+        return ResponseEntity.ok().build();
+    }
 }

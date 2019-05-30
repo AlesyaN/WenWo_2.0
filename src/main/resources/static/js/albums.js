@@ -37,3 +37,32 @@ function openNewAlbumForm(event) {
 function closeNewAlbumForm() {
     document.getElementById("newAlbumForm").style.display = "none";
 }
+
+function toggleEditAlbumNameForm() {
+    var form = document.getElementById("edit-name-form");
+    if (form.style.display === "block") {
+        form.style.display = "none";
+    } else {
+        form.style.display = "block";
+    }
+}
+
+function editAlbumName() {
+    var newAlbumName = document.getElementById("new-album-name").value;
+    var pathname = window.location.pathname;
+    var albumId = pathname.slice(pathname.lastIndexOf("/") + 1);
+    if (newAlbumName.trim() !== "") {
+        $.ajax({
+            url: "/api/editAlbumName",
+            method: "post",
+            data: {
+                "album-id": albumId,
+                "new-name": newAlbumName
+            },
+            success: function () {
+                document.getElementById("albumName").innerHTML = newAlbumName;
+                toggleEditAlbumNameForm();
+            }
+        });
+    }
+}

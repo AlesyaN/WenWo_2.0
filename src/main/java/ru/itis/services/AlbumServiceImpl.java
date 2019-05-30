@@ -35,4 +35,11 @@ public class AlbumServiceImpl implements AlbumService {
         albumRepository.delete(album);
     }
 
+    @Override
+    public void editAlbumName(Integer albumId, String newName) {
+        Album album = getAlbum(albumId).orElseThrow(IllegalArgumentException::new);
+        album.setName(newName);
+        albumRepository.save(album);
+    }
+
 }

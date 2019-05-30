@@ -16,11 +16,17 @@
     <br>
     <br>
     <div class="form-style-2-heading">
-        Album ${album.name}
+        Album <span id="albumName">${album.name}</span>
     </div>
+    <#if currentUserId?? && album.owner.id == currentUserId>
     <form method="post" action="/albums/${album.id}/delete">
         <input type="submit" class="button" value="Delete album">
     </form>
+        <button onclick="toggleEditAlbumNameForm()" class="button edit">Edit name</button>
+        <div id="edit-name-form" style="display: none">
+            <input type="text" id="new-album-name" class="input-field"><br>
+            <button class="button" onclick="editAlbumName()">Save</button>
+        </div>
     <form class="form-style-2" action="/albums/${album.id}" method="post" enctype="multipart/form-data">
         <div class="form-style-2-heading">Upload photos</div>
         <input type="file" name="photo">
@@ -33,6 +39,7 @@
         <input type="text" name="description" class="input-field" placeholder="Description"><br>
         <input type="submit">
     </form>
+    </#if>
     <#list album.photos as photo>
          <div>
              <img style="display: block; width: 30%; height: 30%" src="${photo.photoPath}"><br>
@@ -44,5 +51,7 @@
          <br>
     </#list>
 </div>
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script type="application/javascript" src="/js/albums.js"></script>
 </body>
 </html>
