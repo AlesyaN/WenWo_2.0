@@ -121,14 +121,22 @@
     </#if>
 
     <div class="form-style-2-heading">Albums</div>
-    <div style="display: inline">
-        <#list user.albums as album>
-            <div>
-                <img style="display: block; width: 30%; height: 30%" src="${album.cover.photoPath}">
-                <a href="/albums/${album.id}">${album.name}</a>
-            </div>
-        </#list>
-    </div>
+    <table id="albums">
+        <tr>
+                    <#list user.albums as album>
+                        <td>
+                            <img style="height: 10%" src="${album.cover.photoPath}">
+                        </td>
+                    </#list>
+        </tr>
+        <tr>
+                    <#list user.albums as album>
+                        <td>
+                            <a href="/albums/${album.id}">${album.name}</a>
+                        </td>
+                    </#list>
+        </tr>
+    </table>
     <br>
 
     <div class="form-style-2-heading">Questions</div>

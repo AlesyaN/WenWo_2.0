@@ -68,17 +68,25 @@
     <button class="button" onclick="openNewAlbumForm(event)">+ new album</button>
     <div style="display: none" id="newAlbumForm">
         <label for="name">Album name:
-        <input class="input-field" type="text" id="albumName" name="name"></label>
+            <input class="input-field" type="text" id="albumName" name="name"></label>
         <button class="button" onclick="addAlbum(event)">Save</button>
     </div>
-    <div id="albums" style="display: inline">
-        <#list user.albums as album>
-            <div>
-            <img style="display: block; width: 30%; height: 30%" src="${album.cover.photoPath}">
-            <a href="/albums/${album.id}">${album.name}</a>
-            </div>
-        </#list>
-    </div>
+    <table id="albums">
+        <tr>
+                <#list user.albums as album>
+                    <td>
+                        <img style="height: 10%" src="${album.cover.photoPath}">
+                    </td>
+                </#list>
+        </tr>
+        <tr>
+                <#list user.albums as album>
+                    <td>
+                        <a href="/albums/${album.id}">${album.name}</a>
+                    </td>
+                </#list>
+        </tr>
+    </table>
     <br>
     <a href="/logout">Log out</a>
     <br>
@@ -89,7 +97,9 @@
         <div id="${question.id}">
             <a href="/profile/${question.receiver.login}">${question.receiver.login}</a>
             <br>
-            <b><div data-contain-user-tags data-contain-hashtags>${question.text}</div></b>
+            <b>
+                <div data-contain-user-tags data-contain-hashtags>${question.text}</div>
+            </b>
             <br>
             <i>
                 <#if question.anonymous>
@@ -122,10 +132,10 @@
             </button>
             <button class="button edit" onclick="openEditAnswerField(event)" data-questionId="${question.id}">Edit
             </button>
-            </div>
-            <br>
-            <div class="form-style-2" id="comments">
-                <h3 class="form-style-2-heading">Comments:</h3>
+        </div>
+        <br>
+        <div class="form-style-2" id="comments">
+            <h3 class="form-style-2-heading">Comments:</h3>
                 <#list question.comments as comment>
                     <div id="comment${comment.id}">
                         <a href="/profile/${comment.author.login}">${comment.author.login}</a>
@@ -134,19 +144,21 @@
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
-                        <b><div data-contain-user-tags data-contain-hashtags>${comment.text}</div></b><br>
+                        <b>
+                            <div data-contain-user-tags data-contain-hashtags>${comment.text}</div>
+                        </b><br>
                         <i>${comment.date}</i><br>
                     </div>
                     <br>
                 </#list>
-            </div>
-            <div class="form-style-2">
-                <input class="input-field" id="comment${question.id}"
-                       placeholder="Your comment">
-                <br><br>
-                <button class="button" data-questionId="${question.id}" onclick="addComment(event)">Send</button>
-            </div>
-            <br>
+        </div>
+        <div class="form-style-2">
+            <input class="input-field" id="comment${question.id}"
+                   placeholder="Your comment">
+            <br><br>
+            <button class="button" data-questionId="${question.id}" onclick="addComment(event)">Send</button>
+        </div>
+        <br>
     </#list>
     </list>
 
