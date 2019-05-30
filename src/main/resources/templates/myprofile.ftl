@@ -65,7 +65,7 @@
     </#if>
 
     <div class="form-style-2-heading">Albums</div>
-    <button class="button" onclick="openNewAlbumForm(event)">+ new album</button>
+    <button class="button" onclick="toggleNewAlbumForm(event)">+ new album</button>
     <div style="display: none" id="newAlbumForm">
         <label for="name">Album name:
             <input class="input-field" type="text" id="albumName" name="name"></label>

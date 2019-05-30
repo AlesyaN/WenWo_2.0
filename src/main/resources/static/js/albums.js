@@ -9,7 +9,7 @@ function addAlbum(event) {
                 "name": name
             },
             success: function (album) {
-                closeNewAlbumForm();
+                toggleNewAlbumForm();
                 var images = document.getElementById("images");
                 var tdImg = document.createElement("td");
                 var img = document.createElement("img");
@@ -30,13 +30,15 @@ function addAlbum(event) {
     }
 }
 
-function openNewAlbumForm(event) {
-    document.getElementById("newAlbumForm").style.display = "block";
+function toggleNewAlbumForm(event) {
+    var form = document.getElementById("newAlbumForm");
+    if (form.style.display === "block") {
+        form.style.display = "none";
+    } else {
+        form.style.display = "block";
+    }
 }
 
-function closeNewAlbumForm() {
-    document.getElementById("newAlbumForm").style.display = "none";
-}
 
 function toggleEditAlbumNameForm() {
     var form = document.getElementById("edit-name-form");
