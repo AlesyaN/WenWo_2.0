@@ -82,3 +82,31 @@ function deletePhoto(event) {
         }
     });
 }
+
+function toggleEditDescriptionForm() {
+    var form = document.getElementById("edit-description-form");
+    if (form.style.display === "block") {
+        form.style.display = "none";
+    } else {
+        form.style.display = "block";
+    }
+}
+
+function editDescription(event) {
+    var photoId = event.target.dataset.photoId;
+    var newDescription = document.getElementById("newDescription").value;
+    if (newDescription.trim() !== "") {
+        $.ajax({
+            url: "/api/editPhotoDescription",
+            method: "post",
+            data: {
+                "photo-id": photoId,
+                "new-description": newDescription
+            },
+            success: function () {
+                toggleEditDescriptionForm();
+                document.getElementById("description" + photoId).innerHTML = newDescription;
+            }
+        });
+    }
+}

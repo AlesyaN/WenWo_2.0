@@ -43,11 +43,18 @@
     <#list album.photos as photo>
          <div id="photo${photo.id}">
              <img style="height: 300px" src="${photo.photoPath}"><br>
-             <div>${photo.description}</div>
+             <div id="description${photo.id}">${photo.description}</div>
              <br>
              <i>${photo.date}</i>
              <br>
-             <button onclick="deletePhoto(event)" data-photo-id="${photo.id}" class="button delete">Delete</button>
+             <#if currentUserId?? && album.owner.id == currentUserId>
+                 <button onclick="deletePhoto(event)" data-photo-id="${photo.id}" class="button delete">Delete</button>
+                 <button onclick="toggleEditDescriptionForm(event)" class="button edit">Edit</button>
+                 <div id="edit-description-form" style="display:none">
+                     <input type="text" id="newDescription" class="input-field"><br>
+                     <button class="button" onclick="editDescription(event)" data-photo-id="${photo.id}">Save</button>
+                 </div>
+             </#if>
              <br>
              <br>
              <br>

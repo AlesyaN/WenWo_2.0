@@ -45,4 +45,11 @@ public class PhotoServiceImpl implements PhotoService {
     public Optional<Photo> getPhoto(Integer photoId) {
         return Optional.ofNullable(photoRepository.findOne(photoId));
     }
+
+    @Override
+    public void editPhotoDescription(Integer photoId, String newDescription) {
+        Photo photo = getPhoto(photoId).orElseThrow(IllegalArgumentException::new);
+        photo.setDescription(newDescription);
+        photoRepository.save(photo);
+    }
 }

@@ -11,4 +11,6 @@ public interface PhotoService {
     void deletePhoto(Integer photoId);
 
     Optional<Photo> getPhoto(Integer photoId);
+
+    void editPhotoDescription(Integer photoId, String newDescription);
 }

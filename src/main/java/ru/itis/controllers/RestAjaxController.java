@@ -135,7 +135,8 @@ public class RestAjaxController {
     }
 
     @PostMapping("/api/editAlbumName")
-    public ResponseEntity<Object> editAlbumName(@RequestParam("album-id")Integer albumId, @RequestParam("new-name") String newName) {
+    public ResponseEntity<Object> editAlbumName(@RequestParam("album-id")Integer albumId,
+                                                @RequestParam("new-name") String newName) {
         albumService.editAlbumName(albumId, newName);
         return ResponseEntity.ok().build();
     }
@@ -143,6 +144,13 @@ public class RestAjaxController {
     @PostMapping("/api/deletePhoto")
     public ResponseEntity<Object> deletePhoto(@RequestParam("photo-id") Integer photoId) {
         photoService.deletePhoto(photoId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/api/editPhotoDescription")
+    public ResponseEntity<Object> newPhotoDescription(@RequestParam("photo-id")Integer photoId,
+                                                      @RequestParam("new-description") String newDescription) {
+        photoService.editPhotoDescription(photoId, newDescription);
         return ResponseEntity.ok().build();
     }
 }
