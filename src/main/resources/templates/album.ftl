@@ -41,14 +41,17 @@
     </form>
     </#if>
     <#list album.photos as photo>
-         <div>
-             <img style="display: block; width: 30%; height: 30%" src="${photo.photoPath}"><br>
+         <div id="photo${photo.id}">
+             <img style="height: 300px" src="${photo.photoPath}"><br>
              <div>${photo.description}</div>
              <br>
              <i>${photo.date}</i>
+             <br>
+             <button onclick="deletePhoto(event)" data-photo-id="${photo.id}" class="button delete">Delete</button>
+             <br>
+             <br>
+             <br>
          </div>
-         <br>
-         <br>
     </#list>
 </div>
 <script src="/webjars/jquery/jquery.min.js"></script>

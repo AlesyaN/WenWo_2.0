@@ -31,7 +31,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public void deleteAlbum(Album album) {
-        fileDownloader.deleteFolder(album.getOwner().getLogin() + "/albums/" + album.getId());
+        fileDownloader.delete("/users/" + album.getOwner().getLogin() + "/albums/" + album.getId());
         albumRepository.delete(album);
     }
 
@@ -41,5 +41,6 @@ public class AlbumServiceImpl implements AlbumService {
         album.setName(newName);
         albumRepository.save(album);
     }
+
 
 }

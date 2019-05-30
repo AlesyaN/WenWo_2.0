@@ -8,6 +8,7 @@ import ru.itis.repositories.PhotoRepository;
 import ru.itis.utils.FileDownloader;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class PhotoServiceImpl implements PhotoService {
@@ -31,5 +32,17 @@ public class PhotoServiceImpl implements PhotoService {
                 .date(new Date())
                 .build();
         photoRepository.save(photo);
+    }
+
+    @Override
+    public void deletePhoto(Integer photoId) {
+        Photo photo = getPhoto(photoId).orElseThrow(IllegalArgumentException::new);
+        fileDownloader.delete(photo.getPhotoPath());
+        photoRepository.delete(photo);
+    }
+
+    @Override
+    public Optional<Photo> getPhoto(Integer photoId) {
+        return Optional.ofNullable(photoRepository.findOne(photoId));
     }
 }

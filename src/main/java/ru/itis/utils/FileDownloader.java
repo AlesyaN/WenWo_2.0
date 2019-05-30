@@ -42,8 +42,8 @@ public class FileDownloader {
         if (!directory.exists()) directory.mkdirs();
     }
 
-    public void deleteFolder(String folderPath) {
-        File directory = new File(UPLOADED_FOLDER + "/users/" + folderPath);
+    public void delete(String folderPath) {
+        File directory = new File(UPLOADED_FOLDER + folderPath);
         FileSystemUtils.deleteRecursively(directory);
     }
 

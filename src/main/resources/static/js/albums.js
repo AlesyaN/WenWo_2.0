@@ -68,3 +68,17 @@ function editAlbumName() {
         });
     }
 }
+
+function deletePhoto(event) {
+    var photoId = event.target.dataset.photoId;
+    $.ajax({
+        url: "/api/deletePhoto",
+        data: {
+            "photo-id": photoId
+        },
+        method: "post",
+        success: function () {
+            document.getElementById("photo" + photoId).remove();
+        }
+    });
+}

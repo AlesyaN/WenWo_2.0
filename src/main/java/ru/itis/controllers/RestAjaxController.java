@@ -35,6 +35,9 @@ public class RestAjaxController {
     @Autowired
     AlbumService albumService;
 
+    @Autowired
+    PhotoService photoService;
+
     @PostMapping("/api/follow")
     public ResponseEntity<Object> follow(@RequestParam("login") String login, Authentication authentication) {
         User subscriptor = userService.getUserByLogin(login).orElseThrow(IllegalArgumentException::new);
@@ -134,6 +137,12 @@ public class RestAjaxController {
     @PostMapping("/api/editAlbumName")
     public ResponseEntity<Object> editAlbumName(@RequestParam("album-id")Integer albumId, @RequestParam("new-name") String newName) {
         albumService.editAlbumName(albumId, newName);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/api/deletePhoto")
+    public ResponseEntity<Object> deletePhoto(@RequestParam("photo-id") Integer photoId) {
+        photoService.deletePhoto(photoId);
         return ResponseEntity.ok().build();
     }
 }
