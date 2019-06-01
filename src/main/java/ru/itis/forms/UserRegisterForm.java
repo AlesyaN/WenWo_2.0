@@ -2,14 +2,14 @@ package ru.itis.forms;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.validators.File;
 import ru.itis.validators.Login;
 import ru.itis.validators.Password;
 import ru.itis.validators.UniqueEmail;
-
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 
@@ -22,15 +22,15 @@ public class UserRegisterForm {
     @Password
     private String password;
 
-    @NotBlank
+    @NotEmpty
     @Size(min=4, max=30)
     private String name;
 
-    @NotBlank
+    @NotEmpty
     @Size(min=4, max=30)
     private String surname;
 
-    @NotBlank
+    @NotEmpty
     @UniqueEmail
     @Email
     private String email;

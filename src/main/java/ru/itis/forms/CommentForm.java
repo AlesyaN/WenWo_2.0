@@ -9,6 +9,7 @@ import ru.itis.models.Comment;
 import ru.itis.models.Question;
 import ru.itis.services.QuestionService;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -18,6 +19,6 @@ public class CommentForm {
     @NotNull
     private Integer questionId;
 
-    @NotBlank
+    @NotEmpty
     private String text;
 }

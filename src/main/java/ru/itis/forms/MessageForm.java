@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +15,6 @@ import org.hibernate.validator.constraints.NotBlank;
 public class MessageForm {
     private String receiverLogin;
 
-    @NotBlank
+    @NotEmpty
     private String text;
 }
