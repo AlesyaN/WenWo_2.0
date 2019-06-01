@@ -43,7 +43,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public Optional<Photo> getPhoto(Integer photoId) {
-        return Optional.ofNullable(photoRepository.findOne(photoId));
+        return photoRepository.findById(photoId);
     }
 
     @Override

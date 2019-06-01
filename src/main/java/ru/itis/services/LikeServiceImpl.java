@@ -25,7 +25,7 @@ public class LikeServiceImpl implements LikeService{
     }
 
     public Optional<Like> getLikeById(Integer id) {
-        return Optional.ofNullable(likeRepository.findOne(id));
+        return likeRepository.findById(id);
     }
 
     public List<Like> getLikesByQuestion(Question question) {

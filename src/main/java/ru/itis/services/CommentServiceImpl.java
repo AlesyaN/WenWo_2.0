@@ -32,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Optional<Comment> getCommentById(Integer commentId) {
-        return Optional.ofNullable(commentRepository.findOne(commentId));
+        return commentRepository.findById(commentId);
     }
 
     @Override

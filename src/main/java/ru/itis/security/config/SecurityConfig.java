@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/questions").authenticated()
                 .antMatchers("/search").permitAll()
                 .antMatchers("/chat").authenticated()
-                .antMatchers("/albums/**").permitAll()
+                .antMatchers("/albums/**").authenticated()
                 .and()
             .rememberMe()
                 .rememberMeParameter("remember-me")

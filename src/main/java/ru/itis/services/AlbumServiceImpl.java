@@ -20,7 +20,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public Optional<Album> getAlbum(Integer albumId) {
-        return Optional.ofNullable(albumRepository.findOne(albumId));
+        return albumRepository.findById(albumId);
     }
 
     @Override

@@ -15,7 +15,7 @@ public class MessageServiceImpl implements MessageService{
     private MessageRepository messageRepository;
 
     public Optional<Message> getMessageById(Integer id) {
-        return Optional.ofNullable(messageRepository.findOne(id));
+        return messageRepository.findById(id);
     }
 
     public List<Message> getMessagesByUsers(User user1, User user2) {

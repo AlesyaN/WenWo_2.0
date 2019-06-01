@@ -17,7 +17,7 @@ public class QuestionServiceImpl implements QuestionService{
     private QuestionRepository questionRepository;
 
     public Optional<Question> getQuestionById(Integer id) {
-        return Optional.ofNullable(questionRepository.findOne(id));
+        return questionRepository.findById(id);
     }
 
     public List<Question> getAllUserQuestions(User user){
