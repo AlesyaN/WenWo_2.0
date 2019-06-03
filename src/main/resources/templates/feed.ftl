@@ -80,7 +80,7 @@
 </div>
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
-<script type="application/javascript" src="/js/comment.js"></script>
+<script type="application/javascript" src="/js/question-comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 </body>

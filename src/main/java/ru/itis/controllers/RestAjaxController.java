@@ -1,21 +1,19 @@
 package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.forms.CommentForm;
 import ru.itis.models.*;
-import ru.itis.security.details.UserDetailsImpl;
 import ru.itis.services.*;
 import ru.itis.transfer.AlbumDto;
 import ru.itis.transfer.CommentDto;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
-import java.util.Optional;
 
 @RestController
 public class RestAjaxController {
@@ -30,7 +28,12 @@ public class RestAjaxController {
     LikeService likeService;
 
     @Autowired
-    CommentService commentService;
+    @Qualifier("questionCommentService")
+    CommentService questionCommentService;
+
+    @Autowired
+    @Qualifier("photoCommentService")
+    CommentService photoCommentService;
 
     @Autowired
     AlbumService albumService;
@@ -92,25 +95,25 @@ public class RestAjaxController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/api/addComment")
+    @PostMapping("/api/addQuestionComment")
     public ResponseEntity<Object> addComment(@RequestBody @Valid CommentForm commentForm, BindingResult result, Authentication authentication) {
         if (result.hasErrors()) return ResponseEntity.badRequest().build();
-        Question question = questionService.getQuestionById(commentForm.getQuestionId()).orElseThrow(IllegalArgumentException::new);
+        Question question = questionService.getQuestionById(commentForm.getPostId()).orElseThrow(IllegalArgumentException::new);
         User author = userService.getCurrentUser(authentication).orElse(null);
-        Comment comment = Comment.builder()
+        QuestionComment comment = QuestionComment.builder()
                 .author(author)
                 .question(question)
                 .date(new Date())
                 .text(commentForm.getText())
                 .build();
-        commentService.addComment(comment);
+        questionCommentService.addComment(comment);
         return ResponseEntity.ok(CommentDto.from(comment));
     }
 
-    @PostMapping("/api/deleteComment")
+    @PostMapping("/api/deleteQuestionComment")
     public ResponseEntity<Object> deleteComment(@RequestParam("commentId") Integer commentId) {
-        Comment comment = commentService.getCommentById(commentId).orElseThrow(IllegalArgumentException::new);
-        commentService.deleteComment(comment);
+        Comment comment = questionCommentService.getCommentById(commentId).orElseThrow(IllegalArgumentException::new);
+        questionCommentService.deleteComment(comment);
         return ResponseEntity.ok().build();
     }
 
@@ -151,6 +154,28 @@ public class RestAjaxController {
     public ResponseEntity<Object> newPhotoDescription(@RequestParam("photo-id")Integer photoId,
                                                       @RequestParam("new-description") String newDescription) {
         photoService.editPhotoDescription(photoId, newDescription);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/api/addPhotoComment")
+    public ResponseEntity<Object> addPhotoComment(@RequestBody @Valid CommentForm commentForm, BindingResult result, Authentication authentication) {
+        if (result.hasErrors()) return ResponseEntity.badRequest().build();
+        Photo photo = photoService.getPhoto(commentForm.getPostId()).orElseThrow(IllegalArgumentException::new);
+        User author = userService.getCurrentUser(authentication).orElse(null);
+        PhotoComment comment = PhotoComment.builder()
+                .author(author)
+                .photo(photo)
+                .date(new Date())
+                .text(commentForm.getText())
+                .build();
+        photoCommentService.addComment(comment);
+        return ResponseEntity.ok(CommentDto.from(comment));
+    }
+
+    @PostMapping("/api/deletePhotoComment")
+    public ResponseEntity<Object> deletePhotoComment(@RequestParam("commentId") Integer commentId) {
+        Comment comment = photoCommentService.getCommentById(commentId).orElseThrow(IllegalArgumentException::new);
+        photoCommentService.deleteComment(comment);
         return ResponseEntity.ok().build();
     }
 }

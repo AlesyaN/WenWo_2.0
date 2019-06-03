@@ -1,6 +1,7 @@
 package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +24,7 @@ public class SearchController {
     QuestionService questionService;
 
     @Autowired
+    @Qualifier("questionCommentService")
     CommentService commentService;
 
     @GetMapping(value = "/search", params = "search-text")

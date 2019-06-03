@@ -1,17 +1,17 @@
 function addComment(event) {
-    var questionId = event.target.dataset.questionid;
-    var commentInput = document.getElementById("comment" + questionId);
+    var photoId = event.target.dataset.photoid;
+    var commentInput = document.getElementById("comment" + photoId);
     if (commentInput.value.trim() === "") return;
     $.ajax({
-        url: "/api/addComment",
+        url: "/api/addPhotoComment",
         method: "post",
         contentType: 'application/json',
         data: JSON.stringify({
-            "questionId": +questionId,
+            "postId": +photoId,
             "text": commentInput.value
         }),
         success: function (comment) {
-            var commentsList = document.getElementById("comments");
+            var commentsList = document.getElementById("comments" + comment.postId);
             var commentElement = document.createElement("div");
 
             var author = document.createElement("a");
@@ -30,11 +30,11 @@ function addComment(event) {
             var dateElement = document.createElement("i");
             var date = new Date(comment.date);
             dateElement.innerHTML = ('0' + date.getDate()).slice(-2) + "."
-                                    + ('0' + (1 + +date.getMonth())).slice(-2) + "."
-                                    + date.getUTCFullYear() + " "
-                                    + date.getHours() + ":" +
-                                    + date.getMinutes() + ":" +
-                                    + date.getSeconds();
+                + ('0' + (1 + +date.getMonth())).slice(-2) + "."
+                + date.getUTCFullYear() + " "
+                + date.getHours() + ":" +
+                + date.getMinutes() + ":" +
+                + date.getSeconds();
 
             var br = document.createElement("br");
 
@@ -62,7 +62,7 @@ function deleteComment(event) {
     var commentId = event.target.dataset.commentId;
     var comment = document.getElementById("comment" + commentId);
     $.ajax({
-        url: "/api/deleteComment",
+        url: "/api/deletePhotoComment",
         method: "post",
         data: {
             commentId: commentId

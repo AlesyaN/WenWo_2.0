@@ -55,6 +55,36 @@
                      <button class="button" onclick="editDescription(event)" data-photo-id="${photo.id}">Save</button>
                  </div>
              </#if>
+
+             <div class="form-style-2" id="comments${photo.id}">
+                 <h3 class="form-style-2-heading">Comments:</h3>
+                <#list photo.comments as comment>
+                    <div id="comment${comment.id}">
+                        <a href="/profile/${comment.author.login}">${comment.author.login}</a>
+                        <#if currentUserId?? && comment.author.id == currentUserId>
+                            <button class="button delete" data-comment-id="${comment.id}"
+                                    onclick="deleteComment(event)">Delete
+                            </button>
+                        </#if><br>
+                        <b>
+                            <div data-contain-hashtags data-contain-user-tags>${comment.text}</div>
+                        </b><br>
+                        <i>${comment.date}</i><br>
+                    </div>
+                    <br>
+                </#list>
+             </div>
+
+            <#if currentUserId??>
+            <div class="form-style-2">
+                <input class="input-field" id="comment${photo.id}"
+                       placeholder="Your comment">
+                <br><br>
+                <button class="button" data-photoId="${photo.id}" onclick="addComment(event)">Send</button>
+            </div>
+            </#if>
+
+             <br>
              <br>
              <br>
              <br>
@@ -63,5 +93,8 @@
 </div>
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script type="application/javascript" src="/js/albums.js"></script>
+<script type="application/javascript" src="/js/photo-comment.js"></script>
+<script type="application/javascript" src="/js/hashtags.js"></script>
+<script type="application/javascript" src="/js/user-tags.js"></script>
 </body>
 </html>

@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.itis.models.Comment;
-import ru.itis.models.User;
+import ru.itis.models.PhotoComment;
+import ru.itis.models.QuestionComment;
 
 import java.util.Date;
 
@@ -16,17 +16,28 @@ import java.util.Date;
 public class CommentDto {
     private Integer id;
     private String text;
-    private Integer questionId;
+    private Integer postId;
     private Integer authorId;
     private String authorLogin;
     private Date date;
 
-    public static CommentDto from(Comment comment) {
+    public static CommentDto from(QuestionComment comment) {
         return CommentDto.builder()
                 .id(comment.getId())
                 .authorId(comment.getAuthor().getId())
                 .authorLogin(comment.getAuthor().getLogin())
-                .questionId(comment.getQuestion().getId())
+                .postId(comment.getQuestion().getId())
+                .text(comment.getText())
+                .date(comment.getDate())
+                .build();
+    }
+
+    public static CommentDto from(PhotoComment comment) {
+        return CommentDto.builder()
+                .id(comment.getId())
+                .authorId(comment.getAuthor().getId())
+                .authorLogin(comment.getAuthor().getLogin())
+                .postId(comment.getPhoto().getId())
                 .text(comment.getText())
                 .date(comment.getDate())
                 .build();

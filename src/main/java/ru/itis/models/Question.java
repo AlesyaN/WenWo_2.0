@@ -32,7 +32,7 @@ public class Question {
     private List<Like> likes;
 
     @OneToMany(mappedBy = "question")
-    private List<Comment> comments;
+    private List<QuestionComment> comments;
 
     @Column(name = "message")
     private String text;

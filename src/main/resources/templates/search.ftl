@@ -67,7 +67,7 @@
             </#if>
             <i id="likes${question.id}">${question.likes?size}</i>
             <br>
-            <div class="form-style-2" id="comments">
+            <div class="form-style-2" id="comments${question.id}">
                 <h3 class="form-style-2-heading">Comments:</h3>
                     <#list question.comments as comment>
                         <div id="comment${comment.id}">
@@ -85,7 +85,7 @@
             </div>
             <#if currentUserId??>
             <div class="form-style-2">
-                <input class="input-field" id="comment${question.id}"
+                <input class="input-field" id="commentinput${question.id}"
                        placeholder="Your comment">
                 <br><br>
                 <button class="button" data-questionId="${question.id}" onclick="addComment(event)">Send</button>
@@ -116,7 +116,7 @@
 </div>
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
-<script type="application/javascript" src="/js/comment.js"></script>
+<script type="application/javascript" src="/js/question-comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 </body>

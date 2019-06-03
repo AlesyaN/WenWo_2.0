@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,5 +30,8 @@ public class Photo {
     private Album album;
 
     private Date date;
+
+    @OneToMany(mappedBy = "photo")
+    private List<PhotoComment> comments;
 }
 
