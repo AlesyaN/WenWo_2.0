@@ -33,5 +33,8 @@ public class Photo {
 
     @OneToMany(mappedBy = "photo")
     private List<PhotoComment> comments;
+
+    private Double coordinateX;
+    private Double coordinateY;
 }
 

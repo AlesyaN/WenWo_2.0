@@ -30,6 +30,8 @@ public class PhotoServiceImpl implements PhotoService {
                 .description(photoForm.getDescription())
                 .album(photoForm.getAlbum())
                 .date(new Date())
+                .coordinateX(photoForm.getX())
+                .coordinateY(photoForm.getY())
                 .build();
         photoRepository.save(photo);
     }

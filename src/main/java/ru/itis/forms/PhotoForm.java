@@ -19,4 +19,8 @@ public class PhotoForm {
     private MultipartFile photo;
 
     private Album album;
+
+    private Double x;
+
+    private Double y;
 }

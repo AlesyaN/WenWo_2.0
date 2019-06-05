@@ -36,10 +36,13 @@
         </#if>
         </div>
         <br>
+        <input type="text" hidden id="x" name="x">
+        <input type="text" hidden id="y" name="y">
         <input type="text" name="description" class="input-field" placeholder="Description"><br>
         <input type="submit">
     </form>
     </#if>
+    <div id="map"></div>
     <#list album.photos as photo>
          <div id="photo${photo.id}">
              <img style="height: 300px" src="${photo.photoPath}"><br>
@@ -96,5 +99,7 @@
 <script type="application/javascript" src="/js/photo-comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996" type="text/javascript"></script>
+<script type="application/javascript" src="/js/maps.js"></script>
 </body>
 </html>
