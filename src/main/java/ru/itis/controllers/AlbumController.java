@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.forms.PhotoForm;
+import ru.itis.models.Photo;
 import ru.itis.models.User;
 import ru.itis.services.AlbumService;
 import ru.itis.services.PhotoService;

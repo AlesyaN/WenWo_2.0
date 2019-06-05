@@ -26,4 +26,6 @@ public class Album {
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     @OrderBy("date DESC")
     private List<Photo> photos;
+
+
 }

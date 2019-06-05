@@ -1,9 +1,6 @@
 var myMap;
 ymaps.ready(init);
 
-
-var сoord = null;
-
 function init () {
     var geolocation = ymaps.geolocation,
         myMap = new ymaps.Map('map', {
@@ -43,3 +40,25 @@ function setCoordinates(coordinates) {
     document.getElementById("y").value = coordinates[1];
 }
 
+function showOnMap(event) {
+    var x = parseFloat(event.target.dataset.x.replace(',', '.'));
+    var y = parseFloat(event.target.dataset.y.replace(',', '.'));
+    var id = event.target.dataset.id;
+    var mapElem = document.getElementById("map" + id);
+    var map = new ymaps.Map("map" + id, {
+        center: [x, y],
+        zoom: 10
+    }, {
+        searchControlProvider: 'yandex#search'
+    });
+    if (mapElem.style.display === "none") {
+        mapElem.style.display = "block";
+        map.geoObjects.add(new ymaps.Placemark([x, y], {}, {
+            preset: 'islands#dotIcon',
+            iconColor: '#735184'
+        }));
+    } else {
+        map.destroy();
+        mapElem.style.display = "none";
+    }
+}

@@ -42,13 +42,18 @@
         <input type="submit">
     </form>
     </#if>
-    <div id="map"></div>
+    <div id="map" class="map"></div>
     <#list album.photos as photo>
          <div id="photo${photo.id}">
              <img style="height: 300px" src="${photo.photoPath}"><br>
              <div id="description${photo.id}">${photo.description}</div>
              <br>
              <i>${photo.date}</i>
+             <br>
+             <#if photo.coordinateX?has_content && photo.coordinateY?has_content>
+                 <button onclick="showOnMap(event)" data-id="${photo.id}" data-x="${photo.coordinateX}" data-y="${photo.coordinateY}" class="button">Show on map</button>
+                 <div style="display: none" id="map${photo.id}" class="map"></div>
+             </#if>
              <br>
              <#if currentUserId?? && album.owner.id == currentUserId>
                  <button onclick="deletePhoto(event)" data-photo-id="${photo.id}" class="button delete">Delete</button>
