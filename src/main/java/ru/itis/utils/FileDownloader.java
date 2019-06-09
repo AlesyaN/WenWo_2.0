@@ -51,4 +51,8 @@ public class FileDownloader {
     public void setUploadedFolder(String uploadedFolder) {
         UPLOADED_FOLDER = uploadedFolder;
     }
+
+    public String getUploadedFolder() {
+        return UPLOADED_FOLDER;
+    }
 }

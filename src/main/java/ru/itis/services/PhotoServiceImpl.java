@@ -1,5 +1,12 @@
 package ru.itis.services;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.lang.GeoLocation;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
+import com.drew.metadata.exif.GpsDirectory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.forms.PhotoForm;
@@ -7,6 +14,8 @@ import ru.itis.models.Photo;
 import ru.itis.repositories.PhotoRepository;
 import ru.itis.utils.FileDownloader;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -30,10 +39,30 @@ public class PhotoServiceImpl implements PhotoService {
                 .description(photoForm.getDescription())
                 .album(photoForm.getAlbum())
                 .date(new Date())
-                .coordinateX(photoForm.getX())
-                .coordinateY(photoForm.getY())
                 .build();
+
+        Optional<GeoLocation> location = getGPS(fileDownloader.getUploadedFolder() + photoPath);
+        if (location.isPresent()) {
+            photo.setCoordinateX(location.get().getLatitude());
+            photo.setCoordinateY(location.get().getLongitude());
+        } else {
+            photo.setCoordinateX(photoForm.getX());
+            photo.setCoordinateY(photoForm.getY());
+        }
+
         photoRepository.save(photo);
+    }
+
+    private Optional<GeoLocation> getGPS(String path) {
+        File file = new File(path);
+        GpsDirectory gpsDirectory = null;
+        try {
+            Metadata metadata = ImageMetadataReader.readMetadata(file);
+            gpsDirectory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
+        } catch (ImageProcessingException | IOException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(gpsDirectory != null ? gpsDirectory.getGeoLocation() : null);
     }
 
     @Override
@@ -54,4 +83,6 @@ public class PhotoServiceImpl implements PhotoService {
         photo.setDescription(newDescription);
         photoRepository.save(photo);
     }
+
+
 }

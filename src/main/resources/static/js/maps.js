@@ -45,18 +45,35 @@ function showOnMap(event) {
     var y = parseFloat(event.target.dataset.y.replace(',', '.'));
     var id = event.target.dataset.id;
     var mapElem = document.getElementById("map" + id);
+    var coords = [x, y];
     var map = new ymaps.Map("map" + id, {
-        center: [x, y],
+        center: coords,
         zoom: 10
     }, {
         searchControlProvider: 'yandex#search'
     });
     if (mapElem.style.display === "none") {
         mapElem.style.display = "block";
-        map.geoObjects.add(new ymaps.Placemark([x, y], {}, {
-            preset: 'islands#dotIcon',
-            iconColor: '#735184'
-        }));
+        var placemark = new ymaps.Placemark(coords, {}, {
+            preset: 'islands#violetDotIcon'
+        });
+        map.geoObjects.add(placemark);
+        ymaps.geocode(coords).then(function (res) {
+            var firstGeoObject = res.geoObjects.get(0);
+
+            placemark.properties
+                .set({
+                    // Формируем строку с данными об объекте.
+                    iconCaption: [
+                        // Название населенного пункта или вышестоящее административно-территориальное образование.
+                        firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
+                        // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
+                        firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
+                    ].filter(Boolean).join(', '),
+                    // В качестве контента балуна задаем строку с адресом объекта.
+                    balloonContent: firstGeoObject.getAddressLine()
+                });
+        });
     } else {
         map.destroy();
         mapElem.style.display = "none";
