@@ -2,35 +2,18 @@ var myMap;
 ymaps.ready(init);
 
 function init () {
-    var geolocation = ymaps.geolocation,
-        myMap = new ymaps.Map('map', {
-            center: [55, 34],
-            zoom: 10
-        }, {
-            searchControlProvider: 'yandex#search'
-        });
 
-    geolocation.get({
+    ymaps.geolocation.get({
         provider: 'yandex',
         mapStateAutoApply: true
     }).then(function (result) {
-        // Красным цветом пометим положение, вычисленное через ip.
-        result.geoObjects.options.set('preset', 'islands#redCircleIcon');
-        result.geoObjects.get(0).properties.set({
-            balloonContentBody: 'Мое местоположение'
-        });
-        myMap.geoObjects.add(result.geoObjects);
         setCoordinates(result.geoObjects.get(0).geometry.getCoordinates());
         });
 
-    geolocation.get({
+    ymaps.geolocation.get({
         provider: 'browser',
         mapStateAutoApply: true
     }).then(function (result) {
-        // Синим цветом пометим положение, полученное через браузер.
-        // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
-        result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
-        myMap.geoObjects.add(result.geoObjects);
         setCoordinates(result.geoObjects.get(0).geometry.getCoordinates());
     });
 }
@@ -54,23 +37,38 @@ function showOnMap(event) {
     });
     if (mapElem.style.display === "none") {
         mapElem.style.display = "block";
+
+        ymaps.geolocation.get({
+            provider: 'yandex',
+            mapStateAutoApply: true
+        }).then(function (result) {
+            result.geoObjects.options.set('preset', 'islands#redCircleIcon');
+            result.geoObjects.get(0).properties.set({
+                balloonContentBody: 'Мое местоположение'
+            });
+            map.geoObjects.add(result.geoObjects);
+        });
+
+        ymaps.geolocation.get({
+            provider: 'browser',
+            mapStateAutoApply: true
+        }).then(function (result) {
+            result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
+            map.geoObjects.add(result.geoObjects);
+        });
+
         var placemark = new ymaps.Placemark(coords, {}, {
             preset: 'islands#violetDotIcon'
         });
         map.geoObjects.add(placemark);
         ymaps.geocode(coords).then(function (res) {
             var firstGeoObject = res.geoObjects.get(0);
-
             placemark.properties
                 .set({
-                    // Формируем строку с данными об объекте.
                     iconCaption: [
-                        // Название населенного пункта или вышестоящее административно-территориальное образование.
                         firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
-                        // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
                         firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
                     ].filter(Boolean).join(', '),
-                    // В качестве контента балуна задаем строку с адресом объекта.
                     balloonContent: firstGeoObject.getAddressLine()
                 });
         });

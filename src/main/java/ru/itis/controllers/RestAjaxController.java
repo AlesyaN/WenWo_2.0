@@ -178,4 +178,9 @@ public class RestAjaxController {
         photoCommentService.deleteComment(comment);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/api/getPhotosWithGPS")
+    public ResponseEntity<Object> getPhotosWithGPS() {
+        return ResponseEntity.ok(photoService.getPhotosWithGPS());
+    }
 }

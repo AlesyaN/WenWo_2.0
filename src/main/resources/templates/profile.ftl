@@ -121,6 +121,10 @@
     </#if>
 
     <div class="form-style-2-heading">Albums</div>
+    <button onclick="togglePhotoMap()" class="button">
+        Show photo map
+    </button>
+    <div id="photo-map" class="map" style="display: none"></div>
     <table id="albums">
         <tr id="images">
                     <#list user.albums as album>
@@ -224,6 +228,7 @@
 <script type="application/javascript" src="/js/question-comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
-
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996" type="text/javascript"></script>
+<script type="application/javascript" src="/js/photo-map.js"></script>
 </body>
 </html>

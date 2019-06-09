@@ -65,6 +65,11 @@
     </#if>
 
     <div class="form-style-2-heading">Albums</div>
+    <button onclick="togglePhotoMap()" class="button">
+        Show photo map
+    </button>
+    <div id="photo-map" class="map" style="display: none"></div>
+
     <button class="button" onclick="toggleNewAlbumForm(event)">+ new album</button>
     <div style="display: none" id="newAlbumForm">
         <label for="name">Album name:
@@ -176,5 +181,7 @@
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 <script type="application/javascript" src="/js/albums.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996" type="text/javascript"></script>
+<script type="application/javascript" src="/js/photo-map.js"></script>
 </body>
 </html>

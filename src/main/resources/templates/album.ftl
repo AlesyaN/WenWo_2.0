@@ -42,7 +42,6 @@
         <input type="submit">
     </form>
     </#if>
-    <div id="map" class="map"></div>
     <#list album.photos as photo>
          <div id="photo${photo.id}">
              <img style="height: 300px" src="${photo.photoPath}"><br>

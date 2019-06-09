@@ -3,6 +3,7 @@ package ru.itis.services;
 import ru.itis.forms.PhotoForm;
 import ru.itis.models.Photo;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PhotoService {
@@ -13,4 +14,6 @@ public interface PhotoService {
     Optional<Photo> getPhoto(Integer photoId);
 
     void editPhotoDescription(Integer photoId, String newDescription);
+
+    List<Photo> getPhotosWithGPS();
 }

@@ -17,6 +17,7 @@ import ru.itis.utils.FileDownloader;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -82,6 +83,11 @@ public class PhotoServiceImpl implements PhotoService {
         Photo photo = getPhoto(photoId).orElseThrow(IllegalArgumentException::new);
         photo.setDescription(newDescription);
         photoRepository.save(photo);
+    }
+
+    @Override
+    public List<Photo> getPhotosWithGPS() {
+        return photoRepository.findAllByCoordinateXIsNotNullAndCoordinateYIsNotNull();
     }
 
 
