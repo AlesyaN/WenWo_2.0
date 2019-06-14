@@ -1,6 +1,9 @@
 package ru.itis.validators;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import ru.itis.security.details.UserDetailsImpl;
 import ru.itis.services.UserService;
 
 import javax.validation.ConstraintValidator;
@@ -15,6 +18,8 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
    }
 
    public boolean isValid(String email, ConstraintValidatorContext context) {
-      return userService.emailIsUnique(email);
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      if (auth != null && ((UserDetailsImpl)auth.getPrincipal()).getUser().getEmail().equals(email)) return true;
+      return !userService.emailIsUnique(email);
    }
 }
