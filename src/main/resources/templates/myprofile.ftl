@@ -65,7 +65,7 @@
     </#if>
 
     <div class="form-style-2-heading">Albums</div>
-    <button onclick="togglePhotoMap()" class="button">
+    <button id="photomapbtn" data-login="${user.login}" class="button">
         Show photo map
     </button>
     <div id="photo-map" class="map" style="display: none"></div>
