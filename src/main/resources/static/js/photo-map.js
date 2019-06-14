@@ -1,5 +1,9 @@
 var myMap;
 
+ymaps.ready(function () {
+    document.getElementById("photomapbtn").onclick = togglePhotoMap;
+}());
+
 function init () {
     var geolocation = ymaps.geolocation;
 
@@ -28,6 +32,9 @@ function init () {
 function addPhotosToMap() {
     $.ajax({
       url: "/api/getPhotosWithGPS",
+      data: {
+          "login": document.getElementById("photomapbtn").dataset.login
+      },
       method: "get",
       success(photos) {
           for (var i = 0; i < photos.length; i++) {
@@ -38,10 +45,12 @@ function addPhotosToMap() {
 }
 
 function addPhotoToMap(photo) {
-    console.log(photo);
     var coords = [photo.coordinateX, photo.coordinateY];
     var placemark = new ymaps.Placemark(coords, {}, {
-        preset: 'islands#redDotIcon'
+        iconLayout: 'default#image',
+        iconImageHref: photo.photoPath,
+        iconImageSize: [42, 42],
+        iconImageOffset: [-5, -38]
     });
     myMap.geoObjects.add(placemark);
     ymaps.geocode(coords).then(function (res) {

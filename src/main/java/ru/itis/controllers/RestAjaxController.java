@@ -180,7 +180,7 @@ public class RestAjaxController {
     }
 
     @GetMapping("/api/getPhotosWithGPS")
-    public ResponseEntity<Object> getPhotosWithGPS() {
-        return ResponseEntity.ok(photoService.getPhotosWithGPS());
+    public ResponseEntity<Object> getPhotosWithGPS(@RequestParam("login")String login) {
+        return ResponseEntity.ok(photoService.getPhotosWithGPS(login));
     }
 }

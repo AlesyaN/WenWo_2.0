@@ -86,8 +86,8 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public List<Photo> getPhotosWithGPS() {
-        return photoRepository.findAllByCoordinateXIsNotNullAndCoordinateYIsNotNull();
+    public List<Photo> getPhotosWithGPS(String login) {
+        return photoRepository.getPhotosWithGPS(login);
     }
 
 
