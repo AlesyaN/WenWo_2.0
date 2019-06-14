@@ -14,6 +14,9 @@ import ru.itis.services.UserService;
 
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,8 @@ public class EditProfileController {
 
     @PostMapping("/editProfile")
     public String edit(@Valid UserEditForm form, Authentication authentication, ModelMap modelMap, BindingResult result) {
+        User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
+        modelMap.addAttribute("user", currentUser);
         if (result.hasErrors()) {
             List<String> errors = result
                     .getFieldErrors()
@@ -42,11 +47,13 @@ public class EditProfileController {
             modelMap.addAttribute("errors", errors);
             return "editProfile";
         }
-        Integer currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUser().getId();
-        User currentUser = userService.getUserById(currentUserId).orElseThrow(IllegalArgumentException::new);
-        userService.editProfile(form, currentUser);
-        modelMap.addAttribute("user", currentUser);
-        return "redirect:/profile";
-
+        if (userService.editProfile(form, currentUser)) {
+            return "redirect:/profile";
+        } else {
+            List<String> errors = new ArrayList<>();
+            errors.add("Old password is wrong");
+            modelMap.addAttribute("errors", errors);
+            return "editProfile";
+        }
     }
 }
