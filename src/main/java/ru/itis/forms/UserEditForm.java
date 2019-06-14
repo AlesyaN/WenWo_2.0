@@ -44,7 +44,6 @@ public class UserEditForm {
     private String gender;
     private String city;
 
-    @Past
     private String dateOfBirth;
 
     @File

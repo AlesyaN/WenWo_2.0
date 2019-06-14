@@ -20,6 +20,7 @@ public class UserRegisterForm {
     private String login;
 
     @Password
+    @NotEmpty
     private String password;
 
     @NotBlank

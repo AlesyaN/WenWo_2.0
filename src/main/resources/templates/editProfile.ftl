@@ -10,6 +10,12 @@
     <div class="form-style-2-heading">
         Edit your profile
     </div>
+     <#if errors??>
+         <#list errors as error>
+            <span>${error}</span>
+            <br>
+         </#list>
+     </#if>
     <label for="name">Name:
         <input class="input-field" type="text" id="name" name="name" value="${user.name}">
     </label>
