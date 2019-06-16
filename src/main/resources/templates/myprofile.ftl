@@ -100,6 +100,7 @@
     .frame {
         display: flex;
         align-items: center;
+        margin-bottom: 20px;
     }
 
 
@@ -172,7 +173,7 @@
             <div class="col-sm-12 frame">
                 <div class="col-sm-6">
                     <h2>${user.fullName}</h2>
-                    <div class="m-t-20 m-b-20">
+                    <br>
                         <p><strong>Login: </strong> ${user.login}</p>
                         <p><strong>Email: </strong> ${user.email} </p>
                         <#if user.gender??>
@@ -184,24 +185,23 @@
                         <#if user.dateOfBirth??>
                         <p><strong>Date of birth: </strong> ${user.dateOfBirth} </p>
                         </#if>
-                        <p><strong>Email: </strong> ${user.email} </p>
                         <p><strong>Skills: </strong>
                             <span class="tags">html5</span>
                             <span class="tags">css3</span>
                             <span class="tags">jquery</span>
                             <span class="tags">bootstrap3</span>
                         </p>
-                    </div>
+
                 </div>
-                <#if user.photoPath??>
-                    <div class="col-sm-6 text-center">
-                        <img src="${user.photoPath}" alt="" class="img-fluid" style="vertical-align: middle">
+
+                    <div class="col-sm-6 text-center ">
+
+                        <img <#if user.photoPath??> src="${user.photoPath}"<#else> src="/images/default_user_photo.png" </#if>  alt="" class="img-fluid" style="vertical-align: middle; max-height: 300px">
+
                     </div>
-                <#else>
-                    <div class="col-sm-6 text-center">
-                        <img src="/images/default_user_photo.png" alt="" class="img-fluid" style="vertical-align: middle">
-                    </div>
-                </#if>
+
+
+
             </div>
             <div class="col-sm-12 divider text-center form-inline p-t-20 p-b-20">
                 <div class="col-sm-6 subscriptions" data-users="user.followers">
