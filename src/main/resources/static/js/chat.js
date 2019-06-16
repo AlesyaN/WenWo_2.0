@@ -8,14 +8,10 @@ function connect() {
         stompClient.subscribe('/user/queue/chat',
             function (message) {
                 addMessage(JSON.parse(message.body));
-            },
-            function (message) {
-                console.log(message);
             }
         );
         stompClient.subscribe('/user/queue/deleteMessage',
             function (message) {
-                console.log("deleted " + message);
                 removeMessage(JSON.parse(message.body));
             }
         );
