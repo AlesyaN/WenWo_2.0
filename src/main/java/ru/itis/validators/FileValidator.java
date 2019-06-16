@@ -12,7 +12,7 @@ public class FileValidator implements ConstraintValidator<File, MultipartFile> {
    @Override
    public boolean isValid(MultipartFile multipartFile, ConstraintValidatorContext constraintValidatorContext) {
       boolean valid = true;
-      if (!multipartFile.getContentType().toLowerCase().equals("image/jpeg") &&
+      if (!multipartFile.isEmpty() && !multipartFile.getContentType().toLowerCase().equals("image/jpeg") &&
               !multipartFile.getContentType().toLowerCase().equals("image/png") &&
               !multipartFile.getContentType().toLowerCase().equals("image/jpg")) {
           valid = false;

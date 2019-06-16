@@ -15,5 +15,5 @@ public interface PhotoService {
 
     void editPhotoDescription(Integer photoId, String newDescription);
 
-    List<Photo> getPhotosWithGPS();
+    List<Photo> getPhotosWithGPS(String login);
 }
