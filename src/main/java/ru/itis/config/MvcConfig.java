@@ -16,10 +16,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/users/**",
                 "/css/**",
-                "/js/**")
+                "/js/**",
+                "/fonts/**",
+                "/images/**")
                 .addResourceLocations("file:///" + UPLOADED_FOLDER + "/users/",
                         "classpath:/static/css/",
-                        "classpath:/static/js/");
+                        "classpath:/static/js/",
+                        "classpath:/static/fonts/",
+                        "classpath:/static/images/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("/webjars/")
                 .resourceChain(false);

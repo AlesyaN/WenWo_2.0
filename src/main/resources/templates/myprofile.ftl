@@ -1,20 +1,121 @@
 <#ftl encoding='UTF-8'>
+<#include "header.ftl">
 <html>
 <head>
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap-css"
+    <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="/css/util.css" rel="stylesheet" type="text/css">
+    <link href="/css/bootstrap.css" type="text/css">
+    <link href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
     <meta charset="utf-8">
 </head>
+<style>
+    @font-face {
+        font-family: Poppins-Regular;
+        src: url('/fonts/poppins/Poppins-Regular.ttf');
+    }
+
+    body {
+        font-family: Poppins-Regular;
+    }
+
+    .profile {
+        min-height: 355px;
+        max-width: 800px;
+        text-align: center;
+        margin: auto;
+    }
+
+    figcaption.ratings {
+        margin-top: 20px;
+    }
+
+    figcaption.ratings a {
+        color: #f1c40f;
+        font-size: 11px;
+    }
+
+    figcaption.ratings a:hover {
+        color: #f39c12;
+        text-decoration: none;
+    }
+
+    .divider {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .subscriptions:hover {
+        cursor: pointer;
+
+    }
+
+    .emphasis h2 {
+        margin-bottom: 0;
+    }
+
+    span.tags {
+        background: #1abc9c;
+        border-radius: 2px;
+        color: #f5f5f5;
+        font-weight: bold;
+        padding: 2px 4px;
+    }
+
+    .dropdown-menu {
+        background-color: #34495e;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        width: 250px;
+        margin-left: -125px;
+        left: 50%;
+    }
+
+    .dropdown-menu .divider {
+        background: none;
+    }
+
+    .dropdown-menu > li > a {
+        color: #f5f5f5;
+    }
+
+    .dropup .dropdown-menu {
+        margin-bottom: 10px;
+    }
+
+    .dropup .dropdown-menu:before {
+        content: "";
+        border-top: 10px solid #34495e;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -10px;
+        z-index: 10;
+    }
+
+    .frame {
+        display: flex;
+        align-items: center;
+    }
+
+
+</style>
 <body>
-<#if user??>
-<div class="form-style-2">
+
+
+<#--<div class="form-style-2">
     <form class="form-style-2" method="get" action="/search">
         <input class="input-field" type="text" id="search" name="search-text">
         <input type="submit" class="button" value="Search">
     </form>
-    <a class="button" href="/feed">Feed</a>
-    <a class="button" href="/profile">My profile</a>
-    <a class="button" href="/chat">Messages</a>
-    <a class="button" href="/questions">You have ${user.unansweredQuestions?size} unanswered questions</a>
+<a class="button" href="/feed">Feed</a>
+<a class="button" href="/profile">My profile</a>
+<a class="button" href="/chat">Messages</a>
+<a class="button" href="/questions">You have ${user.unansweredQuestions?size} unanswered questions</a>
     <br>
     <br>
     <div class="form-style-2-heading">
@@ -63,7 +164,88 @@
         </label>
         <br>
     </#if>
+    <br>-->
+<#if user??>
+<div class="container">
+    <div class="row">
+        <div class="card card-body bg-light profile">
+            <div class="col-sm-12 frame">
+                <div class="col-sm-6">
+                    <h2>${user.fullName}</h2>
+                    <div class="m-t-20 m-b-20">
+                        <p><strong>Login: </strong> ${user.login}</p>
+                        <p><strong>Email: </strong> ${user.email} </p>
+                        <#if user.gender??>
+                            <p><strong>Gender: </strong> ${user.gender} </p>
+                        </#if>
+                        <#if user.city??>
+                        <p><strong>City: </strong> ${user.city} </p>
+                        </#if>
+                        <#if user.dateOfBirth??>
+                        <p><strong>Date of birth: </strong> ${user.dateOfBirth} </p>
+                        </#if>
+                        <p><strong>Email: </strong> ${user.email} </p>
+                        <p><strong>Skills: </strong>
+                            <span class="tags">html5</span>
+                            <span class="tags">css3</span>
+                            <span class="tags">jquery</span>
+                            <span class="tags">bootstrap3</span>
+                        </p>
+                    </div>
+                </div>
+                <#if user.photoPath??>
+                    <div class="col-sm-6 text-center">
+                        <img src="${user.photoPath}" alt="" class="img-fluid" style="vertical-align: middle">
+                    </div>
+                <#else>
+                    <div class="col-sm-6 text-center">
+                        <img src="/images/default_user_photo.png" alt="" class="img-fluid" style="vertical-align: middle">
+                    </div>
+                </#if>
+            </div>
+            <div class="col-sm-12 divider text-center form-inline p-t-20 p-b-20">
+                <div class="col-sm-6 subscriptions" data-users="user.followers">
+                    <h2><strong>${user.followers?size}</strong></h2>
+                    <p>
+                        <small>Followers</small>
+                    </p>
+                    <a href="/editProfile">
+                        <button class="btn btn-outline-dark btn-block"><span
+                            class="fa fa-pencil"></span> Edit
+                        </button>
+                    </a>
 
+                </div>
+                <div class="col-sm-6 subscriptions" data-users="user.followings">
+                    <h2><strong>${user.followings?size}</strong></h2>
+                    <p>
+                        <small>Following</small>
+                    </p>
+                    <button class="btn btn-outline-dark btn-block" href="/logout"><span class="fa fa-sign-out"></span>
+                        Logout
+                    </button>
+                </div>
+
+            </div>
+            <br>
+            <div class=" col-sm-12">
+                <form class="m-l-15 m-r-15" method="get" action="/search">
+                    <div class="form-row ">
+                        <div class="col-sm-9">
+                            <input type="text" id="search" name="search-text" class="form-control col-sm-12"
+                                   placeholder="Enter your friend's nick">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-dark col-sm-12">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
     <div class="form-style-2-heading">Albums</div>
     <button onclick="togglePhotoMap()" class="button">
         Show photo map
@@ -181,7 +363,8 @@
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 <script type="application/javascript" src="/js/albums.js"></script>
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996" type="text/javascript"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996"
+        type="text/javascript"></script>
 <script type="application/javascript" src="/js/photo-map.js"></script>
 </body>
 </html>
