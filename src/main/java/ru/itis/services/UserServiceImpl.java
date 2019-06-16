@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
 
             if (!form.getDateOfBirth().equals("")) {
                 try {
-                    SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy h:mm:ss");
+                    SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
                     currentUser.setDateOfBirth(format.parse(form.getDateOfBirth()));
                 } catch (ParseException e) {
                     e.printStackTrace();
