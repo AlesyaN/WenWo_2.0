@@ -18,6 +18,7 @@ import ru.itis.models.User;
 import ru.itis.services.MessageService;
 import ru.itis.services.UserService;
 import ru.itis.transfer.MessageDto;
+import ru.itis.transfer.SimpleUserDto;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class ChatController {
         User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
         List<Message> chats = messageService.getChats(currentUser);
         modelMap.addAttribute("chats", chats);
-        modelMap.addAttribute("currentUserId", currentUser.getId());
+        modelMap.addAttribute("currentUser", SimpleUserDto.from(currentUser));
         return "chats";
     }
 
@@ -66,14 +67,18 @@ public class ChatController {
         MessageDto messageDto = MessageDto.from(message);
         template.convertAndSendToUser(message.getSender().getLogin(), "/queue/chat", messageDto);
         template.convertAndSendToUser(message.getReceiver().getLogin(), "/queue/chat", messageDto);
+        template.convertAndSendToUser(message.getReceiver().getLogin(), "/queue/update", messageDto);
     }
 
     @MessageMapping("/deleteMessage")
     public void deleteMessage(@Payload DeleteMessageForm deleteMessageForm, Authentication authentication) throws IllegalAccessException {
-        messageService.deleteMessage(messageService.getMessageById(deleteMessageForm.getMessageId()).orElseThrow(IllegalArgumentException::new),
-                userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new));
+        Message message = messageService.getMessageById(deleteMessageForm.getMessageId()).orElseThrow(IllegalArgumentException::new);
+        User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
+        messageService.deleteMessage(message, currentUser);
         template.convertAndSendToUser(deleteMessageForm.getPartnerLogin(), "/queue/deleteMessage", deleteMessageForm.getMessageId());
-        template.convertAndSendToUser(userService.getCurrentUser(authentication).orElseThrow(IllegalAccessException::new).getLogin(), "/queue/deleteMessage", deleteMessageForm.getMessageId());
+        template.convertAndSendToUser(currentUser.getLogin(), "/queue/deleteMessage", deleteMessageForm.getMessageId());
 
+        template.convertAndSendToUser(deleteMessageForm.getPartnerLogin(), "/queue/update",
+                MessageDto.from(messageService.getLastMessageByUsers(currentUser, userService.getUserByLogin(deleteMessageForm.getPartnerLogin()).orElseThrow(IllegalArgumentException::new))));
     }
 }

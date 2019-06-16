@@ -63,4 +63,9 @@ public class MessageServiceImpl implements MessageService{
         return chats;
     }
 
+    @Override
+    public Message getLastMessageByUsers(User user1, User user2) {
+        return messageRepository.findLastMessageByUsers(user1.getId(), user2.getId());
+    }
+
 }
