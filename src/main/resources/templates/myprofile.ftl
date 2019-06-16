@@ -209,11 +209,11 @@
                     <p>
                         <small>Followers</small>
                     </p>
-                    <a href="/editProfile">
+                    <form action="/editProfile">
                         <button class="btn btn-outline-dark btn-block"><span
-                            class="fa fa-pencil"></span> Edit
+                                class="fa fa-pencil"></span> Edit
                         </button>
-                    </a>
+                    </form>
 
                 </div>
                 <div class="col-sm-6 subscriptions" data-users="user.followings">
@@ -221,9 +221,12 @@
                     <p>
                         <small>Following</small>
                     </p>
-                    <button class="btn btn-outline-dark btn-block" href="/logout"><span class="fa fa-sign-out"></span>
-                        Logout
-                    </button>
+                    <form action="/logout">
+                        <button class="btn btn-outline-dark btn-block"><span class="fa fa-sign-out"></span>
+                            Logout
+                        </button>
+                    </form>
+
                 </div>
 
             </div>
