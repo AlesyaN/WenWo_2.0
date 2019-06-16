@@ -94,7 +94,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean editProfile(UserEditForm form, User currentUser) {
-        if (passwordEncoder.matches(form.getOldPassword(), currentUser.getPassword())) {
+        if (form.getOldPassword().equals("") && form.getNewPassword().equals("")
+                || passwordEncoder.matches(form.getOldPassword(), currentUser.getPassword())) {
             if (!form.getName().equals(""))
                 currentUser.setName(form.getName());
             else

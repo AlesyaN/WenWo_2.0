@@ -26,12 +26,12 @@
         </thead>
         <tbody>
             <#list chats as chat>
-                <#if chat.sender.id == currentUserId>
+                <#if chat.sender.login == currentUserLogin>
                     <#assign partnerLogin = chat.receiver.login>
                 <#else>
                     <#assign partnerLogin = chat.sender.login>
                 </#if>
-            <tr data-login="${partnerLogin}" onclick="openChat(event)">
+            <tr data-current="${currentUserId}" data-login="${partnerLogin}" onclick="openChat(event)">
                 <td>
                     <a href="/profile/${partnerLogin}">${partnerLogin}</a>
                 </td>
