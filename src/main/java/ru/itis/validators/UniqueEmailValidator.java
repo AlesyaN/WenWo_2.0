@@ -1,6 +1,7 @@
 package ru.itis.validators;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.itis.security.details.UserDetailsImpl;
@@ -19,7 +20,7 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
 
    public boolean isValid(String email, ConstraintValidatorContext context) {
       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-      if (auth != null && ((UserDetailsImpl)auth.getPrincipal()).getUser().getEmail().equals(email)) return true;
-      return !userService.emailIsUnique(email);
+      if (auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken) && ((UserDetailsImpl)auth.getPrincipal()).getUser().getEmail().equals(email)) return true;
+      return userService.emailIsUnique(email);
    }
 }
