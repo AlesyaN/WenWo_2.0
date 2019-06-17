@@ -53,7 +53,6 @@ function addMessage(message) {
     }
 
     document.getElementById("messages").appendChild(tr);
-
 }
 
 function sendMessage() {
