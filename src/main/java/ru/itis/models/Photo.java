@@ -33,7 +33,7 @@ public class Photo {
 
     private Date date;
 
-    @OneToMany(mappedBy = "photo")
+    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL)
     private List<PhotoComment> comments;
 
     private Double coordinateX;
