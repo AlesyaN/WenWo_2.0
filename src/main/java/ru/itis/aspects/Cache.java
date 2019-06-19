@@ -10,7 +10,7 @@ import ru.itis.models.Album;
 import ru.itis.models.Comment;
 import ru.itis.models.Photo;
 import ru.itis.models.PhotoComment;
-import ru.itis.repositories.AlbumRepository;
+import ru.itis.repositories.postgres.AlbumRepository;
 import ru.itis.services.PhotoService;
 
 import java.util.HashMap;

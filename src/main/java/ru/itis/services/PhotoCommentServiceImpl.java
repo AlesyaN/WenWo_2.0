@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.itis.models.Comment;
 import ru.itis.models.PhotoComment;
-import ru.itis.repositories.PhotoCommentRepository;
-import ru.itis.repositories.QuestionCommentRepository;
+import ru.itis.repositories.postgres.PhotoCommentRepository;
 
 import java.util.List;
 import java.util.Optional;

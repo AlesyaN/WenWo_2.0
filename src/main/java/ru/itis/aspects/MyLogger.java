@@ -5,7 +5,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import ru.itis.models.Log;
+import ru.itis.repositories.mongo.LogsRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -17,15 +20,19 @@ public class MyLogger {
 
     private Logger logger;
 
+    @Autowired
+    private LogsRepository logsRepository;
+
     public MyLogger() {
         this.logger = LoggerFactory.getLogger(MyLogger.class);
     }
 
     @Before("execution (* *..UserService.signUp(..))")
     public void logSignUp(JoinPoint jp) {
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm dd/MM/yy");
-        logger.info("New user " + Arrays.toString(jp.getArgs())  +
-                "registered at " + format.format(new Date()));
+        logsRepository.save(Log.builder()
+                .date(new Date())
+                .info("New user " + Arrays.toString(jp.getArgs()) + "registered")
+                .build());
     }
 
 

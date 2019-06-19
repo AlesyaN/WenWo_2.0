@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.models.Comment;
 import ru.itis.models.QuestionComment;
 import ru.itis.models.Question;
-import ru.itis.repositories.QuestionCommentRepository;
+import ru.itis.repositories.postgres.QuestionCommentRepository;
 
 import java.util.List;
 import java.util.Optional;

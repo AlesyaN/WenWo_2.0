@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.models.Message;
 import ru.itis.models.User;
-import ru.itis.repositories.MessageRepository;
+import ru.itis.repositories.postgres.MessageRepository;
 
 import java.util.*;
 

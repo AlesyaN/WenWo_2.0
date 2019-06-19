@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.forms.UserEditForm;
 import ru.itis.forms.UserRegisterForm;
 import ru.itis.models.User;
-import ru.itis.repositories.UserRepository;
+import ru.itis.repositories.postgres.UserRepository;
 import ru.itis.security.details.UserDetailsImpl;
 import ru.itis.utils.FileDownloader;
 

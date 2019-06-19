@@ -5,9 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.itis.models.Like;
 import ru.itis.models.Question;
 import ru.itis.models.User;
-import ru.itis.repositories.LikeRepository;
+import ru.itis.repositories.postgres.LikeRepository;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
