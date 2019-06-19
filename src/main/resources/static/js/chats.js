@@ -50,7 +50,7 @@ function update(message) {
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
-        chats.appendChild(tr);
+        chats.insertBefore(tr, chats.firstChild);
     } else {
         var td = chat.getElementsByTagName("TD");
         td[1].innerHTML = message.senderLogin + "<br>" + message.text;
