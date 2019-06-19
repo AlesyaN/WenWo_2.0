@@ -25,8 +25,8 @@ function update(message) {
     var currentUserLogin = document.getElementById("currentUserLogin").value;
     var partner = (message.senderLogin !== currentUserLogin) ? message.senderLogin : message.receiverLogin;
     var chat = document.getElementById(partner);
+    var chats = document.getElementById("chats");
     if (chat === null || chat === undefined) {
-        var chats = document.getElementById("chats");
         var tr = document.createElement("tr");
 
         var td1 = document.createElement("td");
@@ -62,6 +62,10 @@ function update(message) {
             + date.getHours() + ":" +
             +date.getMinutes() + ":" +
             +date.getSeconds();
+
+        chats.removeChild(chat);
+        chats.insertBefore(chat, chats.firstChild);
+
     }
 }
 
