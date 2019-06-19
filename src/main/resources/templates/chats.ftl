@@ -25,7 +25,7 @@
             <th>Date</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="chats">
             <#list chats as chat>
                 <#if chat.sender.login == currentUser.login>
                     <#assign partnerLogin = chat.receiver.login>
