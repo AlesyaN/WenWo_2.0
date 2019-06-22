@@ -39,8 +39,4 @@ public class QuestionCommentServiceImpl implements CommentService {
         return commentOptional.map(questionComment -> (Comment) questionComment);
     }
 
-    @Override
-    public List<Comment> searchComments(String text) {
-        return commentRepository.search(text).stream().map(comment -> (Comment)comment).collect(Collectors.toList());
-    }
 }

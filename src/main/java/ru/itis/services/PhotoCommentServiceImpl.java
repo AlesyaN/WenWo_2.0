@@ -33,9 +33,4 @@ public class PhotoCommentServiceImpl implements CommentService{
         Optional<PhotoComment> commentOptional = commentRepository.findById(commentId);
         return commentOptional.map(comment -> (Comment) comment);
     }
-
-    @Override
-    public List<Comment> searchComments(String text) {
-        return commentRepository.search(text).stream().map(comment -> (Comment)comment).collect(Collectors.toList());
-    }
 }

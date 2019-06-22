@@ -195,7 +195,7 @@
                     <div id="comment${comment.id}">
                         <a href="/profile/${comment.author.login}">${comment.author.login}</a>
                         <#if currentUserId?? && comment.author.id == currentUserId>
-                            <button class="button delete" data-comment-id="${comment.id}"
+                            <button class="button delete" data-question-comment-id="${comment.id}"
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
@@ -225,7 +225,7 @@
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/profile.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
-<script type="application/javascript" src="/js/question-comment.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996" type="text/javascript"></script>
