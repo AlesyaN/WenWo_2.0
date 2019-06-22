@@ -73,10 +73,17 @@ public class RestAjaxController {
     }
 
     @PostMapping("/api/like")
-    public ResponseEntity<Object> like(@RequestParam("id") Integer id, Authentication authentication) {
-        Question question = questionService.getQuestionById(id).orElseThrow(IllegalArgumentException::new);
+    public ResponseEntity<Object> like(@RequestParam("id") Integer id,
+                                       @RequestParam("type") String type, Authentication authentication) {
         User currentUser = userService.getCurrentUser(authentication).orElse(null);
-        boolean isLike = likeService.toggle(question, currentUser);
+        boolean isLike = false;
+        if (type.equals("question")) {
+            Question question = questionService.getQuestionById(id).orElseThrow(IllegalArgumentException::new);
+            isLike = likeService.toggle(question, currentUser);
+        } else if (type.equals("photo")) {
+            Photo photo = photoService.getPhotoById(id).orElseThrow(IllegalArgumentException::new);
+            isLike = likeService.toggle(photo, currentUser);
+        }
         return ResponseEntity.ok(isLike);
     }
 

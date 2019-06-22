@@ -62,6 +62,26 @@
                      <button class="button" onclick="editDescription(event)" data-photo-id="${photo.id}">Save</button>
                  </div>
              </#if>
+              <#if currentUserId??>
+                  <#assign liked = false>
+                  <#list photo.likes as like>
+                      <#if like.user.id == currentUserId>
+                          <#assign liked = true>
+                      </#if>
+                  </#list>
+                    <button
+                    <#if liked == true>
+                        class="pressed-button"
+                    <#elseif liked == false>
+                        class="button"
+                    </#if>
+                        data-photoid="${photo.id}" onclick="like(event)">&hearts;
+                    </button>
+              <#else>
+            <br>
+            <a class="button" href="/login">&hearts;</a>
+              </#if>
+             <i id="likes${photo.id}">${photo.likes?size}</i>
 
              <div class="form-style-2" id="comments${photo.id}">
                  <h3 class="form-style-2-heading">Comments:</h3>
@@ -100,6 +120,7 @@
 </div>
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script type="application/javascript" src="/js/albums.js"></script>
+<script type="application/javascript" src="/js/like.js"></script>
 <script type="application/javascript" src="/js/photo-comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>

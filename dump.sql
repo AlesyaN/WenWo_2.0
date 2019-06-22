@@ -67,10 +67,10 @@ insert into question (sender_id, reciever_id, message, "date", answer)
 insert into question (sender_id, reciever_id, message, "date")
   values (2, 3, 'blablabla', now());
 
-insert into hib_like (user_id, question_id) values (1,2);
-insert into hib_like (user_id, question_id) values (2,1);
-insert into hib_like (user_id, question_id) values (3,1);
-insert into hib_like (user_id, question_id) values (4,3);
+insert into question_like (user_id, question_id) values (1,2);
+insert into question_like (user_id, question_id) values (2,1);
+insert into question_like (user_id, question_id) values (3,1);
+insert into question_like (user_id, question_id) values (4,3);
 
 insert into subscriptions (subscriptor_id, subscriber_id) values (1, 2);
 insert into subscriptions (subscriptor_id, subscriber_id) values (2, 1);

@@ -88,5 +88,10 @@ public class PhotoServiceImpl implements PhotoService {
         return photoRepository.getPhotosWithGPS(login);
     }
 
+    @Override
+    public Optional<Photo> getPhotoById(Integer id) {
+        return photoRepository.findById(id);
+    }
+
 
 }

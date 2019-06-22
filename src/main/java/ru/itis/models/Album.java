@@ -27,5 +27,4 @@ public class Album {
     @OrderBy("date DESC")
     private List<Photo> photos;
 
-
 }

@@ -1,12 +1,21 @@
 function like(event) {
     var id = event.target.dataset.questionid;
+    var type;
+    if (id !== null && id !== undefined) {
+        type = "question";
+    } else {
+        id = event.target.dataset.photoid;
+        type = "photo";
+    }
+    console.log(id, type);
     var button = event.target;
     var numOfLikes = document.getElementById("likes" + id);
     $.ajax({
         url : "/api/like",
         method: "post",
         data: {
-            "id" : id
+            "id" : id,
+            "type": type
         },
         success: function (msg) {
             if (msg === true) {

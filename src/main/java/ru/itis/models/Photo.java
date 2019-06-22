@@ -39,5 +39,8 @@ public class Photo {
 
     private Double coordinateX;
     private Double coordinateY;
+
+    @OneToMany(mappedBy = "photo")
+    private List<PhotoLike> likes;
 }
 
