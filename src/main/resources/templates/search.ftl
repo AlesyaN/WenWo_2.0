@@ -73,7 +73,7 @@
                         <div id="comment${comment.id}">
                             <a href="/profile/${comment.author.login}">${comment.author.login}</a>
                             <#if currentUserId?? && comment.author.id == currentUserId>
-                                <button class="button delete" data-comment-id="${comment.id}"
+                                <button class="button delete" data-question-comment-id="${comment.id}"
                                         onclick="deleteComment(event)">Delete
                                 </button>
                             </#if><br>
@@ -94,29 +94,10 @@
             <br>
         </#list>
     </#if>
-    <#if comments?? && 0 < comments?size>
-        <br>
-        <div class="form-style-2-heading">Comments</div>
-        <#list comments as comment>
-            <div id="comment${comment.id}">
-                <i>To question: ${comment.question.text}</i>
-                <br>
-                <a href="/profile/${comment.author.login}">${comment.author.login}</a>
-                            <#if currentUserId?? && comment.author.id == currentUserId>
-                                <button class="button delete" data-comment-id="${comment.id}"
-                                        onclick="deleteComment(event)">Delete
-                                </button>
-                            </#if><br>
-                <b data-contain-hashtags data-contain-user-tags>${comment.text}</b><br>
-                <i>${comment.date}</i><br>
-            </div>
-            <br>
-        </#list>
-    </#if>
 </div>
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
-<script type="application/javascript" src="/js/question-comment.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 </body>

@@ -13,6 +13,5 @@ public interface CommentService {
 
     Optional<Comment> getCommentById(Integer commentId);
 
-    List<Comment> searchComments(String text);
 }
 
