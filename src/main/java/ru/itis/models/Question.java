@@ -32,6 +32,7 @@ public class Question {
     private List<Like> likes;
 
     @OneToMany(mappedBy = "question")
+    @OrderBy("date")
     private List<QuestionComment> comments;
 
     @Column(name = "message")

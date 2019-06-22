@@ -34,6 +34,7 @@ public class Photo {
     private Date date;
 
     @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL)
+    @OrderBy("date")
     private List<PhotoComment> comments;
 
     private Double coordinateX;
