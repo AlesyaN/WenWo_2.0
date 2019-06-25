@@ -14,6 +14,7 @@ public class CommentForm {
     @NotNull
     private Integer postId;
 
+    private String type;
     @NotEmpty
     private String text;
 }

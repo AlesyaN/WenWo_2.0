@@ -1,14 +1,22 @@
 function addComment(event) {
-    var questionId = event.target.dataset.questionid;
-    var commentInput = document.getElementById("commentinput" + questionId);
+    var id = event.target.dataset.questionid;
+    var type;
+    if (id !== null && id !== undefined) {
+        type = "question";
+    } else {
+        id = event.target.dataset.photoid;
+        type = "photo";
+    }
+    var commentInput = document.getElementById("commentinput" + id);
     if (commentInput.value.trim() === "") return;
     $.ajax({
-        url: "/api/addQuestionComment",
+        url: "/api/addComment",
         method: "post",
         contentType: 'application/json',
         data: JSON.stringify({
-            "postId": +questionId,
-            "text": commentInput.value
+            "postId": +id,
+            "text": commentInput.value,
+            "type": type
         }),
         success: function (comment) {
             var commentsList = document.getElementById("comments" + comment.postId);
@@ -43,13 +51,25 @@ function addComment(event) {
 }
 
 function deleteComment(event) {
-    var commentId = event.target.dataset.commentId;
-    var comment = document.getElementById("comment" + commentId);
+    var id = event.target.dataset.questionCommentId;
+    var type;
+    if (id !== null && id !== undefined) {
+        type = "question";
+    } else {
+        id = event.target.dataset.photoCommentId;
+        type = "photo";
+    }
+    var comment = document.getElementById("comment" + id);
+    console.log(id);
+    console.log(type);
+    console.log(comment);
     $.ajax({
-        url: "/api/deleteQuestionComment",
+        url: "/api/deleteComment",
+        type: "type",
         method: "post",
         data: {
-            commentId: commentId
+            commentId: id,
+            type: type
         },
         success: function (msg) {
             comment.remove();

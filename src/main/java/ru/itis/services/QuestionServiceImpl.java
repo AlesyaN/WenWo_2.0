@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.models.Question;
 import ru.itis.models.User;
-import ru.itis.repositories.QuestionRepository;
+import ru.itis.repositories.postgres.QuestionRepository;
 
 import java.util.List;
 import java.util.Optional;

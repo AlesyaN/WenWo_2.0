@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.models.Comment;
 import ru.itis.models.QuestionComment;
 import ru.itis.models.Question;
-import ru.itis.repositories.QuestionCommentRepository;
+import ru.itis.repositories.postgres.QuestionCommentRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +39,4 @@ public class QuestionCommentServiceImpl implements CommentService {
         return commentOptional.map(questionComment -> (Comment) questionComment);
     }
 
-    @Override
-    public List<Comment> searchComments(String text) {
-        return commentRepository.search(text).stream().map(comment -> (Comment)comment).collect(Collectors.toList());
-    }
 }

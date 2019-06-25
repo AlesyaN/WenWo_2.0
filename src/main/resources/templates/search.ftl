@@ -76,6 +76,7 @@
     <div class="container">
     <#list questions as question>
         <br>
+<<<<<<< HEAD
         <div id="${question.id}" class="card">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="questionTab" role="tablist">
@@ -125,6 +126,8 @@
                                     <span id="likes${question.id}">${question.likes?size}</span>
                                     <span id="likesHeart"
                                           class="fa <#if liked == true> fa-heart <#elseif liked == false> fa-heart-o </#if>"></span>
+
+
                                 </button>
                             </div>
                          <#else>
@@ -139,6 +142,7 @@
                          </#if>
 
                         </div>
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
@@ -181,13 +185,14 @@
     </#list>
         <br>
     </div>
+
     </#if>
 </div>
 
 </div>
 <script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
-<script type="application/javascript" src="/js/question-comment.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 </body>

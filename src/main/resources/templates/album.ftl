@@ -62,6 +62,26 @@
                      <button class="button" onclick="editDescription(event)" data-photo-id="${photo.id}">Save</button>
                  </div>
              </#if>
+              <#if currentUserId??>
+                  <#assign liked = false>
+                  <#list photo.likes as like>
+                      <#if like.user.id == currentUserId>
+                          <#assign liked = true>
+                      </#if>
+                  </#list>
+                    <button
+                    <#if liked == true>
+                        class="pressed-button"
+                    <#elseif liked == false>
+                        class="button"
+                    </#if>
+                        data-photoid="${photo.id}" onclick="like(event)">&hearts;
+                    </button>
+              <#else>
+            <br>
+            <a class="button" href="/login">&hearts;</a>
+              </#if>
+             <i id="likes${photo.id}">${photo.likes?size}</i>
 
              <div class="form-style-2" id="comments${photo.id}">
                  <h3 class="form-style-2-heading">Comments:</h3>
@@ -69,7 +89,7 @@
                     <div id="comment${comment.id}">
                         <a href="/profile/${comment.author.login}">${comment.author.login}</a>
                         <#if currentUserId?? && comment.author.id == currentUserId>
-                            <button class="button delete" data-comment-id="${comment.id}"
+                            <button class="button delete" data-photo-comment-id="${comment.id}"
                                     onclick="deleteComment(event)">Delete
                             </button>
                         </#if><br>
@@ -84,7 +104,7 @@
 
             <#if currentUserId??>
             <div class="form-style-2">
-                <input class="input-field" id="comment${photo.id}"
+                <input class="input-field" id="commentinput${photo.id}"
                        placeholder="Your comment">
                 <br><br>
                 <button class="button" data-photoId="${photo.id}" onclick="addComment(event)">Send</button>
@@ -100,7 +120,7 @@
 </div>
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script type="application/javascript" src="/js/albums.js"></script>
-<script type="application/javascript" src="/js/photo-comment.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996" type="text/javascript"></script>

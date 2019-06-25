@@ -29,9 +29,10 @@ public class Question {
     private User receiver;
 
     @OneToMany(mappedBy = "question")
-    private List<Like> likes;
+    private List<QuestionLike> likes;
 
     @OneToMany(mappedBy = "question")
+    @OrderBy("date")
     private List<QuestionComment> comments;
 
     @Column(name = "message")

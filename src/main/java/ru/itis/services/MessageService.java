@@ -12,5 +12,5 @@ public interface MessageService {
     void addMessage(Message message);
     void deleteMessage(Message message, User sender);
     List<Message> getChats(User currentUser);
-
+    Message getLastMessageByUsers(User user1, User user2);
 }

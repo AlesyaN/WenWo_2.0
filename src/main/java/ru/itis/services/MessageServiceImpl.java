@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.models.Message;
 import ru.itis.models.User;
-import ru.itis.repositories.MessageRepository;
+import ru.itis.repositories.postgres.MessageRepository;
 
 import java.util.*;
 
@@ -61,6 +61,11 @@ public class MessageServiceImpl implements MessageService{
             }
         });
         return chats;
+    }
+
+    @Override
+    public Message getLastMessageByUsers(User user1, User user2) {
+        return messageRepository.findLastMessageByUsers(user1.getId(), user2.getId());
     }
 
 }

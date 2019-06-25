@@ -3,15 +3,13 @@ package ru.itis.services;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.GeoLocation;
-import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
 import com.drew.metadata.exif.GpsDirectory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.forms.PhotoForm;
 import ru.itis.models.Photo;
-import ru.itis.repositories.PhotoRepository;
+import ru.itis.repositories.postgres.PhotoRepository;
 import ru.itis.utils.FileDownloader;
 
 import java.io.File;
@@ -88,6 +86,11 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public List<Photo> getPhotosWithGPS(String login) {
         return photoRepository.getPhotosWithGPS(login);
+    }
+
+    @Override
+    public Optional<Photo> getPhotoById(Integer id) {
+        return photoRepository.findById(id);
     }
 
 

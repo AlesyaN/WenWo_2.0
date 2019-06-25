@@ -401,6 +401,7 @@
                     anonymous
                                 <#else>
                     <a href="/profile/${question.sender.login}">${question.sender.login}</a>
+
                                 </#if> ${question.date}</i>
                             </div>
                             <#if currentUserId??>
@@ -488,7 +489,7 @@
 </#if>
 <script type="application/javascript" src="/js/profile.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
-<script type="application/javascript" src="/js/question-comment.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 <script type="application/javascript" src="/js/albums.js"></script>

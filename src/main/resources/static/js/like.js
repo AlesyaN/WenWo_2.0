@@ -1,6 +1,14 @@
 function like(event) {
     var id = event.currentTarget.dataset.questionid;
-    console.log(id);
+    var type;
+    if (id !== null && id !== undefined) {
+        type = "question";
+    } else {
+        id = event.currentTarget.dataset.photoid;
+        type = "photo";
+    }
+    console.log(id, type);
+
     var button = event.target;
     var numOfLikes = document.getElementById("likes" + id);
     console.log(numOfLikes);
@@ -8,7 +16,8 @@ function like(event) {
         url : "/api/like",
         method: "post",
         data: {
-            "id" : id
+            "id" : id,
+            "type": type
         },
         success: function (msg) {
             if (msg === true) {

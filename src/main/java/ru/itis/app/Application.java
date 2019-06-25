@@ -6,12 +6,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "ru.itis")
-@EnableJpaRepositories(basePackages = "ru.itis.repositories")
+@EnableJpaRepositories(basePackages = "ru.itis.repositories.postgres")
+@EnableMongoRepositories(basePackages = "ru.itis.repositories.mongo")
 @EntityScan(basePackages = "ru.itis.models")
 public class Application {
 

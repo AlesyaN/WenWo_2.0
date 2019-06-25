@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Component
 public class UserDto {
     private String login;
     private String email;

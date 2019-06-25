@@ -33,11 +33,16 @@ public class Photo {
 
     private Date date;
 
-    @OneToMany(mappedBy = "photo")
-    @JsonIgnore
+
+    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL)
+    @OrderBy("date")
+
     private List<PhotoComment> comments;
 
     private Double coordinateX;
     private Double coordinateY;
+
+    @OneToMany(mappedBy = "photo")
+    private List<PhotoLike> likes;
 }
 

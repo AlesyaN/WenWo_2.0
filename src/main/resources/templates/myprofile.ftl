@@ -367,6 +367,7 @@
                     <#assign liked = true>
                 </#if>
             </#list>
+
                             <div class="btn-group">
                                 <button onclick="like(event)" class="btn btn-outline-danger"
                                         data-questionid="${question.id}">
@@ -380,6 +381,7 @@
                             </div>
 
                         </div>
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
@@ -445,7 +447,7 @@
 </#if>
 <script type="application/javascript" src="/js/profile.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
-<script type="application/javascript" src="/js/question-comment.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>
 <script type="application/javascript" src="/js/user-tags.js"></script>
 <script type="application/javascript" src="/js/albums.js"></script>

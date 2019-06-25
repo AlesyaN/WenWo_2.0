@@ -17,6 +17,7 @@
     <a class="button" href="/chat">Messages</a>
     <br>
     <br>
+    <input id="currentUserLogin" value="${currentUser.login}" hidden>
     <table id="conversation" class="table table-striped">
         <thead>
         <tr>
@@ -25,14 +26,14 @@
             <th>Date</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="chats">
             <#list chats as chat>
-                <#if chat.sender.login == currentUserLogin>
+                <#if chat.sender.login == currentUser.login>
                     <#assign partnerLogin = chat.receiver.login>
                 <#else>
                     <#assign partnerLogin = chat.sender.login>
                 </#if>
-            <tr data-current="${currentUserId}" data-login="${partnerLogin}" onclick="openChat(event)">
+            <tr id="${partnerLogin}" onclick="openChat(event)">
                 <td>
                     <a href="/profile/${partnerLogin}">${partnerLogin}</a>
                 </td>
@@ -48,6 +49,9 @@
         </tbody>
     </table>
 </div>
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <script type="application/javascript" src="/js/chats.js"></script>
 </body>
 </html>
