@@ -1,4 +1,5 @@
 <#ftl encoding='UTF-8'>
+<#include "header.ftl">
 <html>
 <head>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -15,9 +16,7 @@
         <input class="input-field" type="text" id="search" name="search-text">
         <input type="submit" class="button" value="Search">
     </form>
-    <a class="button" href="/feed">Feed</a>
-    <a class="button" href="/profile">My profile</a>
-    <a class="button" href="/chat">Messages</a>
+
     <br>
     <br>
     <h1>Chat with ${partner}</h1>

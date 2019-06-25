@@ -40,7 +40,7 @@ public class ChatController {
         User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
         List<Message> chats = messageService.getChats(currentUser);
         modelMap.addAttribute("chats", chats);
-        modelMap.addAttribute("currentUserId", currentUser.getId());
+        modelMap.addAttribute("currentUserLogin", currentUser.getLogin());
         return "chats";
     }
 

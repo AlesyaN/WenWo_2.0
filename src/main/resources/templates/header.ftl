@@ -55,10 +55,13 @@
 
     </div>
 </header>
-
 <script type="text/javascript" src="/js/jquery-3.2.1.min.js"
-<script type="text/javascript" src="/js/lib/jquery/jquery.min.js"></script>
+<script src="/js/lib/counterup/counterup.min.js"></script>
+
+
 <script type="text/javascript" src="/js/lib/wow/wow.min.js"></script>
 <script type="text/javascript" src="/js/index.js"></script>
+
+
 </body>
 </html>

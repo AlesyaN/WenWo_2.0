@@ -1,26 +1,23 @@
-<#ftl encoding='UTF-8'>
-<#include "header.ftl">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/util.css">
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
-<#if user??>
-<br>
+<!--<#if user??>-->
 <div class="container">
 
 
-    <div class="row justify-content-center after-header m-b-20">
+    <div class="row justify-content-center after-header">
         <form method="post" class="col-sm-8 card card-body" enctype="multipart/form-data">
-            <#if errors??>
-                <#list errors as error>
-            <h6 class="alert alert-danger">${error}</h6>
+            <!--<#if errors??>
+            <#list errors as error>
+            <span>${error}</span>
             <br>
-                </#list>
-            </#if>
+        </#list>
+    </#if>-->
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" value="${user.name}">
@@ -60,20 +57,20 @@
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select class="form-control" id="gender" name="gender">
-                    <option value=""
-                        <#if !user.gender??>
+                    <option value="">
+                        <!--<#if !user.gender??>
                         selected
-                        </#if>>not selected
+                    </#if>>not selected-->
                     </option>
-                    <option value="male"
-                        <#if user.gender?? && user.gender == "male">
+                    <option value="male">
+                        <!--<#if user.gender?? && user.gender == "male">
                         selected
-                        </#if>>male
+                    </#if>>male-->
                     </option>
-                    <option value="female"
-                        <#if user.gender?? && user.gender == "female">
+                    <option value="female">
+                        <!--<#if user.gender?? && user.gender == "female">
                         selected
-                        </#if>>female
+                    </#if>>female-->
                     </option>
                 </select>
             </div>
@@ -88,16 +85,15 @@
                 <button type="submit" class="btn btn-outline-warning col-sm-3">Save changes</button>
             </div>
         </form>
-<#else>
+        <!--<#else>
         <div class="text-center after-header" style="margin: auto">
             <h1>No such user</h1>
         </div>
-</#if>
+    </#if>-->
+    </div>
 </div>
-</div>
-<script type="application/javascript" src="/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="application/javascript" src="/js/profile.js"></script>
+<script type="application/javascript" src="../static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+<script type="application/javascript" src="../static/js/profile.js"></script>
 </body>
-
 </html>

@@ -11,10 +11,10 @@ function follow() {
             var followers = followersElement.innerHTML;
             if (msg === true) {
                 followers = +followers + 1;
-                followBtn.innerHTML = "Not follow";
+                followBtn.innerHTML = "<span class=\"fa fa-user-times\"></span> Not follow";
             } else if (msg === false) {
                 followers = +followers - 1;
-                followBtn.innerHTML = "Follow";
+                followBtn.innerHTML = "<span class=\"fa fa-user-plus\"></span> Follow";
             }
             followersElement.innerHTML = followers;
         },
@@ -28,36 +28,35 @@ function ask(event) {
     var numOfUnansweredQuestions = document.getElementById("num-of-unanswered-questions");
     var unansweredQuestionsBar = document.getElementById("unanswered-questions-bar");
     var unansweredQuestions = document.getElementById("unansweredQuestions");
-    var textarea = document.getElementById("textarea");
+    var question = document.getElementById("newQuestion");
     var checkbox = document.getElementById("anonymous");
     event.preventDefault();
-    if (textarea.value.trim() === "") return;
+    if (question.value.trim() === "") return;
     $.ajax({
         url: "/api/ask",
         type: "post",
         data: {
             "login": document.getElementById("login").innerHTML,
-            "question": textarea.value,
+            "question": question.value,
             "anonymous": checkbox.checked
         },
         success: function (id) {
-            unansweredQuestionsBar.style.display = "block";
             numOfUnansweredQuestions.innerHTML = +numOfUnansweredQuestions.innerHTML + 1;
             var newQuestion = document.createElement("div");
-            newQuestion.innerHTML = usertags(hashtags(textarea.value));
+            newQuestion.id = "question"+id;
+            newQuestion.className = "list-group-item flex-column align-items-start";
+            newQuestion.innerHTML = "<p class=\"mb-1\" data-contain-user-tags data-contain-hashtags>"+usertags(hashtags(question.value))+"</p>\n" +
+                "                                <button class=\"btn btn-sm btn-dark\" onclick=\"deleteUnansweredQuestion(event)\"\n" +
+                "                                        data-questionId=\""+id+"\">Delete\n" +
+                "                                </button>";
 
-            var deleteButton = document.createElement("button");
-            deleteButton.className = "button delete";
-            deleteButton.innerHTML = "Delete";
-            deleteButton.dataset.questionid = id;
-            deleteButton.onclick = deleteUnansweredQuestion;
 
-            newQuestion.appendChild(deleteButton);
-            unansweredQuestions.appendChild(document.createElement("br"));
+
+
             unansweredQuestions.appendChild(newQuestion);
 
             checkbox.checked = false;
-            textarea.value = "";
+            question.value = "";
         },
         error: function (msg) {
             alert("error");
@@ -159,21 +158,21 @@ function editAnswer(event) {
             "answer": answer
         },
         success: function (msg) {
-            closeEditAnswerField(event);
             document.getElementById("answer" + questionId).innerHTML = usertags(hashtags(answer));
+            document.getElementById("answerField"+questionId).value = '';
         }
     });
 
 }
 
 function openUnansweredQuestions(event) {
-    var questionsList = document.getElementById("unansweredQuestions");
+    var questionsList = document.getElementById("unanswered-questions-bar");
     questionsList.style.display = "block";
     event.target.onclick = closeUnansweredQuestions;
 }
 
 function closeUnansweredQuestions(event) {
-    var questionsList = document.getElementById("unansweredQuestions");
+    var questionsList = document.getElementById("unanswered-questions-bar");
     questionsList.style.display = "none";
     event.target.onclick = openUnansweredQuestions;
 }

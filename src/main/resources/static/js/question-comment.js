@@ -14,42 +14,26 @@ function addComment(event) {
             var commentsList = document.getElementById("comments" + comment.postId);
             var commentElement = document.createElement("div");
 
-            var author = document.createElement("a");
-            author.href = "/profile/" + comment.authorId;
-            author.innerHTML = comment.authorLogin;
-
-            var deleteButton = document.createElement("button");
-            deleteButton.className = "button delete";
-            deleteButton.dataset.commentId = comment.id;
-            deleteButton.innerHTML = "Delete";
-            deleteButton.onclick = deleteComment;
-
-            var text = document.createElement("b");
-            text.innerHTML = usertags(hashtags(comment.text));
-
-            var dateElement = document.createElement("i");
-            var date = new Date(comment.date);
-            dateElement.innerHTML = ('0' + date.getDate()).slice(-2) + "."
-                                    + ('0' + (1 + +date.getMonth())).slice(-2) + "."
-                                    + date.getUTCFullYear() + " "
-                                    + date.getHours() + ":" +
-                                    + date.getMinutes() + ":" +
-                                    + date.getSeconds();
-
-            var br = document.createElement("br");
+            var dateInDays = new Date(comment.date);
+            var  date = ('0' + dateInDays.getDate()).slice(-2) + "."
+                + ('0' + (1 + +dateInDays.getMonth())).slice(-2) + "."
+                + dateInDays.getUTCFullYear() + " "
+                + dateInDays.getHours() + ":" +
+                + dateInDays.getMinutes() + ":" +
+                + dateInDays.getSeconds();
 
             commentElement.id = "comment" + comment.id;
-            commentElement.appendChild(author);
-            commentElement.appendChild(deleteButton);
-            commentElement.appendChild(br);
-            commentElement.appendChild(text);
-            commentElement.appendChild(br.cloneNode());
-            commentElement.appendChild(dateElement);
-            commentElement.appendChild(br.cloneNode());
+            commentElement.className = "list-group-item flex-column align-items-start";
+            commentElement.innerHTML = "<div class=\"d-flex w-100 justify-content-between\">\n" +
+                "                                <h5 class=\"mb-1\"><a href=\"/profile/"+comment.authorLogin+"\">"+comment.authorLogin+"</a></h5>\n" +
+                "                                <small>"+date+"</small>\n" +
+                "                            </div>\n" +
+                "                            <p class=\"mb-1\"  data-contain-user-tags data-contain-hashtags>"+usertags(hashtags(comment.text))+"</p>\n" +
+                "              <div class=\"text-right\"><button class=\"btn btn-dark\" data-comment-id=\""+comment.id+"\"\n" +
+                "                                    onclick=\"deleteComment(event)\">Delete\n" +
+                "                            </button></div>\n";
 
             commentsList.appendChild(commentElement);
-            commentsList.appendChild(br.cloneNode());
-
             commentInput.value = "";
         },
         error: function () {

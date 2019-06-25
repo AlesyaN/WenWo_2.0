@@ -34,6 +34,7 @@ public class Photo {
     private Date date;
 
     @OneToMany(mappedBy = "photo")
+    @JsonIgnore
     private List<PhotoComment> comments;
 
     private Double coordinateX;

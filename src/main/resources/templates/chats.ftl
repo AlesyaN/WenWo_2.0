@@ -1,4 +1,5 @@
 <#ftl encoding='UTF-8'>
+<#include "header.ftl">
 <html>
 <head>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
