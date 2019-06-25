@@ -28,10 +28,10 @@ public class Question {
     @JoinColumn(name = "reciever_id")
     private User receiver;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<QuestionLike> likes;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     @OrderBy("date")
     private List<QuestionComment> comments;
 
