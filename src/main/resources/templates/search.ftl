@@ -76,7 +76,6 @@
     <div class="container">
     <#list questions as question>
         <br>
-<<<<<<< HEAD
         <div id="${question.id}" class="card">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="questionTab" role="tablist">

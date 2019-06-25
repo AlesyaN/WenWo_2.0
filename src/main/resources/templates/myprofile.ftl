@@ -332,21 +332,21 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="questionTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="answer-tab" data-toggle="tab" href="#answer" role="tab"
-                           aria-controls="answer" aria-selected="true">Answer</a>
+                        <a class="nav-link active" id="answer-tab" data-toggle="tab" href="#answerTab${question.id}" role="tab"
+                           aria-controls="answerTab${question.id}" aria-selected="true">Answer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab"
-                           aria-controls="comments" aria-selected="true">Comments</a>
+                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments${question.id}" role="tab"
+                           aria-controls="comments${question.id}" aria-selected="true">Comments</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit" role="tab"
-                           aria-controls="edit" aria-selected="true">Edit answer</a>
+                        <a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit${question.id}" role="tab"
+                           aria-controls="edit${question.id}" aria-selected="true">Edit answer</a>
                     </li>
                 </ul>
             </div>
             <div class="tab-content" id="questionTabContent">
-                <div class="tab-pane fade show active" id="answer" role="tabpanel" aria-labelledby="answer-tab">
+                <div class="tab-pane fade show active" id="answerTab${question.id}" role="tabpanel" aria-labelledby="answer-tab">
 
                     <div class="card-body">
                         <h5 class="card-title" data-contain-user-tags data-contain-hashtags>${question.text}</h5>
@@ -372,7 +372,7 @@
                                 <button onclick="like(event)" class="btn btn-outline-danger"
                                         data-questionid="${question.id}">
                                     <span id="likes${question.id}">${question.likes?size}</span>
-                                    <span id="likesHeart"
+                                    <span id="likesHeart${question.id}"
                                           class="fa <#if liked == true> fa-heart <#elseif liked == false> fa-heart-o </#if>"></span>
                                 </button>
                                 <button class="btn btn-outline-dark" onclick="deleteQuestion(event)"
@@ -384,7 +384,7 @@
 
                     </div>
                 </div>
-                <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                <div class="tab-pane fade" id="comments${question.id}" role="tabpanel" aria-labelledby="comments-tab">
                     <div class="card-body">
                         <div class="input-group mb-3">
                             <input id="commentinput${question.id}" type="text" class="form-control"
@@ -418,7 +418,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
+                <div class="tab-pane fade" id="edit${question.id}" role="tabpanel" aria-labelledby="edit-tab">
                     <div class="card-body">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Enter new answer"

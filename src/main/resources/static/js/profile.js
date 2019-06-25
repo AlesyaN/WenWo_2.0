@@ -86,6 +86,7 @@ function deleteUnansweredQuestion(event) {
 
 function deleteQuestion(event) {
     var id = event.target.dataset.questionid;
+    console.log(id);
     var question = document.getElementById(id);
     $.ajax({
         url: "/api/deleteQuestion",
