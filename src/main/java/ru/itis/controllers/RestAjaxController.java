@@ -11,6 +11,7 @@ import ru.itis.models.*;
 import ru.itis.services.*;
 import ru.itis.transfer.AlbumDto;
 import ru.itis.transfer.CommentDto;
+import ru.itis.transfer.PhotoDto;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -186,6 +187,6 @@ public class RestAjaxController {
 
     @GetMapping("/api/getPhotosWithGPS")
     public ResponseEntity<Object> getPhotosWithGPS(@RequestParam("login")String login) {
-        return ResponseEntity.ok(photoService.getPhotosWithGPS(login));
+        return ResponseEntity.ok(photoService.getPhotosWithGPS(login).stream().map(PhotoDto::from));
     }
 }

@@ -28,7 +28,6 @@ public class Photo {
 
     @ManyToOne
     @JoinColumn(name = "album_id")
-    @JsonIgnore
     private Album album;
 
     private Date date;
