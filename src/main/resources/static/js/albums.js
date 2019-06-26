@@ -24,10 +24,9 @@ function addAlbum(event) {
                     "                                <p class=\"card-text\">"+album.name+"</p>\n" +
                     "                                <div class=\"d-flex justify-content-between align-items-center\">\n" +
                     "                                    <div class=\"btn-group\">\n" +
-                    "                                        <form action=/albums/"+album.id+">\n" +
-                    "                                            <button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">View</button>\n" +
-                    "                                        </form>\n" +
-                    "                                        <button type=\"button\" class=\"btn btn-sm btn-outline-secondary\">Edit</button>\n" +
+                    "                                            <button type=\"button\" onclick=\"location.href = '/albums/"+album.id+"'\" class=\"btn btn-sm btn-outline-secondary\">View</button>\n" +
+
+                    "                                        <button type=\"button\" onclick=\"location.href = '/albums/"+album.id+"'\" class=\"btn btn-sm btn-outline-secondary\">Edit</button>\n" +
                     "                                    </div>\n" +
                     "                                    <small class=\"text-muted\">"+album.photosNumber+" photos</small>\n" +
                     "                                </div>\n" +

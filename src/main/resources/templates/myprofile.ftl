@@ -281,11 +281,10 @@
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
                             <img class="card-img-top" style="object-fit: cover; height: 200px"
-                                 <#if album.cover.photopath??>
+
                                     src="${album.cover.photoPath}"
-                                 <#else>
-                                    src="/images/album_default.jpg"
-                                 </#if>
+
+
                                  alt="Card image cap">
                             <div class="card-body">
                                 <p class="card-text">${album.name}</p>
@@ -336,8 +335,8 @@
                            aria-controls="answerTab${question.id}" aria-selected="true">Answer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments${question.id}" role="tab"
-                           aria-controls="comments${question.id}" aria-selected="true">Comments</a>
+                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#commentsTab${question.id}" role="tab"
+                           aria-controls="commentsTab${question.id}" aria-selected="true">Comments</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit${question.id}" role="tab"
@@ -384,7 +383,7 @@
 
                     </div>
                 </div>
-                <div class="tab-pane fade" id="comments${question.id}" role="tabpanel" aria-labelledby="comments-tab">
+                <div class="tab-pane fade" id="commentsTab${question.id}" role="tabpanel" aria-labelledby="comments-tab">
                     <div class="card-body">
                         <div class="input-group mb-3">
                             <input id="commentinput${question.id}" type="text" class="form-control"

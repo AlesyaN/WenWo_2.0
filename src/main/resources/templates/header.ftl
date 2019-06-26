@@ -10,7 +10,7 @@
           rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Libraries CSS Files -->
     <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -45,11 +45,12 @@
 
         <nav class="main-nav float-right d-none d-lg-block">
             <ul>
-                <li class="active"><a href="/index">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/profile">My Profile</a></li>
                 <li><a href="/feed">Feed</a></li>
-                <li><a href="/chat">Messages</a></li>
+                <li><a href="/chat">Chats</a></li>
                 <li><a href="/questions">My Unanswered Questions</a></li>
+                <li><a href="/search?search-text">Search</a></li>
             </ul>
         </nav>
 

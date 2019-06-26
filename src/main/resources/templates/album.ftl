@@ -1,23 +1,23 @@
 <#ftl encoding='UTF-8'>
+<#include "header.ftl">
 <html>
 <head>
-    <link rel="stylesheet" href="/css/styles.css" type="text/css">
     <meta charset="utf-8">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
 </head>
 <body>
-<div class="form-style-2">
-    <form class="form-style-2" method="get" action="/search">
-        <input class="input-field" type="text" id="search" name="search-text">
-        <input type="submit" class="button" value="Search">
-    </form>
-    <a class="button" href="/feed">Feed</a>
-    <a class="button" href="/profile">My profile</a>
-    <a class="button" href="/chat">Messages</a>
-    <br>
-    <br>
-    <div class="form-style-2-heading">
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container col-sm-8 after-header" style="margin: auto">
+
+    <h4>
         Album <span id="albumName">${album.name}</span>
-    </div>
+        <hr>
+    </h4>
     <#if currentUserId?? && album.owner.id == currentUserId>
     <form method="post" action="/albums/${album.id}/delete">
         <input type="submit" class="button" value="Delete album">

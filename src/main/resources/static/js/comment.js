@@ -51,7 +51,7 @@ function addComment(event) {
 }
 
 function deleteComment(event) {
-    var id = event.target.dataset.questionCommentId;
+    var id = event.target.dataset.commentId;
     var type;
     if (id !== null && id !== undefined) {
         type = "question";

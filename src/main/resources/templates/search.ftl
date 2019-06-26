@@ -5,15 +5,13 @@
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
     <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="/js/popper.min.js"></script>
-
-
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
 <br>
 <br>
 <div class="container col-sm-8 after-header">
-    <form class="" method="get" action="/search">
+    <form method="get" action="/search">
         <div class="form-row">
             <input id="search" name="search-text" class="form-control col-sm-9" type="text"
                    placeholder="use #hashtags, @usertags to search">
@@ -80,17 +78,17 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="questionTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="answer-tab" data-toggle="tab" href="#answer" role="tab"
-                           aria-controls="answer" aria-selected="true">Answer</a>
+                        <a class="nav-link active" id="answer-tab" data-toggle="tab" href="#answerTab${question.id}" role="tab"
+                           aria-controls="answerTab${question.id}" aria-selected="true">Answer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab"
-                           aria-controls="comments" aria-selected="true">Comments</a>
+                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#commentsTab${question.id}" role="tab"
+                           aria-controls="commentsTab${question.id}" aria-selected="true">Comments</a>
                     </li>
                 </ul>
             </div>
             <div class="tab-content" id="questionTabContent">
-                <div class="tab-pane fade show active" id="answer" role="tabpanel" aria-labelledby="answer-tab">
+                <div class="tab-pane fade show active" id="answerTab${question.id}" role="tabpanel" aria-labelledby="answer-tab">
 
                     <div class="card-body">
                         <div class="list-group">
@@ -123,10 +121,8 @@
                                 <button onclick="like(event)" class="btn btn-outline-danger"
                                         data-questionid="${question.id}">
                                     <span id="likes${question.id}">${question.likes?size}</span>
-                                    <span id="likesHeart"
+                                    <span id="likesHeart${question.id}"
                                           class="fa <#if liked == true> fa-heart <#elseif liked == false> fa-heart-o </#if>"></span>
-
-
                                 </button>
                             </div>
                          <#else>
@@ -134,7 +130,7 @@
                                 <form action="/login">
                                     <button type="submit" class="btn btn-outline-danger">
                                         <span id="likes${question.id}">${question.likes?size}</span>
-                                        <span id="likesHeart" class="fa fa-heart-o"></span>
+                                        <span id="likesHeart${question.id}" class="fa fa-heart-o"></span>
                                     </button>
                                 </form>
                             </div>
@@ -144,7 +140,7 @@
 
                     </div>
                 </div>
-                <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                <div class="tab-pane fade" id="commentsTab${question.id}" role="tabpanel" aria-labelledby="comments-tab">
                     <div class="card-body">
                         <div class="input-group mb-3">
                             <input id="commentinput${question.id}" type="text" class="form-control"

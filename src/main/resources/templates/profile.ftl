@@ -312,36 +312,6 @@
                 unanswered questions from you
             </button>
         </p>
-        <div class="bd-example">
-            <div class="modal fade" id="askModal" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Ask something</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="newQuestion" name="question" maxlength="25"
-                                       placeholder="enter your question for ${user.login}">
-                            </div>
-                            <label for="anonymous">
-                                Ask anonymously
-                                <input type="checkbox" id="anonymous">
-                            </label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"
-                                    onclick="ask(event)">Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="unanswered-questions-bar" style="display: none">
             <p style="margin: auto" class="text-center">
                 You have <span
@@ -363,10 +333,38 @@
                         </#list>
             </div>
         </div>
-
-
     </div>
 </section>
+<div class="bd-example">
+    <div class="modal fade" id="askModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Ask something</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="newQuestion" name="question"
+                               placeholder="enter your question for ${user.login}">
+                    </div>
+                    <label for="anonymous">
+                        Ask anonymously
+                        <input type="checkbox" id="anonymous">
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            onclick="ask(event)">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="bg-light">
     <div class="container">
@@ -377,18 +375,18 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="questionTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="answer-tab" data-toggle="tab" href="#answer" role="tab"
-                           aria-controls="answer" aria-selected="true">Answer</a>
+                        <a class="nav-link active" id="answer-tab" data-toggle="tab" href="#answerTab${question.id}" role="tab"
+                           aria-controls="answerTab${question.id}" aria-selected="true">Answer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab"
-                           aria-controls="comments" aria-selected="true">Comments</a>
+                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#commentsTab${question.id}" role="tab"
+                           aria-controls="commentsTab${question.id}" aria-selected="true">Comments</a>
                     </li>
                 </ul>
             </div>
             <div class="tab-content" id="questionTabContent">
 
-                <div class="tab-pane fade show active" id="answer" role="tabpanel" aria-labelledby="answer-tab">
+                <div class="tab-pane fade show active" id="answerTab${question.id}" role="tabpanel" aria-labelledby="answer-tab">
 
                     <div class="card-body">
                         <h5 class="card-title" data-contain-user-tags data-contain-hashtags>${question.text}</h5>
@@ -415,7 +413,7 @@
                                 <button onclick="like(event)" class="btn btn-outline-danger"
                                         data-questionid="${question.id}">
                                     <span id="likes${question.id}">${question.likes?size}</span>
-                                    <span id="likesHeart"
+                                    <span id="likesHeart${question.id}"
                                           class="fa <#if liked == true> fa-heart <#elseif liked == false> fa-heart-o </#if>"></span>
                                 </button>
                             </div>
@@ -424,7 +422,7 @@
                                 <form action="/login">
                                     <button type="submit" class="btn btn-outline-danger">
                                         <span id="likes${question.id}">${question.likes?size}</span>
-                                        <span id="likesHeart" class="fa fa-heart-o"></span>
+                                        <span id="likesHeart${question.id}" class="fa fa-heart-o"></span>
                                     </button>
                                 </form>
                             </div>
@@ -433,7 +431,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                <div class="tab-pane fade" id="commentsTab${question.id}" role="tabpanel" aria-labelledby="comments-tab">
                     <div class="card-body">
                         <div class="input-group mb-3">
                             <input id="commentinput${question.id}" type="text" class="form-control"
