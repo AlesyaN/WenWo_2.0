@@ -24,4 +24,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     @Query("from Question q where q.answer is not null and (q.text like CONCAT('%',:text,'%') or q.answer like CONCAT('%',:text,'%'))")
     List<Question> search(@Param("text") String text);
+
+    Long countAllByAnonymousIsTrue();
+
+    Long countAllByAnswerIsNotNull();
 }

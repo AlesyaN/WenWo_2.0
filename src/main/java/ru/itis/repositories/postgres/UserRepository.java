@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("from User u where u.login like CONCAT('%',:text,'%')")
     List<User> search(@Param("text") String text);
+
+
 }

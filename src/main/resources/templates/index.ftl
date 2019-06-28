@@ -151,27 +151,27 @@ Header
 
         <div class="container">
             <div class="row counters">
-
+                <#if info??>
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">274</span>
+                    <span data-toggle="counter-up">${info.users}</span>
                     <p>Users</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">1937</span>
+                    <span data-toggle="counter-up">${info.questions}</span>
                     <p>Questions</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">365</span>
+                    <span data-toggle="counter-up">${info.anonymousQuestions}</span>
                     <p>Anonymous questions</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">1678</span>
+                    <span data-toggle="counter-up">${info.answers}</span>
                     <p>Answers</p>
                 </div>
-
+                </#if>
             </div>
 
         </div>
