@@ -6,6 +6,7 @@ import ru.itis.models.Message;
 import ru.itis.models.User;
 import ru.itis.repositories.postgres.MessageRepository;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 @Service
@@ -64,8 +65,8 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public Message getLastMessageByUsers(User user1, User user2) {
-        return messageRepository.findLastMessageByUsers(user1.getId(), user2.getId());
+    public Optional<Message> getLastMessageByUsers(User user1, User user2) {
+        return Optional.ofNullable(messageRepository.findLastMessageByUsers(user1.getId(), user2.getId()));
     }
 
 }

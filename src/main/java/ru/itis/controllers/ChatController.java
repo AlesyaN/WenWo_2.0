@@ -23,6 +23,7 @@ import ru.itis.transfer.SimpleUserDto;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ChatController {
@@ -79,8 +80,12 @@ public class ChatController {
         messageService.deleteMessage(message, currentUser);
         template.convertAndSendToUser(deleteMessageForm.getPartnerLogin(), "/queue/deleteMessage", deleteMessageForm.getMessageId());
         template.convertAndSendToUser(currentUser.getLogin(), "/queue/deleteMessage", deleteMessageForm.getMessageId());
-
-        template.convertAndSendToUser(deleteMessageForm.getPartnerLogin(), "/queue/update",
-                MessageDto.from(messageService.getLastMessageByUsers(currentUser, userService.getUserByLogin(deleteMessageForm.getPartnerLogin()).orElseThrow(IllegalArgumentException::new))));
+        Optional<Message> lastMessageOptional = messageService.getLastMessageByUsers(currentUser, userService.getUserByLogin(deleteMessageForm.getPartnerLogin()).orElseThrow(IllegalArgumentException::new));
+        if (lastMessageOptional.isPresent()) {
+            template.convertAndSendToUser(deleteMessageForm.getPartnerLogin(), "/queue/update",
+                    MessageDto.from(lastMessageOptional.get()));
+        } else {
+            template.convertAndSendToUser(deleteMessageForm.getPartnerLogin(), "/queue/update", MessageDto.builder().senderLogin(currentUser.getLogin()).build());
+        }
     }
 }
