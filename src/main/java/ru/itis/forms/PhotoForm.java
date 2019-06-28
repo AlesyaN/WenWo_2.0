@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.models.Album;
 import ru.itis.validators.File;
+import ru.itis.validators.FileNotNull;
 
 @Data
 @AllArgsConstructor
@@ -15,6 +16,7 @@ import ru.itis.validators.File;
 public class PhotoForm {
     private String description;
 
+    @FileNotNull
     @File
     private MultipartFile photo;
 
