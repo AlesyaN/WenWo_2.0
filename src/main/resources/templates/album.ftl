@@ -47,7 +47,7 @@
              <img style="height: 300px" src="${photo.photoPath}"><br>
              <div id="description${photo.id}">${photo.description}</div>
              <br>
-             <i>${photo.date}</i>
+             <i>${photo.dateToString}</i>
              <br>
              <#if photo.coordinateX?has_content && photo.coordinateY?has_content>
                  <button onclick="showOnMap(event)" data-id="${photo.id}" data-x="${photo.coordinateX}" data-y="${photo.coordinateY}" class="button">Show on map</button>
