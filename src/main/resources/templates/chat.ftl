@@ -30,31 +30,33 @@
     <div class=" card ">
         <br>
         <strong>Messages</strong>
+        <br>
+            <table id="conversation" class="table">
+                <tbody id="messages">
+                <#list messages as message>
+                <tr id="${message.id}">
+                    <td>
+                        <a href="/profile/${message.sender.login}">${message.sender.login}</a>
+                    </td>
+                    <td>
+                        ${message.text}
+                    </td>
+                    <td>
+                        ${message.date}
+                    </td>
 
-                <table id="conversation" class="table">
-                    <tbody id="messages">
-                    <#list messages as message>
-                    <tr id="${message.id}">
+                        <#if message.sender.login != partner>
                         <td>
-                            <a href="/profile/${message.sender.login}">${message.sender.login}</a>
+                            <button class="btn btn-outline-warning" data-id="${message.id}" onclick="deleteMessage(event)">
+                                Delete
+                            </button>
                         </td>
-                        <td>
-                            ${message.text}
-                        </td>
-                        <td>
-                            ${message.date}
-                        </td>
-                        <td>
-                            <#if message.sender.login != partner>
-                                <button class="btn btn-outline-warning" data-id="${message.id}" onclick="deleteMessage(event)">
-                                    Delete
-                                </button>
-                            </#if>
-                        </td>
-                    </tr>
-                    </#list>
-                    </tbody>
-                </table>
+                        </#if>
+
+                </tr>
+                </#list>
+                </tbody>
+            </table>
     </div>
 </div>
 

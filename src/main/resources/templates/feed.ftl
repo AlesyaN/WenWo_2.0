@@ -2,52 +2,76 @@
 <#include "header.ftl">
 <html>
 <head>
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
     <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="/js/popper.min.js"></script>
+
+
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <link href="/css/util.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
 </head>
+<style>
+    @font-face {
+        font-family: Poppins-Regular;
+        src: url('/fonts/poppins/Poppins-Regular.ttf');
+    }
+
+    body {
+        font-family: Poppins-Regular;
+    }
+</style>
 <body>
 <br>
 
-    <div class="container after-header">
+<div class="container after-header">
     <#list feed as question>
         <br>
         <div id="${question.id}" class="card">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="questionTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="answer-tab" data-toggle="tab" href="#answerTab${question.id}" role="tab"
+                        <a class="nav-link active" id="answer-tab" data-toggle="tab" href="#answerTab${question.id}"
+                           role="tab"
                            aria-controls="answerTab${question.id}" aria-selected="true">Answer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#commentsTab${question.id}" role="tab"
+                        <a class="nav-link" id="comments-tab" data-toggle="tab" href="#commentsTab${question.id}"
+                           role="tab"
                            aria-controls="commentsTab${question.id}" aria-selected="true">Comments</a>
                     </li>
                 </ul>
             </div>
             <div class="tab-content" id="questionTabContent">
-                <div class="tab-pane fade show active" id="answerTab${question.id}" role="tabpanel" aria-labelledby="answer-tab">
+                <div class="tab-pane fade show active" id="answerTab${question.id}" role="tabpanel"
+                     aria-labelledby="answer-tab">
 
                     <div class="card-body">
-                        <div class="list-group">
-                            <i class="text-muted"><#if question.anonymous>
-                    anonymous
-                            <#else>
-                    <a href="/profile/${question.sender.login}">${question.sender.login}</a>
-                            </#if> ${question.date}</i>
+                        <div class="d-flex justify-content-end">
+                            <div class="list-group">
+                                <i class="text-muted"><#if question.anonymous>
+                                    anonymous
+                                <#else>
+                                <a href="/profile/${question.sender.login}">${question.sender.login}</a>
+
+                                </#if></i>
+                            </div>
+                            &nbsp;
+                            <div class="list-group">
+                                <i> ${question.date}</i>
+                            </div>
                         </div>
+
                         <h5 class="card-title" data-contain-user-tags data-contain-hashtags>${question.text}</h5>
                         <p class="card-text" data-contain-user-tags data-contain-hashtags
                            <#if question.answer??>id="answer${question.id}">
                         ${question.answer}<#else> >no answer</#if></p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="list-group">
-                                <i class="text-muted"><#if question.anonymous>
-                                    anonymous
-                                <#else>
-                    <a href="/profile/${question.receiver.login}">${question.receiver.login}</a>
-                                </#if></i>
+                                <i class="text-muted">
+                                    to <a href="/profile/${question.receiver.login}">${question.receiver.login}</a>
+                                </i>
                             </div>
                          <#if currentUserId??>
                              <#assign liked = false>
@@ -79,14 +103,16 @@
 
                     </div>
                 </div>
-                <div class="tab-pane fade" id="commentsTab${question.id}" role="tabpanel" aria-labelledby="comments-tab">
+                <div class="tab-pane fade" id="commentsTab${question.id}" role="tabpanel"
+                     aria-labelledby="comments-tab">
                     <div class="card-body">
                         <div class="input-group mb-3">
                             <input id="commentinput${question.id}" type="text" class="form-control"
                                    placeholder="Leave your comment"
                                    aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" data-questionId="${question.id}"
+                                <button class="btn btn-outline-secondary" type="button"
+                                        data-questionId="${question.id}"
                                         onclick="addComment(event)">Send
                                 </button>
                             </div>
@@ -117,11 +143,19 @@
 
         </div>
     </#list>
-        <br>
-    </div>
+    <br>
+</div>
 
+<script type="application/javascript" src="/js/profile.js"></script>
+<script type="application/javascript" src="/js/like.js"></script>
+<script type="application/javascript" src="/js/comment.js"></script>
+<script type="application/javascript" src="/js/hashtags.js"></script>
+<script type="application/javascript" src="/js/user-tags.js"></script>
+<script type="application/javascript" src="/js/albums.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996"
+        type="text/javascript"></script>
+<script type="application/javascript" src="/js/photo-map.js"></script>
 
-<script type="application/javascript" src="/js/jquery-1.9.1.js"></script>
 <script type="application/javascript" src="/js/like.js"></script>
 <script type="application/javascript" src="/js/comment.js"></script>
 <script type="application/javascript" src="/js/hashtags.js"></script>

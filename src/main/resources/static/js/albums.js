@@ -72,7 +72,6 @@ function editAlbumName() {
             },
             success: function () {
                 document.getElementById("albumName").innerHTML = newAlbumName;
-                toggleEditAlbumNameForm();
             }
         });
     }
@@ -113,7 +112,6 @@ function editDescription(event) {
                 "new-description": newDescription
             },
             success: function () {
-                toggleEditDescriptionForm();
                 document.getElementById("description" + photoId).innerHTML = newDescription;
             }
         });

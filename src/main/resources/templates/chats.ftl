@@ -25,7 +25,6 @@
             <th class="text-center">Date</th>
             <th class="text-center">Last message</th>
             <th class="text-center">Partner</th>
-
         </tr>
         </thead>
         <tbody id="chats">
@@ -40,7 +39,7 @@
                 ${chat.date}
             </td>
             <td>
-                ${chat.sender.login}<br>
+                ${chat.sender.login}:<br>
                 ${chat.text}
             </td>
             <td>

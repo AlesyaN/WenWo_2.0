@@ -266,7 +266,7 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row" id="albums">
+            <div class="row justify-content-center" id="albums">
                 <#if user.albums?has_content>
                 <#list user.albums as album>
                     <div class="col-md-4">

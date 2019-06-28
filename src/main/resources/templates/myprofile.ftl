@@ -173,7 +173,7 @@
                         </#if>
                     </div>
 
-                <div class="col-sm-6 text-center ">
+                <div class="col-sm-6 text-center">
 
                     <img <#if user.photoPath??> src="${user.photoPath}"<#else>
                                                 src="/images/default_user_photo.png" </#if> alt="" class="img-fluid"
@@ -244,7 +244,7 @@
                 <button id="photomapbtn" data-login="${user.login}" class="btn btn-secondary my-2">Show photos map
                 </button>
             </p>
-            <div id="photo-map" class="map" style="display: none; margin: auto"></div>
+            <div id="photo-map" class="map" style="display: none; margin: auto; width: 600px; height: 400px"></div>
             <div class="bd-example">
                 <div class="modal fade" id="newAlbumModal" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -276,7 +276,7 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row" id="albums">
+            <div class="row justify-content-center" id="albums">
                 <#list user.albums as album>
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">

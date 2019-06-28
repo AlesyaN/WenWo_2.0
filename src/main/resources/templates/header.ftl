@@ -58,6 +58,8 @@
 </header>
 <script type="text/javascript" src="/js/jquery-3.2.1.min.js"
 <script src="/js/lib/counterup/counterup.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
 
 
 <script type="text/javascript" src="/js/lib/wow/wow.min.js"></script>

@@ -28,35 +28,38 @@ function update(message) {
     var chats = document.getElementById("chats");
     if (chat === null || chat === undefined) {
         var tr = document.createElement("tr");
+        tr.id = message.senderLogin;
+        tr.onclick = openChat;
 
         var td1 = document.createElement("td");
-        var a = document.createElement("a");
-        a.innerHTML = partner;
-        a.href = "/profile/" + partner;
-        td1.appendChild(a);
-
-        var td2 = document.createElement("td");
-        td2.innerHTML = message.senderLogin + "<br>" + message.text;
-
-        var td3 = document.createElement("td");
         var date = new Date(message.date);
-        td3.innerHTML = ('0' + date.getDate()).slice(-2) + "."
+        td1.innerHTML = ('0' + date.getDate()).slice(-2) + "."
             + ('0' + (1 + +date.getMonth())).slice(-2) + "."
             + date.getUTCFullYear() + " "
             + date.getHours() + ":" +
             +date.getMinutes() + ":" +
             +date.getSeconds();
 
+        var td2 = document.createElement("td");
+        td2.innerHTML = message.senderLogin + "<br>" + message.text;
+
+        var td3 = document.createElement("td");
+        var a = document.createElement("a");
+        a.innerHTML = partner;
+        a.href = "/profile/" + partner;
+        td3.appendChild(a);
+
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
+
         chats.insertBefore(tr, chats.firstChild);
     } else {
         var td = chat.getElementsByTagName("TD");
         td[1].innerHTML = message.senderLogin + "<br>" + message.text;
 
         var date = new Date(message.date);
-        td[2].innerHTML = ('0' + date.getDate()).slice(-2) + "."
+        td[0].innerHTML = ('0' + date.getDate()).slice(-2) + "."
             + ('0' + (1 + +date.getMonth())).slice(-2) + "."
             + date.getUTCFullYear() + " "
             + date.getHours() + ":" +

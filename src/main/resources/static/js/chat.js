@@ -45,7 +45,7 @@ function addMessage(message) {
     tr.appendChild(dateElement);
     if (message.receiverLogin === $("#partner").val()) {
         var deleteButton = document.createElement("button");
-        deleteButton.className = "button";
+        deleteButton.className = "btn btn-outline-warning";
         deleteButton.innerHTML = "Delete";
         deleteButton.dataset.id = message.id;
         deleteButton.onclick = deleteMessage;

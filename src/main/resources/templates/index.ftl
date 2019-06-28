@@ -100,8 +100,7 @@ Header
 
             <header class="section-header">
                 <h3>About us</h3>
-                <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant
-                    vituperatoribus.</p>
+                <p>WenWo is not just "the another one social network". Why it is so?</p>
             </header>
 
             <div class="row">
@@ -114,37 +113,32 @@ Header
 
                 <div class="col-lg-6">
                     <div class="why-us-content">
-                        <p>Molestiae omnis numquam corrupti omnis itaque. Voluptatum quidem impedit. Odio dolorum
-                            exercitationem est error omnis repudiandae ad dolorum sit.</p>
+                        <p>Today each of us has so many accounts in different social networks. But all of them are based
+                        on the same concept of sending messages and sharing public posts, which made people even more private: we chat
+                        only with our close friends and browse our feed in a read-only mode without having any communication with other users.</p>
                         <p>
-                            Explicabo repellendus quia labore. Non optio quo ea ut ratione et quaerat. Porro facilis
-                            deleniti porro consequatur
-                            et temporibus. Labore est odio.
-
-                            Odio omnis saepe qui. Veniam eaque ipsum. Ea quia voluptatum quis explicabo sed nihil
-                            repellat..
+                            WenWo application is based on a different concept.
+                            The key point of our project is a <strong>question</strong>.
                         </p>
 
                         <div class="features wow bounceInUp clearfix">
                             <i class="fa fa-diamond" style="color: #f058dc;"></i>
-                            <h4>Corporis dolorem</h4>
-                            <p>Commodi quia voluptatum. Est cupiditate voluptas quaerat officiis ex alias dignissimos et
-                                ipsum. Soluta at enim modi ut incidunt dolor et.</p>
+                            <h4>Questions & Answers</h4>
+                            <p>User can ask somebody public or private question to know him better.
+                                When the second user answers this question, it appears on his page and in the feed of the followers.
+                                It is just like an interview for every user with questions from his friends.</p>
                         </div>
 
                         <div class="features wow bounceInUp clearfix">
                             <i class="fa fa-object-group" style="color: #ffb774;"></i>
-                            <h4>Eum ut aspernatur</h4>
-                            <p>Molestias eius rerum iusto voluptas et ab cupiditate aut enim. Assumenda animi occaecati.
-                                Quo dolore fuga quasi autem aliquid ipsum odit. Perferendis doloremque iure nulla
-                                aut.</p>
+                            <h4>Chats & Albums</h4>
+                            <p>However, there are common social networks options such as sharing photos and chatting.</p>
                         </div>
 
                         <div class="features wow bounceInUp clearfix">
                             <i class="fa fa-language" style="color: #589af1;"></i>
-                            <h4>Voluptates dolores</h4>
-                            <p>Voluptates nihil et quis omnis et eaque omnis sint aut. Ducimus dolorum aspernatur. Totam
-                                dolores ut enim ullam voluptas distinctio aut.</p>
+                            <h4>Global focus</h4>
+                            <p>Nowadays, there are several social networks with the same concept of Q&A. But WenWo is the first such <strong>worldwide</strong> application.</p>
                         </div>
 
                     </div>
@@ -191,9 +185,8 @@ Header
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-left">
                     <h3 class="cta-title">Haven't registered yet?</h3>
-                    <p class="cta-text"> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.</p>
+                    <p class="cta-text">If you are not registered, you only can search for friend's profiles and view them.
+                        Registered user has it's own profile with Personal Info, Albums and Questions; it also can ask anyone a question, answer on users questions to him, leave comments, likes, follow someone and chat with other users. </p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
                     <a class="cta-btn align-middle" href="/signUp">Sign up right now</a>
