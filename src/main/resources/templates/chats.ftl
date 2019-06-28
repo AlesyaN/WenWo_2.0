@@ -1,50 +1,53 @@
 <#ftl encoding='UTF-8'>
+<#include "header.ftl">
 <html>
 <head>
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     <meta charset="utf-8">
 </head>
 <body>
-<div class="form-style-2">
-    <form class="form-style-2" method="get" action="/search">
-        <input class="input-field" type="text" id="search" name="search-text">
-        <input type="submit" class="button" value="Search">
-    </form>
-    <a class="button" href="/feed">Feed</a>
-    <a class="button" href="/profile">My profile</a>
-    <a class="button" href="/chat">Messages</a>
+<br>
+<br>
+<div class="container col-sm-6 after-header">
+    <div class="text-center">
+        <h2>
+            Your conversations:
+        </h2>
+    </div>
     <br>
-    <br>
+
     <input id="currentUserLogin" value="${currentUser.login}" hidden>
-    <table id="conversation" class="table table-striped">
+    <table id="conversation" class="table table-hover text-center">
         <thead>
         <tr>
-            <th>Partner</th>
-            <th>Message</th>
-            <th>Date</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Last message</th>
+            <th class="text-center">Partner</th>
         </tr>
         </thead>
         <tbody id="chats">
-            <#list chats as chat>
+        <#list chats as chat>
                 <#if chat.sender.login == currentUser.login>
                     <#assign partnerLogin = chat.receiver.login>
                 <#else>
                     <#assign partnerLogin = chat.sender.login>
                 </#if>
-            <tr id="${partnerLogin}" onclick="openChat(event)">
-                <td>
-                    <a href="/profile/${partnerLogin}">${partnerLogin}</a>
-                </td>
-                <td>
-                    ${chat.sender.login}<br>
-                    ${chat.text}
-                </td>
-                <td>
-                    ${chat.date}
-                </td>
-            </tr>
-            </#list>
+        <tr id="${partnerLogin}" onclick="openChat(event)">
+            <td>
+                ${chat.date}
+            </td>
+            <td>
+                ${chat.sender.login}:<br>
+                ${chat.text}
+            </td>
+            <td>
+                <a href="/profile/${partnerLogin}">${partnerLogin}</a>
+            </td>
+
+        </tr>
+        </#list>
         </tbody>
     </table>
 </div>

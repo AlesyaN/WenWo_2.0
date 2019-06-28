@@ -1,5 +1,12 @@
+(function ($) {
+    "use strict";
+    $('#newAlbumModal').on('show.bs.modal', function (event) {
+        $('#albumName').trigger('focus')
+    })
+})(jQuery);
 function addAlbum(event) {
     var name = document.getElementById("albumName").value;
+    document.getElementById("albumName").value = "";
     if (name.trim() !== "") {
         var albums = document.getElementById("albums");
         $.ajax({
@@ -9,22 +16,23 @@ function addAlbum(event) {
                 "name": name
             },
             success: function (album) {
-                toggleNewAlbumForm();
-                var images = document.getElementById("images");
-                var tdImg = document.createElement("td");
-                var img = document.createElement("img");
-                img.style.height = "200px";
-                img.src = album.cover.photoPath;
-                tdImg.appendChild(img);
-                images.appendChild(tdImg);
+                var imgCard = document.createElement('div');
+                imgCard.className = 'col-md-4';
+                imgCard.innerHTML = "<div class=\"card mb-4 shadow-sm\">\n" +
+                    "                            <img class=\"card-img-top\"  style=\"object-fit: cover; height: 200px\" src=\""+album.cover.photoPath+"\" alt=\"Card image cap\">\n" +
+                    "                            <div class=\"card-body\">\n" +
+                    "                                <p class=\"card-text\">"+album.name+"</p>\n" +
+                    "                                <div class=\"d-flex justify-content-between align-items-center\">\n" +
+                    "                                    <div class=\"btn-group\">\n" +
+                    "                                            <button type=\"button\" onclick=\"location.href = '/albums/"+album.id+"'\" class=\"btn btn-sm btn-outline-secondary\">View</button>\n" +
 
-                var links = document.getElementById("links");
-                var tdLink = document.createElement("td");
-                var a = document.createElement("a");
-                a.href = "/albums/" + album.id;
-                a.innerHTML = album.name;
-                tdLink.appendChild(a);
-                links.appendChild(tdLink);
+                    "                                        <button type=\"button\" onclick=\"location.href = '/albums/"+album.id+"'\" class=\"btn btn-sm btn-outline-secondary\">Edit</button>\n" +
+                    "                                    </div>\n" +
+                    "                                    <small class=\"text-muted\">"+album.photosNumber+" photos</small>\n" +
+                    "                                </div>\n" +
+                    "                            </div>\n" +
+                    "                        </div>";
+                albums.appendChild(imgCard);
             }
         });
     }
@@ -49,6 +57,7 @@ function toggleEditAlbumNameForm() {
     }
 }
 
+
 function editAlbumName() {
     var newAlbumName = document.getElementById("new-album-name").value;
     var pathname = window.location.pathname;
@@ -63,7 +72,6 @@ function editAlbumName() {
             },
             success: function () {
                 document.getElementById("albumName").innerHTML = newAlbumName;
-                toggleEditAlbumNameForm();
             }
         });
     }
@@ -104,10 +112,10 @@ function editDescription(event) {
                 "new-description": newDescription
             },
             success: function () {
-                toggleEditDescriptionForm();
                 document.getElementById("description" + photoId).innerHTML = newDescription;
             }
         });
     }
 }
+
 

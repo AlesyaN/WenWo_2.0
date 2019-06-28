@@ -1,6 +1,7 @@
 var myMap;
 
 ymaps.ready(function () {
+    console.log("ready");
     document.getElementById("photomapbtn").onclick = togglePhotoMap;
 }());
 
@@ -79,6 +80,7 @@ function togglePhotoMap() {
         init();
         addPhotosToMap();
     } else {
+        myMap.destroy();
         map.style.display = "none";
     }
 }

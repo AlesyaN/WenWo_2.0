@@ -1,15 +1,17 @@
 function like(event) {
-    var id = event.target.dataset.questionid;
+    var id = event.currentTarget.dataset.questionid;
     var type;
     if (id !== null && id !== undefined) {
         type = "question";
     } else {
-        id = event.target.dataset.photoid;
+        id = event.currentTarget.dataset.photoid;
         type = "photo";
     }
     console.log(id, type);
+
     var button = event.target;
     var numOfLikes = document.getElementById("likes" + id);
+    console.log(numOfLikes);
     $.ajax({
         url : "/api/like",
         method: "post",
@@ -20,10 +22,10 @@ function like(event) {
         success: function (msg) {
             if (msg === true) {
                 numOfLikes.innerHTML = +numOfLikes.innerHTML + 1;
-                button.className = "pressed-button"
+                document.getElementById("likesHeart"+id).className = "fa fa-heart";
             } else if (msg === false) {
                 numOfLikes.innerHTML = +numOfLikes.innerHTML - 1;
-                button.className = "button";
+                document.getElementById("likesHeart"+id).className = "fa fa-heart-o";
             }
         },
         error: function (msg) {
