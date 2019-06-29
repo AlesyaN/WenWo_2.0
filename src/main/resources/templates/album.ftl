@@ -69,6 +69,7 @@
                     You should add file first
         </#if>
     </#if>
+
     <br>
     <br>
     <div <#if album.photos?size<4>class="card-deck"<#else>class="card-columns" </#if>>
@@ -145,6 +146,7 @@
                         </div>
 
                         <small class="text-muted">${photo.date}</small>
+
                     </div>
                     <br>
                     <div class="d-flex justify-content-between align-items-center">

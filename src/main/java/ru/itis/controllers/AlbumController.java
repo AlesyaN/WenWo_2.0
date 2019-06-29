@@ -43,9 +43,11 @@ public class AlbumController {
     }
 
     @PostMapping("/albums/{album-id}")
-    public String addPhoto(@PathVariable("album-id") Integer albumId, @Valid PhotoForm photoForm, BindingResult bindingResult, ModelMap modelMap) {
+    public String addPhoto(@PathVariable("album-id") Integer albumId, @Valid PhotoForm photoForm, BindingResult bindingResult, ModelMap modelMap, Authentication authentication) {
         if (bindingResult.hasErrors()) {
             modelMap.addAttribute("album", albumService.getAlbum(albumId).orElseThrow(IllegalArgumentException::new));
+            Optional<User> currentUserOptional = userService.getCurrentUser(authentication);
+            currentUserOptional.ifPresent(user -> modelMap.addAttribute("currentUserId", user.getId()));
             modelMap.addAttribute("error", true);
             return "album";
         }

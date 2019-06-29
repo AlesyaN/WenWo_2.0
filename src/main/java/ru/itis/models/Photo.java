@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -43,5 +44,10 @@ public class Photo {
 
     @OneToMany(mappedBy = "photo")
     private List<PhotoLike> likes;
+
+    public String getDateToString() {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        return format.format(date);
+    }
 }
 
