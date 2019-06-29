@@ -91,8 +91,9 @@ function deletePhoto(event) {
     });
 }
 
-function toggleEditDescriptionForm() {
-    var form = document.getElementById("edit-description-form");
+function toggleCommentsTab(event) {
+    var id = event.target.dataset.photoId;
+    var form = document.getElementById("commentsTab"+id);
     if (form.style.display === "block") {
         form.style.display = "none";
     } else {

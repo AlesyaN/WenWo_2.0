@@ -77,3 +77,52 @@ function showOnMap(event) {
         mapElem.style.display = "none";
     }
 }
+function showMapInModal(event) {
+    var x = parseFloat(event.target.dataset.x.replace(',', '.'));
+    var y = parseFloat(event.target.dataset.y.replace(',', '.'));
+    var id = event.target.dataset.id;
+    var mapElem = document.getElementById("map" + id);
+    mapElem.innerHTML = "";
+    var coords = [x, y];
+    var map = new ymaps.Map("map" + id, {
+        center: coords,
+        zoom: 10
+    }, {
+        searchControlProvider: 'yandex#search'
+    });
+        ymaps.geolocation.get({
+            provider: 'yandex',
+            mapStateAutoApply: true
+        }).then(function (result) {
+            result.geoObjects.options.set('preset', 'islands#redCircleIcon');
+            result.geoObjects.get(0).properties.set({
+                balloonContentBody: 'Мое местоположение'
+            });
+            map.geoObjects.add(result.geoObjects);
+        });
+
+        ymaps.geolocation.get({
+            provider: 'browser',
+            mapStateAutoApply: true
+        }).then(function (result) {
+            result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
+            map.geoObjects.add(result.geoObjects);
+        });
+
+        var placemark = new ymaps.Placemark(coords, {}, {
+            preset: 'islands#violetDotIcon'
+        });
+        map.geoObjects.add(placemark);
+        ymaps.geocode(coords).then(function (res) {
+            var firstGeoObject = res.geoObjects.get(0);
+            placemark.properties
+                .set({
+                    iconCaption: [
+                        firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas(),
+                        firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
+                    ].filter(Boolean).join(', '),
+                    balloonContent: firstGeoObject.getAddressLine()
+                });
+        });
+
+}
