@@ -69,9 +69,10 @@
                     You should add file first
         </#if>
     </#if>
+
     <br>
     <br>
-<div <#if album.photos?size<4>class="card-deck"<#else>class="card-columns" </#if>>
+    <div <#if album.photos?size<4>class="card-deck"<#else>class="card-columns" </#if>>
         <#list album.photos as photo>
             <div id="photo${photo.id}" class="card">
 
@@ -83,12 +84,12 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <#if currentUserId?? && album.owner.id == currentUserId>
-                                <button onclick="deletePhoto(event)" data-photo-id="${photo.id}"
-                                        class="btn btn-sm btn-outline-secondary">Delete
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-                                        data-target="#editDescriptionModal">Edit
-                                </button>
+                                <span onclick="deletePhoto(event)" data-photo-id="${photo.id}"
+                                        class="btn btn-sm btn-outline-secondary fa fa-trash-o">
+                                </span>
+                                <span class="btn btn-sm btn-outline-secondary fa fa-pencil" data-toggle="modal"
+                                        data-target="#editDescriptionModal">
+                                </span>
                                 <div class="bd-example">
                                     <div class="modal fade" id="editDescriptionModal" tabindex="-1" role="dialog"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,7 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                </#if>
+                                &nbsp;
                                 <#if currentUserId??>
                                     <#assign liked = false>
                                     <#list photo.likes as like>
@@ -141,62 +142,120 @@
                                         </button>
                                     </form>
                                 </#if>
-
+                            </#if>
                         </div>
 
                         <small class="text-muted">${photo.date}</small>
+
                     </div>
-                    <#if photo.coordinateX?has_content && photo.coordinateY?has_content>
                     <br>
-                    <div class="text-center">
-
-                            <button onclick="showOnMap(event)" data-id="${photo.id}" data-x="${photo.coordinateX}"
-                                    data-y="${photo.coordinateY}" class="btn btn-sm btn-outline-dark">Show on map
+                    <div class="d-flex justify-content-between align-items-center">
+                        <#if photo.coordinateX?has_content && photo.coordinateY?has_content>
+                            <button onclick="showMapInModal(event)" data-id="${photo.id}" data-x="${photo.coordinateX}"
+                                    data-y="${photo.coordinateY}" data-toggle="modal"
+                                    data-target="#showMapModal" class="btn btn-sm btn-outline-dark">Show on map
                             </button>
+                            <div class="bd-example">
+                                <div class="modal fade" id="showMapModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="exampleModalLabel">Photo map</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div style="margin: auto; width: 400px; height: 400px" id="map${photo.id}"
+                                                     class="map">
 
-
-                    </div>
-
-                        <div style="display: none; margin: auto; width: 270px; height: 200px" id="map${photo.id}"
-                             class="map">
-                            <br>
-                        </div>
-                    </#if>
-
-                    <#--<br>
-                    <div class="form-style-2" id="comments${photo.id}">
-                        <h3 class="form-style-2-heading">Comments:</h3>
-                        <#list photo.comments as comment>
-                            <div id="comment${comment.id}">
-                                <a href="/profile/${comment.author.login}">${comment.author.login}</a>
-                                <#if currentUserId?? && comment.author.id == currentUserId>
-                                    <button class="button delete" data-photo-comment-id="${comment.id}"
-                                            onclick="deleteComment(event)">Delete
-                                    </button>
-                                </#if><br>
-                                <b>
-                                    <div data-contain-hashtags data-contain-user-tags>${comment.text}</div>
-                                </b><br>
-                                <i>${comment.date}</i><br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <br>
-                        </#list>
+                        </#if>
+                        <button class="btn btn-sm btn-outline-dark" onclick="toggleCommentsTab(event)" data-photo-id="${photo.id}">Comments</button>
+
+
                     </div>
-                    <#if currentUserId??>
-                        <div class="form-style-2">
-                            <input class="input-field" id="commentinput${photo.id}"
-                                   placeholder="Your comment">
-                            <br><br>
-                            <button class="button" data-photoId="${photo.id}" onclick="addComment(event)">Send</button>
+                    <div id="commentsTab${photo.id}" style="display: none">
+                        <br>
+
+                            <#if currentUserId??>
+                            <div class="input-group mb-3">
+                                <input id="commentinput${photo.id}" type="text" class="form-control form-control-sm col-sm-10"
+                                       placeholder="Leave your comment"
+                                       aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-outline-secondary" type="button"
+                                            data-photoId="${photo.id}"
+                                            onclick="addPhotoComment(event)">Send
+                                    </button>
+                                </div>
+                            </div>
+                            </#if>
+                        <div class="list-group list-group-flush" id="comments${photo.id}">
+                            <#list photo.comments as comment>
+                                <div id="comment${comment.id}" class="list-group-item flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <p class="mb-1"><a
+                                                href="/profile/${comment.author.login}">${comment.author.login}</a></p>
+                                        <small>${comment.date}</small>
+                                    </div>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1" data-contain-user-tags data-contain-hashtags>${comment.text}</h5>
+                                        <#if currentUserId?? && comment.author.id == currentUserId>
+                                            <div class="text-right">
+                                                <button class="btn btn-sm btn-dark fa fa-trash-o" data-photo-comment-id="${comment.id}"
+                                                        onclick="deleteComment(event)">
+                                                </button>
+                                            </div>
+
+                                        </#if>
+                                    </div>
+                                </div>
+                            </#list>
+
                         </div>
-                    </#if>-->
+
+                    </div>
+
+                <#--<br>
+                <
+                <div class="form-style-2" id="comments${photo.id}">
+                    <h3 class="form-style-2-heading">Comments:</h3>
+                    <#list photo.comments as comment>
+                        <div id="comment${comment.id}">
+                            <a href="/profile/${comment.author.login}">${comment.author.login}</a>
+                            <#if currentUserId?? && comment.author.id == currentUserId>
+                                <button class="button delete" data-photo-comment-id="${comment.id}"
+                                        onclick="deleteComment(event)">Delete
+                                </button>
+                            </#if><br>
+                            <b>
+                                <div data-contain-hashtags data-contain-user-tags>${comment.text}</div>
+                            </b><br>
+                            <i>${comment.date}</i><br>
+                        </div>
+                        <br>
+                    </#list>
+                </div>
+                <#if currentUserId??>
+                    <div class="form-style-2">
+                        <input class="input-field" id="commentinput${photo.id}"
+                               placeholder="Your comment">
+                        <br><br>
+                        <button class="button" data-photoId="${photo.id}" onclick="addComment(event)">Send</button>
+                    </div>
+                </#if>-->
                 </div>
             </div>
         </#list>
-        </div>
-
-
-
+    </div>
 
 
 </div>
