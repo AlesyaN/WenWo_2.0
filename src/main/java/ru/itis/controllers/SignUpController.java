@@ -2,6 +2,7 @@ package ru.itis.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,10 @@ public class SignUpController {
     UserServiceImpl userService;
 
     @GetMapping("/signUp")
-    public String getSignUpPage() {
+    public String getSignUpPage(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return "redirect:/profile";
+        }
         return "signUp";
     }
 
