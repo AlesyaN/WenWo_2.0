@@ -36,18 +36,13 @@ public class Photo {
 
     @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL)
     @OrderBy("date")
-
     private List<PhotoComment> comments;
 
     private Double coordinateX;
     private Double coordinateY;
 
-    @OneToMany(mappedBy = "photo")
+    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL)
     private List<PhotoLike> likes;
 
-//    public String getDateToString() {
-//        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-//        return format.format(date);
-//    }
 }
 
