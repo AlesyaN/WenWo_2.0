@@ -30,6 +30,7 @@ public class User {
     private String email;
     private String city;
     private String gender;
+
     @Column(name = "dateofbirth")
     private Date dateOfBirth;
 

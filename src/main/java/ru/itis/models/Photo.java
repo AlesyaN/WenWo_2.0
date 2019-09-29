@@ -45,9 +45,9 @@ public class Photo {
     @OneToMany(mappedBy = "photo")
     private List<PhotoLike> likes;
 
-    public String getDateToString() {
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        return format.format(date);
-    }
+//    public String getDateToString() {
+//        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+//        return format.format(date);
+//    }
 }
 

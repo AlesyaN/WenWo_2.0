@@ -18,7 +18,7 @@ public class AlbumDto {
     private Photo cover;
     private Integer photosNumber;
 
-    private static final String DEFAULT_PHOTO_PATH = "/users/album_default.jpg";
+    private static final String DEFAULT_PHOTO_PATH = "/users/default.png";
 
     public static AlbumDto from(Album album) {
         Photo photo;

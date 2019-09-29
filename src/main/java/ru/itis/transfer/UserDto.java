@@ -11,6 +11,7 @@ import ru.itis.models.Album;
 import ru.itis.models.Question;
 import ru.itis.models.User;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ public class UserDto {
     private String gender;
     private String city;
     private String photoPath;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private List<Question> answeredQuestions;
     private List<Question> unansweredQuestions;
     private List<User> followers;
@@ -36,13 +37,18 @@ public class UserDto {
     private static String UPLOADED_FOLDER;
 
     public static UserDto from(User user) {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        String dateOfBirth = null;
+        if (user.getDateOfBirth() != null) {
+            dateOfBirth = format.format(user.getDateOfBirth());
+        }
         return UserDto.builder()
                 .login(user.getLogin())
                 .email(user.getEmail())
                 .fullName(user.getFullName())
                 .gender(user.getGender())
                 .city(user.getCity())
-                .dateOfBirth(user.getDateOfBirth())
+                .dateOfBirth(dateOfBirth)
                 .followers(user.getFollowers())
                 .followings(user.getFollowings())
                 .photoPath(user.getPhoto_path())

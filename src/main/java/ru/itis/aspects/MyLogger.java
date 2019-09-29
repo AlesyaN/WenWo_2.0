@@ -31,7 +31,7 @@ public class MyLogger {
     public void logSignUp(JoinPoint jp) {
         logsRepository.save(Log.builder()
                 .date(new Date())
-                .info("New user " + Arrays.toString(jp.getArgs()) + "registered")
+                .info("New user " + jp.getArgs()[0] + "registered")
                 .build());
     }
 
