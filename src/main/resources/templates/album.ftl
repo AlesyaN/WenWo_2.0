@@ -150,34 +150,7 @@
                     </div>
                     <br>
                     <div class="d-flex justify-content-between align-items-center">
-                        <#if photo.coordinateX?has_content && photo.coordinateY?has_content>
-                            <button onclick="showMapInModal(event)" data-id="${photo.id}" data-x="${photo.coordinateX}"
-                                    data-y="${photo.coordinateY}" data-toggle="modal"
-                                    data-target="#showMapModal" class="btn btn-sm btn-outline-dark">Show on map
-                            </button>
-                            <div class="bd-example">
-                                <div class="modal fade" id="showMapModal" tabindex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="exampleModalLabel">Photo map</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div style="margin: auto; width: 400px; height: 400px" id="map${photo.id}"
-                                                     class="map">
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </#if>
                         <button class="btn btn-sm btn-outline-dark" onclick="toggleCommentsTab(event)" data-photo-id="${photo.id}">Comments</button>
 
 
@@ -224,34 +197,7 @@
 
                     </div>
 
-                <#--<br>
-                <
-                <div class="form-style-2" id="comments${photo.id}">
-                    <h3 class="form-style-2-heading">Comments:</h3>
-                    <#list photo.comments as comment>
-                        <div id="comment${comment.id}">
-                            <a href="/profile/${comment.author.login}">${comment.author.login}</a>
-                            <#if currentUserId?? && comment.author.id == currentUserId>
-                                <button class="button delete" data-photo-comment-id="${comment.id}"
-                                        onclick="deleteComment(event)">Delete
-                                </button>
-                            </#if><br>
-                            <b>
-                                <div data-contain-hashtags data-contain-user-tags>${comment.text}</div>
-                            </b><br>
-                            <i>${comment.date}</i><br>
-                        </div>
-                        <br>
-                    </#list>
-                </div>
-                <#if currentUserId??>
-                    <div class="form-style-2">
-                        <input class="input-field" id="commentinput${photo.id}"
-                               placeholder="Your comment">
-                        <br><br>
-                        <button class="button" data-photoId="${photo.id}" onclick="addComment(event)">Send</button>
-                    </div>
-                </#if>-->
+
                 </div>
             </div>
         </#list>
@@ -269,6 +215,5 @@
 <script type="application/javascript" src="/js/user-tags.js"></script>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996"
         type="text/javascript"></script>
-<script type="application/javascript" src="/js/maps.js"></script>
 </body>
 </html>
