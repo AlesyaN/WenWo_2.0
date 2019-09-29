@@ -36,7 +36,7 @@ public class EditProfileController {
     }
 
     @PostMapping("/editProfile")
-    public String edit(@Valid UserEditForm form, Authentication authentication, ModelMap modelMap, BindingResult result) {
+    public String edit(@Valid UserEditForm form, BindingResult result, Authentication authentication, ModelMap modelMap) {
         User currentUser = userService.getCurrentUser(authentication).orElseThrow(IllegalAccessError::new);
         modelMap.addAttribute("user", currentUser);
         if (result.hasErrors()) {
@@ -47,6 +47,7 @@ public class EditProfileController {
             modelMap.addAttribute("errors", errors);
             return "editProfile";
         }
+
         if (userService.editProfile(form, currentUser)) {
             return "redirect:/profile";
         } else {

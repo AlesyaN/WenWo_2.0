@@ -25,12 +25,12 @@
 						<i class="zmdi zmdi-accounts-add"></i>
 					</span>
                 <div>
-                    <#if errors??>
-    <#list errors as error>
-            <h6 class="alert alert-danger">${error}</h6>
-            <br>
-    </#list>
-                    </#if>
+                <#if errors??>
+                    <#list errors as error>
+                            <h6 class="alert alert-danger">${error}</h6>
+                            <br>
+                    </#list>
+                </#if>
                 </div>
                 <div class="wrap-input100">
                     <input class="input100" type="text" name="login" id="login" data-validate="Invalid login">
