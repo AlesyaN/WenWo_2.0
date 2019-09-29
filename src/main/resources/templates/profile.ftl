@@ -326,6 +326,7 @@
             </p>
             <br>
             <div class="list-group list-group-flush" id="unansweredQuestions">
+                <#if unansweredQuestions??>
                         <#list unansweredQuestions as question>
                             <div id="question${question.id}" class="list-group-item flex-column align-items-start">
 
@@ -334,8 +335,8 @@
                                         data-questionId="${question.id}">Delete
                                 </button>
                             </div>
-
                         </#list>
+                </#if>
             </div>
         </div>
     </div>
