@@ -1,7 +1,6 @@
 var myMap;
 
 ymaps.ready(function () {
-    console.log("ready");
     document.getElementById("photomapbtn").onclick = togglePhotoMap;
 }());
 
@@ -9,8 +8,7 @@ function init () {
     var geolocation = ymaps.geolocation;
 
     geolocation.get({
-        provider: 'yandex',
-        mapStateAutoApply: true
+        provider: 'yandex'
     }).then(function (result) {
         result.geoObjects.options.set('preset', 'islands#redCircleIcon');
         result.geoObjects.get(0).properties.set({
@@ -20,8 +18,7 @@ function init () {
     });
 
     geolocation.get({
-        provider: 'browser',
-        mapStateAutoApply: true
+        provider: 'browser'
     }).then(function (result) {
         result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
         myMap.geoObjects.add(result.geoObjects);
@@ -72,8 +69,8 @@ function togglePhotoMap() {
     if (map.style.display === "none") {
         map.style.display = "block";
         myMap = new ymaps.Map('photo-map', {
-            center: [55, 34],
-            zoom: 10
+            center: [50, 64],
+            zoom: 2
         }, {
             searchControlProvider: 'yandex#search'
         });

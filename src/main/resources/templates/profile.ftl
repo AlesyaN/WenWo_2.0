@@ -261,7 +261,7 @@
                 <button id="photomapbtn" data-login="${user.login}" class="btn btn-secondary my-2">Show photos map
                 </button>
             </p>
-            <div id="photo-map" class="map" style="display: none; margin: auto"></div>
+            <div id="photo-map" class="map" style="display: none; margin: auto; width: 600px; height: 400px"></div>
             <#else>
                 <p class="lead text-muted">${user.login} didn't create any photo albums yet</p>
             <p>
@@ -499,6 +499,6 @@
 <script type="application/javascript" src="/js/albums.js"></script>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996"
         type="text/javascript"></script>
-<script type="application/javascript" src="/js/photo-map.js"></script>
+<script type="application/javascript" src="/js/all-photos-map.js"></script>
 </body>
 </html>
