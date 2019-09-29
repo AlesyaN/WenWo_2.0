@@ -90,8 +90,6 @@ Header
 <main id="main">
 
 
-
-
     <!--==========================
       Why Us Section
     ============================-->
@@ -114,8 +112,10 @@ Header
                 <div class="col-lg-6">
                     <div class="why-us-content">
                         <p>Today each of us has so many accounts in different social networks. But all of them are based
-                        on the same concept of sending messages and sharing public posts, which made people even more private: we chat
-                        only with our close friends and browse our feed in a read-only mode without having any communication with other users.</p>
+                            on the same concept of sending messages and sharing public posts, which made people even
+                            more private: we chat
+                            only with our close friends and browse our feed in a read-only mode without having any
+                            communication with other users.</p>
                         <p>
                             WenWo application is based on a different concept.
                             The key point of our project is a <strong>question</strong>.
@@ -125,20 +125,23 @@ Header
                             <i class="fa fa-diamond" style="color: #f058dc;"></i>
                             <h4>Questions & Answers</h4>
                             <p>User can ask somebody public or private question to know him better.
-                                When the second user answers this question, it appears on his page and in the feed of the followers.
+                                When the second user answers this question, it appears on his page and in the feed of
+                                the followers.
                                 It is just like an interview for every user with questions from his friends.</p>
                         </div>
 
                         <div class="features wow bounceInUp clearfix">
                             <i class="fa fa-object-group" style="color: #ffb774;"></i>
                             <h4>Chats & Albums</h4>
-                            <p>However, there are common social networks options such as sharing photos and chatting.</p>
+                            <p>However, there are common social networks options such as sharing photos and
+                                chatting.</p>
                         </div>
 
                         <div class="features wow bounceInUp clearfix">
                             <i class="fa fa-language" style="color: #589af1;"></i>
                             <h4>Global focus</h4>
-                            <p>Nowadays, there are several social networks with the same concept of Q&A. But WenWo is the first such <strong>worldwide</strong> application.</p>
+                            <p>Nowadays, there are several social networks with the same concept of Q&A. But WenWo is
+                                the first such <strong>worldwide</strong> application.</p>
                         </div>
 
                     </div>
@@ -152,25 +155,25 @@ Header
         <div class="container">
             <div class="row counters">
                 <#if info??>
-                <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">${info.users}</span>
-                    <p>Users</p>
-                </div>
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">${info.users}</span>
+                        <p>Users</p>
+                    </div>
 
-                <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">${info.questions}</span>
-                    <p>Questions</p>
-                </div>
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">${info.questions}</span>
+                        <p>Questions</p>
+                    </div>
 
-                <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">${info.anonymousQuestions}</span>
-                    <p>Anonymous questions</p>
-                </div>
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">${info.anonymousQuestions}</span>
+                        <p>Anonymous questions</p>
+                    </div>
 
-                <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">${info.answers}</span>
-                    <p>Answers</p>
-                </div>
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">${info.answers}</span>
+                        <p>Answers</p>
+                    </div>
                 </#if>
             </div>
 
@@ -185,8 +188,11 @@ Header
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-left">
                     <h3 class="cta-title">Haven't registered yet?</h3>
-                    <p class="cta-text">If you are not registered, you only can search for friend's profiles and view them.
-                        Registered user has it's own profile with Personal Info, Albums and Questions; it also can ask anyone a question, answer on users questions to him, leave comments, likes, follow someone and chat with other users. </p>
+                    <p class="cta-text">If you are not registered, you only can search for friend's profiles and view
+                        them.
+                        Registered user has it's own profile with Personal Info, Albums and Questions; it also can ask
+                        anyone a question, answer on users questions to him, leave comments, likes, follow someone and
+                        chat with other users. </p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
                     <a class="cta-btn align-middle" href="/signUp">Sign up right now</a>
@@ -197,7 +203,7 @@ Header
     </section><!-- #call-to-action -->
 
     <!--==========================
-      Services Section
+      Search Section
     ============================-->
     <section id="services" class="section-bg">
         <div class="container">
@@ -215,7 +221,8 @@ Header
                                                                           style="color: #F9CD0B;"></i></div>
 
                         <form class="form-inline" method="get" action="/search">
-                            <input class="form-control mx-sm-3 mb-3" style="width: 800px" type="text" placeholder="enter your friend nickname">
+                            <input class="form-control mx-sm-3 mb-3" name="search-text" style="width: 800px" type="text"
+                                   placeholder="enter your friend nickname">
                             <button class="btn btn-light mb-3" type="submit">Search</button>
                         </form>
                     </div>
@@ -225,7 +232,7 @@ Header
             </div>
 
         </div>
-    </section><!-- #services -->
+    </section>
     <!--==========================
       Clients Section
     ============================-->
@@ -400,7 +407,7 @@ Header
 <script type="text/javascript" src="/js/lib/counterup/counterup.min.js"></script>
 <script type="text/javascript" src="/js/lib/owlcarousel/owl.carousel.min.js"></script>
 <script type="text/javascript" src="/js/lib/isotope/isotope.pkgd.min.js"></script>
-<script type="text/javascript"  src="/js/lib/lightbox/js/lightbox.min.js"></script>
+<script type="text/javascript" src="/js/lib/lightbox/js/lightbox.min.js"></script>
 <!-- Contact Form JavaScript File -->
 <script type="text/javascript" src="contactform/contactform.js"></script>
 
