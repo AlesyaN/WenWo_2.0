@@ -119,29 +119,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                &nbsp;
-                                <#if currentUserId??>
-                                    <#assign liked = false>
-                                    <#list photo.likes as like>
-                                        <#if like.user.id == currentUserId>
-                                            <#assign liked = true>
-                                        </#if>
-                                    </#list>
+                            </#if>
+                            &nbsp;
+                            <#if currentUserId??>
+                                <#assign liked = false>
+                                <#list photo.likes as like>
+                                    <#if like.user.id == currentUserId>
+                                        <#assign liked = true>
+                                    </#if>
+                                </#list>
 
-                                    <button onclick="like(event)" class="btn btn-sm btn-outline-danger"
-                                            data-photoid="${photo.id}">
+                                <button onclick="like(event)" class="btn btn-sm btn-outline-danger"
+                                        data-photoid="${photo.id}">
+                                    <span id="likes${photo.id}">${photo.likes?size}</span>
+                                    <span id="likesHeart${photo.id}"
+                                          class="fa <#if liked == true> fa-heart <#elseif liked == false> fa-heart-o </#if>"></span>
+                                </button>
+                            <#else>
+                                <form action="/login">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
                                         <span id="likes${photo.id}">${photo.likes?size}</span>
-                                        <span id="likesHeart${photo.id}"
-                                              class="fa <#if liked == true> fa-heart <#elseif liked == false> fa-heart-o </#if>"></span>
+                                        <span id="likesHeart${photo.id}" class="fa fa-heart-o"></span>
                                     </button>
-                                <#else>
-                                    <form action="/login">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">
-                                            <span id="likes${photo.id}">${photo.likes?size}</span>
-                                            <span id="likesHeart${photo.id}" class="fa fa-heart-o"></span>
-                                        </button>
-                                    </form>
-                                </#if>
+                                </form>
                             </#if>
                         </div>
 
