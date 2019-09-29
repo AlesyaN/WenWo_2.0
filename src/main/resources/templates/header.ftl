@@ -24,23 +24,10 @@
 </head>
 <body>
 <header id="header">
-
-    <div id="topbar">
-        <div class="container">
-            <div class="social-links">
-                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                <a href="#" class="facebook"><i class="fa fa-vk"></i></a>
-                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                <a href="#" class="telegram"><i class="fa fa-telegram"></i></a>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
 
         <div class="logo float-left">
-            <h1 class="text-light"><a href="#intro" class="scrollto"><span>Wenwo</span></a></h1>
-            <!-- <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a> -->
+            <h1 class="text-light"><a href="/" class="scrollto"><span>Wenwo</span></a></h1>
         </div>
 
         <nav class="main-nav float-right d-none d-lg-block">

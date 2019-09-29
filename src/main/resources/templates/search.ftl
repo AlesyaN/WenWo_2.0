@@ -20,7 +20,7 @@
             </div>
         </div>
     </form>
-    <br></br>
+    <br>
     <div>
         <h3>
             Searching results:

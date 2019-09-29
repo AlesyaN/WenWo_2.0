@@ -1,4 +1,5 @@
 <#ftl encoding='UTF-8'>
+<#include "header.ftl">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,42 +28,6 @@
 </head>
 
 <body>
-<!--==========================
-Header
-============================-->
-<header id="header">
-
-    <div id="topbar">
-        <div class="container">
-            <div class="social-links">
-                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                <a href="#" class="facebook"><i class="fa fa-vk"></i></a>
-                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                <a href="#" class="instagram"><i class="fa fa-telegram"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <div class="logo float-left">
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <h1 class="text-light"><a href="#intro" class="scrollto"><span>Wenwo</span></a></h1>
-            <!-- <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a> -->
-        </div>
-
-        <nav class="main-nav float-right d-none d-lg-block">
-            <ul>
-                <li class="active"><a href="#intro">Home</a></li>
-                <li><a href="#why-us">About Us</a></li>
-                <li><a href="#services">Search</a></li>
-                <li><a href="#testimonials">Team</a></li>
-                <li><a href="#footer">Contact Us</a></li>
-            </ul>
-        </nav><!-- .main-nav -->
-
-    </div>
-</header><!-- #header -->
 
 <!--==========================
   Intro Section
@@ -181,7 +146,7 @@ Header
     </section>
 
     <!--==========================
-      Call To Action Section
+      Haven't registered Section
     ============================-->
     <section id="call-to-action" class="wow fadeInUp">
         <div class="container">
@@ -200,7 +165,7 @@ Header
             </div>
 
         </div>
-    </section><!-- #call-to-action -->
+    </section>
 
     <!--==========================
       Search Section
@@ -234,7 +199,7 @@ Header
         </div>
     </section>
     <!--==========================
-      Clients Section
+      Our team Section
     ============================-->
     <section id="testimonials">
         <div class="container">
@@ -253,8 +218,8 @@ Header
                             <h3>Alesya Nasibullina</h3>
                             <h4>Backend</h4>
                             <p>
-                                Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam
-                                duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                                Student of Higher Institute of Information Technologies and Intelligent Systems<br>
+                                Associate software engineer at ACI Worlwide Russia
                             </p>
                         </div>
 
@@ -263,9 +228,8 @@ Header
                             <h3>Kamila Nigmetzyanova</h3>
                             <h4>Frontend</h4>
                             <p>
-                                Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat
-                                minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore
-                                labore illum veniam.
+                                Student of Higher Institute of Information Technologies and Intelligent Systems<br>
+                                Associate software engineer at ACI Worlwide Russia
                             </p>
                         </div>
 
@@ -276,126 +240,10 @@ Header
 
 
         </div>
-    </section><!-- #testimonials -->
+    </section>
 
 
 </main>
-
-<!--==========================
-  Footer
-============================-->
-<footer id="footer" class="section-bg">
-    <div class="footer-top">
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-lg-6">
-
-                    <div class="row">
-
-                        <div class="col-sm-10   ">
-
-                            <div class="footer-info">
-                                <h3>Wenwo</h3>
-                                <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa
-                                    magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.
-                                    Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc
-                                    congue.</p>
-                            </div>
-
-
-                            <div class="footer-links">
-                                <h4>Contact Us</h4>
-                                <p>
-                                    21 Kremlevskaya Street<br>
-                                    Kazan, 421001<br>
-                                    Russia <br>
-                                    <strong>Phone:</strong> +7 917 909 35 75<br>
-                                    <strong>Email:</strong> kamila.nigmet@gmail.com<br>
-                                </p>
-                            </div>
-
-                            <div class="social-links">
-                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="fa fa-vk"></i></a>
-                                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                                <a href="#" class="linkedin"><i class="fa fa-telegram"></i></a>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-lg-6">
-
-                    <div class="form">
-
-                        <h4>Send us a message</h4>
-                        <p>Eos ipsa est voluptates. Nostrum nam libero ipsa vero. Debitis quasi sit eaque numquam
-                            similique commodi harum aut temporibus.</p>
-                        <form action="" method="post" role="form" class="contactForm">
-                            <div class="form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                       data-rule="minlen:4" data-msg="Please enter at least 4 chars"/>
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="Your Email" data-rule="email"
-                                       data-msg="Please enter a valid email"/>
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subject" id="subject"
-                                       placeholder="Subject" data-rule="minlen:4"
-                                       data-msg="Please enter at least 8 chars of subject"/>
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="message" rows="5" data-rule="required"
-                                          data-msg="Please write something for us" placeholder="Message"></textarea>
-                                <div class="validation"></div>
-                            </div>
-
-                            <div id="sendmessage">Your message has been sent. Thank you!</div>
-                            <div id="errormessage"></div>
-
-                            <div class="text-center">
-                                <button type="submit" title="Send Message">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="copyright">
-            &copy; Copyright <strong>Rapid</strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            <!--
-              All the links in the footer should remain intact.
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Rapid
-            -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-    </div>
-</footer><!-- #footer -->
-
-<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-<!-- Uncomment below i you want to use a preloader -->
-<!-- <div id="preloader"></div> -->
 
 <!-- JavaScript Libraries -->
 <script type="text/javascript" src="/js/jquery-3.2.1.min.js"
