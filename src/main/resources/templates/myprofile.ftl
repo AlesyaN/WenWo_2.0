@@ -13,143 +13,11 @@
     <link href="/css/util.css" rel="stylesheet" type="text/css">
     <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap-css"
     <link href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="/css/myprofile.css" rel="stylesheet" type="text/css">
+
     <meta charset="utf-8">
 </head>
-<style>
-    :root {
-        --jumbotron-padding-y: 3rem;
-    }
 
-    .jumbotron {
-        padding-top: var(--jumbotron-padding-y);
-        padding-bottom: var(--jumbotron-padding-y);
-        margin-bottom: 0;
-        background-color: #fff;
-    }
-
-    @media (min-width: 768px) {
-        .jumbotron {
-            padding-top: calc(var(--jumbotron-padding-y) * 2);
-            padding-bottom: calc(var(--jumbotron-padding-y) * 2);
-        }
-    }
-
-    .jumbotron p:last-child {
-        margin-bottom: 0;
-    }
-
-    .jumbotron-heading {
-        font-weight: 300;
-    }
-
-    .jumbotron .container {
-        max-width: 40rem;
-    }
-
-    footer {
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-    }
-
-    footer p {
-        margin-bottom: .25rem;
-    }
-
-    @font-face {
-        font-family: Poppins-Regular;
-        src: url('/fonts/poppins/Poppins-Regular.ttf');
-    }
-
-    body {
-        font-family: Poppins-Regular;
-    }
-
-    .profile {
-        max-height: 600px;
-        max-width: 800px;
-
-        text-align: center;
-        margin: auto;
-    }
-
-    figcaption.ratings {
-        margin-top: 20px;
-    }
-
-    figcaption.ratings a {
-        color: #f1c40f;
-        font-size: 11px;
-    }
-
-    figcaption.ratings a:hover {
-        color: #f39c12;
-        text-decoration: none;
-    }
-
-    .divider {
-        border-top: 1px solid lightgrey;
-        border-bottom: 1px solid lightgray;
-    }
-
-    .subscriptions:hover {
-        cursor: pointer;
-
-    }
-
-    .emphasis h2 {
-        margin-bottom: 0;
-    }
-
-    span.tags {
-        background: #F1D85D;
-        border-radius: 2px;
-        color: #f5f5f5;
-        font-weight: bold;
-        padding: 2px 4px;
-    }
-
-    .dropdown-menu {
-        background-color: #34495e;
-        box-shadow: none;
-        -webkit-box-shadow: none;
-        width: 250px;
-        margin-left: -125px;
-        left: 50%;
-    }
-
-    .dropdown-menu .divider {
-        background: none;
-    }
-
-    .dropdown-menu > li > a {
-        color: #f5f5f5;
-    }
-
-    .dropup .dropdown-menu {
-        margin-bottom: 10px;
-    }
-
-    .dropup .dropdown-menu:before {
-        content: "";
-        border-top: 10px solid #34495e;
-        border-right: 10px solid transparent;
-        border-left: 10px solid transparent;
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        margin-left: -10px;
-        z-index: 10;
-    }
-
-    .frame {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-        min-height: 300px;
-    }
-
-
-</style>
 <body class="bg-light">
 <br>
 <#if user??>
@@ -241,8 +109,10 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newAlbumModal">Add new
                     Album
                 </button>
-                <button id="photomapbtn" data-login="${user.login}" class="btn btn-secondary my-2">Show photos map
-                </button>
+                <#if user.albums?has_content>
+                    <button id="photomapbtn" data-login="${user.login}" class="btn btn-secondary my-2">Show photos map
+                    </button>
+                </#if>
             </p>
             <div id="photo-map" class="map" style="display: none; margin: auto; width: 600px; height: 400px"></div>
             <div class="bd-example">
@@ -452,6 +322,6 @@
 <script type="application/javascript" src="/js/albums.js"></script>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ba0d1ebb-c4a5-4a00-af89-2882eb642996"
         type="text/javascript"></script>
-<script type="application/javascript" src="/js/photo-map.js"></script>
+<script type="application/javascript" src="/js/all-photos-map.js"></script>
 </body>
 </html>

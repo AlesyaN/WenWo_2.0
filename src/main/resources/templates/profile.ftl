@@ -254,6 +254,7 @@
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Albums</h1>
+            <#if user.albums?has_content>
             <p class="lead text-muted">Here are ${user.login}'s
                 photo albums</p>
             <p>
@@ -261,6 +262,10 @@
                 </button>
             </p>
             <div id="photo-map" class="map" style="display: none; margin: auto"></div>
+            <#else>
+                <p class="lead text-muted">${user.login} didn't create any photo albums yet</p>
+            <p>
+            </#if>
         </div>
     </section>
 
