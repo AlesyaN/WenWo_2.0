@@ -37,7 +37,7 @@ public class UserDto {
     private static String UPLOADED_FOLDER;
 
     public static UserDto from(User user) {
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String dateOfBirth = null;
         if (user.getDateOfBirth() != null) {
             dateOfBirth = format.format(user.getDateOfBirth());

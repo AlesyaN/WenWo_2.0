@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itis.models.User;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -19,9 +20,10 @@ public class UserEditDto {
     private String email;
     private String gender;
     private String city;
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     public static UserEditDto from(User user) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return UserEditDto.builder()
                 .name(user.getName())
                 .surname(user.getSurname())
@@ -29,7 +31,7 @@ public class UserEditDto {
                 .email(user.getEmail())
                 .gender(user.getGender())
                 .city(user.getCity())
-                .dateOfBirth(user.getDateOfBirth())
+                .dateOfBirth(format.format(user.getDateOfBirth()))
                 .build();
     }
 }

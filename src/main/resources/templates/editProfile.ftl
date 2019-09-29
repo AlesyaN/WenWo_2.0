@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label for="dateOfBirth">Date of birth</label>
-                <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                <input class="form-control" type="date" id="dateOfBirth" name="dateOfBirth"
                        value="<#if user.dateOfBirth??>${user.dateOfBirth}</#if>">
             </div>
 
