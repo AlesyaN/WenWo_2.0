@@ -15,6 +15,6 @@ public class MongoConfig extends AbstractMongoConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        return "wenwo";
+        return "heroku_0c1rj4kf";
     }
 }
