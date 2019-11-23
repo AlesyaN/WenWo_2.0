@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 public class MongoConfig extends AbstractMongoConfiguration {
     @Override
     public MongoClient mongoClient() {
-        return new MongoClient("127.0.0.1", 27017);
+        return new MongoClient("ds039211.mlab.com", 39211);
     }
 
     @Override
