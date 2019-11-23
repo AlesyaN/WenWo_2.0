@@ -24,6 +24,7 @@ public class UserEditDto {
 
     public static UserEditDto from(User user) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateOfBirth = user.getDateOfBirth() == null ? null : format.format(user.getDateOfBirth());
         return UserEditDto.builder()
                 .name(user.getName())
                 .surname(user.getSurname())
@@ -31,7 +32,7 @@ public class UserEditDto {
                 .email(user.getEmail())
                 .gender(user.getGender())
                 .city(user.getCity())
-                .dateOfBirth(format.format(user.getDateOfBirth()))
+                .dateOfBirth(dateOfBirth)
                 .build();
     }
 }
