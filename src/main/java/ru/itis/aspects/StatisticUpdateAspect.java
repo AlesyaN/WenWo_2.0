@@ -17,22 +17,22 @@ import java.util.Date;
 @Configuration
 public class StatisticUpdateAspect {
 
-//     @Autowired
-//     InfoService infoService;
+     @Autowired
+     InfoService infoService;
 
-//     @Around("execution(* *..InfoService.getInfo(..))")
-//     public Info updateStats(ProceedingJoinPoint jp) {
-//         try {
-//             Info info = (Info) jp.proceed(jp.getArgs());
-//             if (info != null && info.getUpdated().isAfter(LocalDateTime.now().minusDays(1))) {
-//                 return info;
-//             } else {
-//                 infoService.update();
-//                 return (Info)jp.proceed(jp.getArgs());
-//             }
-//         } catch (Throwable throwable) {
-//             throwable.printStackTrace();
-//         }
-//         return null;
-//     }
+     @Around("execution(* *..InfoService.getInfo(..))")
+     public Info updateStats(ProceedingJoinPoint jp) {
+         try {
+             Info info = (Info) jp.proceed(jp.getArgs());
+             if (info != null && info.getUpdated().isAfter(LocalDateTime.now().minusDays(1))) {
+                 return info;
+             } else {
+                 infoService.update();
+                 return (Info)jp.proceed(jp.getArgs());
+             }
+         } catch (Throwable throwable) {
+             throwable.printStackTrace();
+         }
+         return null;
+     }
 }

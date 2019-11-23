@@ -29,10 +29,10 @@ public class MyLogger {
 
     @Before("execution (* *..UserService.signUp(..))")
     public void logSignUp(JoinPoint jp) {
-//         logsRepository.save(Log.builder()
-//                 .date(new Date())
-//                 .info("New user " + jp.getArgs()[0] + "registered")
-//                 .build());
+         logsRepository.save(Log.builder()
+                 .date(new Date())
+                 .info("New user " + jp.getArgs()[0] + "registered")
+                 .build());
     }
 
 

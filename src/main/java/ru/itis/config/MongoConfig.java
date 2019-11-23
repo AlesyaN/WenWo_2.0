@@ -1,6 +1,7 @@
 package ru.itis.config;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
@@ -8,7 +9,8 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 public class MongoConfig extends AbstractMongoConfiguration {
     @Override
     public MongoClient mongoClient() {
-        return new MongoClient("ds039211.mlab.com", 39211);
+        MongoClientURI uri = new MongoClientURI("mongodb://mongo:qwerty007@ds039211.mlab.com:39211/heroku_0c1rj4kf");
+        return new MongoClient(uri);
     }
 
     @Override
